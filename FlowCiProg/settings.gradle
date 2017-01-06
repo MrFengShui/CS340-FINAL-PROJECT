@@ -1,1 +1,1 @@
-include ':app', ':plot'
+include ':app', ':plot', ':MPChartLib'
