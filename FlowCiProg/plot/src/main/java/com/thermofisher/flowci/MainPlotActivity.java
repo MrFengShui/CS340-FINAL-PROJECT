@@ -1,7 +1,7 @@
 package com.thermofisher.flowci;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,36 +9,33 @@ import android.widget.EditText;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
+import com.github.mikephil.charting.charts.ScatterChart;
+import com.thermofisher.flowci.event.DataPlotClickListener;
+import com.thermofisher.flowci.event.IntentToClickListener;
+import com.thermofisher.flowci.tool.DirectoryFactory;
+import com.thermofisher.flowci.tool.plot.DataPlotFactory;
+
+import java.io.File;
+
 public class MainPlotActivity extends Activity {
 
-    private Intent intent;
-    private TabHost tabHost;
+    private View.OnClickListener clickListener;
+
+    private ScatterChart scatterChart;
+    private ScatterChart[] scatterCharts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_plot);
         initTabHost();
-        handleEvents();
-    }
-
-    private void handleEvents() {
-        Button browseButton = (Button) findViewById(R.id.flowci_file_browse_button);
-        browseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (intent == null) {
-                    intent = new Intent();
-                }
-
-                intent.setClass(MainPlotActivity.this, FileChooserActivity.class);
-                startActivity(intent);
-            }
-        });
+        initScatterChart();
+        handleBrowseEvent();
+        handlePlotEvent();
     }
 
     private void initTabHost() {
-        tabHost = (TabHost) findViewById(android.R.id.tabhost);
+        TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
         tabHost.setup();
 
         TabSpec fscTabSpec = tabHost.newTabSpec("FSC Plot Tab").setIndicator("FSC Plot").setContent(R.id.tab1);
@@ -60,6 +57,38 @@ public class MainPlotActivity extends Activity {
                 editText.setText(tabId);
             }
         });
+    }
+
+    private void initScatterChart() {
+        if (scatterCharts == null) {
+            scatterCharts = new ScatterChart[4];
+        }
+
+        scatterChart = (ScatterChart) findViewById(R.id.flowci_fsc_scatter_chart);
+        scatterChart.setNoDataText("No FSC Data Found");
+        scatterChart.setNoDataTextColor(Color.BLUE);
+        scatterChart.invalidate();
+        scatterCharts[0] = scatterChart;
+
+        scatterChart = (ScatterChart) findViewById(R.id.flowci_ssc_scatter_chart);
+        scatterChart.setNoDataText("No SSC Data Found");
+        scatterChart.setNoDataTextColor(Color.GREEN);
+        scatterChart.invalidate();
+        scatterCharts[1] = scatterChart;
+    }
+
+    private void handleBrowseEvent() {
+        clickListener = new IntentToClickListener(MainPlotActivity.this, FileChooserActivity.class);
+        Button browseButton = (Button) findViewById(R.id.flowci_file_browse_button);
+        browseButton.setOnClickListener(clickListener);
+    }
+
+    private void handlePlotEvent() {
+        DirectoryFactory factory = DirectoryFactory.getDirectoryInstance(MainPlotActivity.this);
+        String filePath = factory.getHomeDirectory() + File.separator + "CC4_067_BM.csv";
+        clickListener = new DataPlotClickListener(scatterCharts, filePath);
+        Button plotButton = (Button) findViewById(R.id.flowci_data_plot_button);
+        plotButton.setOnClickListener(clickListener);
     }
 
 }

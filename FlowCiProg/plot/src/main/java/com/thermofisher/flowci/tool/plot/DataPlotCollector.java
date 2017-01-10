@@ -1,4 +1,4 @@
-package com.thermofisher.flowci.tool;
+package com.thermofisher.flowci.tool.plot;
 
 import com.github.mikephil.charting.charts.ScatterChart;
 import com.github.mikephil.charting.data.Entry;
@@ -8,17 +8,25 @@ import com.github.mikephil.charting.interfaces.datasets.IScatterDataSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StaticDataPlotManager {
+public class DataPlotCollector {
 
     private List<Entry> entryList;
     private List<IScatterDataSet> scatterList;
 
-    public StaticDataPlotManager() {
-        scatterList = new ArrayList<>();
+    public DataPlotCollector() {
+        if (scatterList == null) {
+            scatterList = new ArrayList<>();
+        } else {
+            scatterList.clear();
+        }
     }
 
     public List<Entry> fillData(List<Float> dataList) {
-        entryList = new ArrayList<>();
+        if (entryList == null) {
+            entryList = new ArrayList<>();
+        } else {
+            entryList.clear();
+        }
 
         for (float dataItem : dataList) {
             entryList.add(new Entry(dataItem, dataItem));

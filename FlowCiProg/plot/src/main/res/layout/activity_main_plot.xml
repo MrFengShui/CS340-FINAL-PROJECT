@@ -60,11 +60,19 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
+                    <com.github.mikephil.charting.charts.ScatterChart
+                        android:layout_width="match_parent"
+                        android:id="@+id/flowci_fsc_scatter_chart"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent" />
+
                     <TextView
                         android:text="Tab 1 Content"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/textView" />
+                        android:layout_height="50dp"
+                        android:id="@+id/textView"
+                        android:gravity="center_vertical|center_horizontal" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -73,11 +81,19 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
+                    <com.github.mikephil.charting.charts.ScatterChart
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/flowci_ssc_scatter_chart"
+                        android:layout_weight="1" />
+
                     <TextView
                         android:text="Tab 2 Content"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/textView2" />
+                        android:layout_height="50dp"
+                        android:id="@+id/textView2"
+                        android:gravity="center_vertical|center_horizontal" />
+
                 </LinearLayout>
 
                 <LinearLayout
