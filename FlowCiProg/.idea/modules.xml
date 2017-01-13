@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/FlowCiProg.iml" filepath="$PROJECT_DIR$/FlowCiProg.iml" />
       <module fileurl="file://$PROJECT_DIR$/MPChartLib/MPChartLib.iml" filepath="$PROJECT_DIR$/MPChartLib/MPChartLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage/manage.iml" filepath="$PROJECT_DIR$/manage/manage.iml" />
       <module fileurl="file://$PROJECT_DIR$/plot/plot.iml" filepath="$PROJECT_DIR$/plot/plot.iml" />
     </modules>
   </component>
