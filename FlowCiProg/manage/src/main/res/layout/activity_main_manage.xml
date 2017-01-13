@@ -37,14 +37,26 @@
 
     </LinearLayout>
 
-    <TextView
-        android:text="File Path"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_weight="0"
-        android:padding="5px"
-        android:id="@+id/textView2"
-        android:gravity="center_vertical" />
+        android:layout_height="50dp">
+
+        <TextView
+            android:hint="File Path"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5px"
+            android:id="@+id/flowci_manage_path_textview"
+            android:gravity="center_vertical" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/button"
+            android:layout_weight="1" />
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"

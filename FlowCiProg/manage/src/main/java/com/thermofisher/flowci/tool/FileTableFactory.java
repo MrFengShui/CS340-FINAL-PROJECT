@@ -12,19 +12,27 @@ import android.widget.TextView;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 
 public class FileTableFactory {
 
     private static FileTableFactory tableFactory;
 
+    private FileOrderComparator orderComparator;
+
     private Activity context;
+    private CheckBox box;
     private DecimalFormat decimalFormat;
     private File file;
-    private File[] fileList;
     private SimpleDateFormat dateFormat;
     private TableLayout table;
     private TableRow.LayoutParams layoutParams;
+    private TextView textView;
 
     private FileTableFactory(Activity context, TableLayout table) {
         this.context = context;
@@ -53,9 +61,66 @@ public class FileTableFactory {
         return dateFormat.format(new Date(date));
     }
 
+    private CheckBox createCheckBox() {
+        layoutParams = new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(5, 5, 5, 5);
+
+        box = new CheckBox(context);
+        box.setLayoutParams(layoutParams);
+        return box;
+    }
+
+    private TextView createTextView(String text, float weight, int horizon) {
+        layoutParams = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, weight);
+        layoutParams.setMargins(5, 5, 5, 5);
+
+        textView = new TextView(context);
+        textView.setLayoutParams(layoutParams);
+        textView.setGravity(horizon | Gravity.CENTER_VERTICAL);
+        textView.setText(text);
+        return textView;
+    }
+
+    private TextView createTextView(boolean flag, String text, float weight, int horizon) {
+        layoutParams = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, weight);
+        layoutParams.setMargins(5, 5, 5, 5);
+
+        textView = new TextView(context);
+        textView.setLayoutParams(layoutParams);
+        textView.setGravity(horizon | Gravity.CENTER_VERTICAL);
+        textView.setTextColor(flag ? Color.MAGENTA : textView.getTextColors().getDefaultColor());
+        textView.setText(text);
+        return textView;
+    }
+
+    private File[] resort(File[] files) {
+        List<File> dirList = new ArrayList<>();
+        List<File> fileList = new ArrayList<>();
+
+        for (File file : files) {
+            if (file.isDirectory()) {
+                dirList.add(file);
+            } else if (file.isFile()) {
+                fileList.add(file);
+            } else {
+                continue;
+            }
+        }
+
+        if (orderComparator == null) {
+            orderComparator = new FileOrderComparator();
+        }
+
+        Collections.sort(dirList, orderComparator);
+        Collections.sort(fileList, orderComparator);
+        dirList.addAll(fileList);
+        files = dirList.toArray(files);
+        return files;
+    }
+
     public void buildTableContent(String dirPath) {
         file = new File(dirPath);
-        fileList = file.listFiles();
+        File[] fileList = resort(file.listFiles());
 
         if (fileList.length > 0) {
             for (File fileItem : fileList) {
@@ -65,40 +130,17 @@ public class FileTableFactory {
                 tableRow.setLayoutParams(layoutParams);
                 table.addView(tableRow);
 
-                layoutParams = new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                layoutParams.setMargins(5, 5, 5, 5);
-
-                CheckBox box = new CheckBox(context);
-                box.setLayoutParams(layoutParams);
+                box = createCheckBox();
                 tableRow.addView(box, 0);
 
-                layoutParams = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 0.75f);
-                layoutParams.setMargins(5, 5, 5, 5);
+                textView = createTextView(fileItem.isDirectory(), fileItem.getName(), 0.75f, Gravity.START);
+                tableRow.addView(textView, 1);
 
-                TextView fstView = new TextView(context);
-                fstView.setLayoutParams(layoutParams);
-                fstView.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
-                fstView.setTextColor(fileItem.isDirectory() ? Color.MAGENTA : fstView.getTextColors().getDefaultColor());
-                fstView.setText(fileItem.getName());
-                tableRow.addView(fstView, 1);
+                textView = createTextView(formatFileSize(fileItem.length()), 0.15f, Gravity.CENTER_HORIZONTAL);
+                tableRow.addView(textView, 2);
 
-                layoutParams = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 0.15f);
-                layoutParams.setMargins(5, 5, 5, 5);
-
-                TextView sndView = new TextView(context);
-                sndView.setLayoutParams(layoutParams);
-                sndView.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
-                sndView.setText(formatFileSize(fileItem.length()));
-                tableRow.addView(sndView, 2);
-
-                layoutParams = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 0.25f);
-                layoutParams.setMargins(5, 5, 5, 5);
-
-                TextView trdView = new TextView(context);
-                trdView.setLayoutParams(layoutParams);
-                trdView.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
-                trdView.setText(formatModifyDate(fileItem.lastModified()));
-                tableRow.addView(trdView, 3);
+                textView = createTextView(formatModifyDate(fileItem.lastModified()), 0.25f, Gravity.CENTER_HORIZONTAL);
+                tableRow.addView(textView, 3);
             }
         }
     }
@@ -109,6 +151,15 @@ public class FileTableFactory {
         }
 
         return tableFactory;
+    }
+
+    private class FileOrderComparator implements Comparator<File> {
+
+        @Override
+        public int compare(File o1, File o2) {
+            return o1.compareTo(o2);
+        }
+
     }
 
 }

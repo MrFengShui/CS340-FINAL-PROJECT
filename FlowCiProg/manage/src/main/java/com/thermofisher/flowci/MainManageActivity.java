@@ -26,6 +26,8 @@ public class MainManageActivity extends Activity {
     private void initTableContent() {
         DirectoryFactory directoryFactory = DirectoryFactory.getDirectoryInstance(MainManageActivity.this);
         String dirPath = directoryFactory.getHomeDirectory();
+        TextView homeDirectory = (TextView) findViewById(R.id.flowci_manage_path_textview);
+        homeDirectory.setText(dirPath);
         TableLayout table = (TableLayout) findViewById(R.id.flowci_file_list_table);
         tableFactory = FileTableFactory.getTableFactoryInstance(MainManageActivity.this, table);
         tableFactory.buildTableContent(dirPath);
