@@ -1,0 +1,30 @@
+{
+  "name": "CS340_Final_Project",
+  "version": "1.0.0",
+  "description": "Dynamic content with Express and Handlebars",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "",
+    "prestart": "npm run build",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://MrFengShui@bitbucket.org/MrFengShui/webprog.git"
+  },
+  "author": "Luan Songjian",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MrFengShui/CS340-FINAL-PROJECT/issues"
+  },
+  "homepage": "https://github.com/MrFengShui/CS340-FINAL-PROJECT.git#README",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "express-handlebars": "^3.0.0",
+    "handlebars": "^4.0.6",
+    "handlebars-json": "^1.0.1",
+    "mysql": "^2.12.0"
+  }
+}
