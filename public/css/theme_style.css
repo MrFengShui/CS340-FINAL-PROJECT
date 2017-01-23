@@ -1,0 +1,254 @@
+input[type='text'], input[type='password'], input[type='date'], input[type='number'] {
+    border-color: crimson;
+    border-width: medium;
+    border-style: solid;
+    color: crimson;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 18pt;
+    font-weight: normal;
+    padding-left: 5px;
+    width: 100%;
+    height: 50px;
+}
+
+button:hover, select:hover {
+    background-color: darkred;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.25), 0 5px 20px 0 rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+
+html {
+    background-color: crimson;
+    overflow-y: hidden;
+}
+
+hr {
+    border-color: crimson;
+    margin: 0;
+}
+
+header {
+    align-items: center;
+    display: inline-flex;
+    justify-content: space-between;
+    padding: 5px;
+    width: 100%;
+}
+
+.general-header-title h1 {
+    color: snow;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 24pt;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    text-align: right;
+}
+
+.general-header-title h2 {
+    color: snow;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    text-align: right;
+}
+
+footer ul {
+    align-items: center;
+    display: inline-flex;
+    justify-content: space-between;
+    list-style-type: none;
+    margin: 0;
+    padding: 10px;
+    width: 100%;
+}
+
+.footer-info-list {
+    display: inline-flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.footer-info-list p {
+    align-items: center;
+    color: snow;
+    display: inline-flex;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 10pt;
+    font-weight: normal;
+    justify-content: center;
+    margin: 0;
+    height: 40px;
+}
+/**/
+.initial-page-main, .query-page-main {
+    background-color: snow;
+    display: inline-flex;
+    justify-content: center;
+    padding: 5px;
+    width: 100%;
+}
+/**/
+.initial-form-table {
+    background-color: crimson;
+    margin: 10px;
+    width: 500px;
+}
+
+.initial-form-table button, .initial-form-table select {
+    background-color: crimson;
+    border-width: 0;
+    color: snow;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 18pt;
+    font-weight: normal;
+    width: 100%;
+    height: 100%;
+}
+
+.initial-table-title {
+    color: snow;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 24pt;
+    font-weight: bold;
+    text-align: center;
+}
+
+.initial-table-tag {
+    background-color: snow;
+    color: crimson;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 18pt;
+    font-weight: normal;
+    width: 100px;
+    height: 50px;
+    text-align: right;
+}
+
+.initial-table-content {
+    background-color: snow;
+    width: 360px;
+    height: 50px;
+}
+/**/
+.query-page-content {
+    padding: 0 5px;
+    width: 100%;
+    overflow: auto;
+}
+
+.query-page-side {
+    width: 300px;
+    height: 750px;
+}
+
+.query-page-side section {
+    border-color: crimson;
+    border-width: medium;
+    border-style: solid;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.query-page-section-line {
+    padding: 5px;
+}
+
+.query-page-side section h1 {
+    align-items: center;
+    background-color: crimson;
+    color: snow;
+    display: flex;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14pt;
+    font-weight: bold;
+    height: 40px;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.query-page-side section label {
+    color: crimson;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.query-page-side section span {
+    color: crimson;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+}
+
+.query-page-side section input[type='text'], .query-page-side section input[type='date'] {
+    color: crimson;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    height: 30px;
+}
+
+.query-page-side section input[type='number'] {
+    color: crimson;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    width: 80px;
+    height: 30px;
+}
+
+.query-page-side select {
+    background-color: crimson;
+    border-width: 0;
+    color: snow;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: normal;
+    width: 100%;
+    height: 30px;
+}
+
+.query-page-side button {
+    background-color: crimson;
+    border-width: 0;
+    color: snow;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: normal;
+    width: 100%;
+    height: 30px;
+}
+
+.book-info-table {
+    background-color: crimson;
+    width: 1600px;
+}
+
+.book-info-header {
+    color: snow;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: normal;
+    height: 40px;
+}
+
+.book-info-header.id, .book-info-header.type, .book-info-header.date {
+    width: 150px;
+}
+
+.book-info-header.name {
+    width: 350px;
+}
+
+.book-info-header.author, .book-info-header.press, .book-info-header.isbn {
+    width: 200px;
+}
+
+.book-info-header.edition, .book-info-header.price {
+    width: 100px;
+}
