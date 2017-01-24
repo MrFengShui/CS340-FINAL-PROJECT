@@ -1,0 +1,50 @@
+<div class="query-page-side">
+    <section>
+        <h1>Person Information</h1>
+        <div class="query-page-section-line">
+            <label for="">Consumer ID:</label>
+            <span>{{id}}</span>
+        </div>
+        <hr>
+        <div class="query-page-section-line">
+            <label for="">Consumer Name:</label>
+            <span>{{firstName}}&nbsp;{{lastName}}</span>
+        </div>
+        <hr>
+        <div class="query-page-section-line">
+            <label for="">Consumer Type:</label>
+            <span>{{type}}</span>
+        </div>
+    </section>
+    <section>
+        <h1>Query Condition</h1>
+        <div class="query-page-section-line">
+            <label for="">Repository ID</label>
+            <input type="text" name="repoid" value="">
+        </div>
+        <div class="query-page-section-line">
+            <label for="">Repository Floor</label>
+            <input type="text" name="repofloor" value="">
+        </div>
+        <div class="query-page-section-line">
+            <label for="">Repository Guarder</label>
+            <input type="text" name="repoguard" value="">
+        </div>
+        <div class="query-page-section-line">
+            <label for="">Book ID</label>
+            <input type="text" name="bookid" value="">
+        </div>
+        <div class="query-page-section-line">
+            <label for="">Book Type</label>
+            <select class="" name="">
+                <option selected="true" disabled>Select one book type</option>
+                <option>Art</option>
+                <option>Engineering</option>
+                <option>History</option>
+                <option>Literature</option>
+                <option>Science</option>
+            </select>
+        </div>
+        <button type="button" name="dosearch">Search</button>
+    </section>
+</div>

@@ -11,7 +11,7 @@ input[type='text'], input[type='password'], input[type='date'], input[type='numb
     height: 50px;
 }
 
-button:hover, select:hover {
+button:hover, select:hover, a:hover {
     background-color: darkred;
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.25), 0 5px 20px 0 rgba(0, 0, 0, 0.25);
     cursor: pointer;
@@ -58,7 +58,7 @@ header {
 footer ul {
     align-items: center;
     display: inline-flex;
-    justify-content: space-between;
+    justify-content: center;
     list-style-type: none;
     margin: 0;
     padding: 10px;
@@ -81,6 +81,95 @@ footer ul {
     justify-content: center;
     margin: 0;
     height: 40px;
+}
+/**/
+nav {
+    display: inline;
+}
+
+nav ul {
+    display: inline-flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    /*width: 100%;*/
+}
+
+.dropdown-menu-bar {
+    width: 240px;
+    height: 40px;
+}
+
+.dropdown-menu-account {
+    align-items: center;
+    background-color: crimson;
+    color: snow;
+    display: flex;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: normal;
+    float: right;
+    justify-content: center;
+    text-decoration: none;
+    width: 240px;
+    height: 40px;
+}
+
+.dropdown-menu-title {
+    align-items: center;
+    background-color: crimson;
+    color: snow;
+    display: flex;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: normal;
+    justify-content: center;
+    text-decoration: none;
+    width: 100%;
+    height: 40px;
+}
+
+.dropdown-menu-title:hover {
+    background-color: darkred;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.25), 0 5px 20px 0 rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+
+.dropdown-menu-item {
+    background-color: snow;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.25), 0 5px 20px 0 rgba(0, 0, 0, 0.25);
+    display: none;
+    position: absolute;
+    top: 40px;
+    z-index: 10;
+}
+
+.dropdown-menu-item a {
+    align-items: center;
+    background-color: snow;
+    color: crimson;
+    display: flex;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: normal;
+    justify-content: center;
+    text-decoration: none;
+    width: 240px;
+    height: 40px;
+}
+
+.dropdown-menu-item a:hover {
+    background-color: crimson;
+    color: snow;
+}
+
+.dropdown-menu-item hr {
+    border-color: crimson;
+    width: 140%;
+}
+
+.dropdown-menu-bar:hover .dropdown-menu-item {
+    display: inline-block;
 }
 /**/
 .initial-page-main, .query-page-main {
@@ -229,12 +318,42 @@ footer ul {
     width: 1600px;
 }
 
-.book-info-header {
+.repo-info-table {
+    background-color: crimson;
+    width: 1350px;
+}
+
+.vend-info-table {
+    background-color: crimson;
+    width: 1100px;
+}
+
+.book-info-header, .repo-info-header, .vend-info-header {
     color: snow;
     font-family: Tahoma, Geneva, sans-serif;
     font-size: 12pt;
     font-weight: normal;
     height: 40px;
+}
+
+.vend-info-header.id, .vend-info-header.phone {
+    width: 150px;
+}
+
+.vend-info-header.name {
+    width: 250px;
+}
+
+.vend-info-header.address, .vend-info-header.email {
+    width: 200px;
+}
+
+.repo-info-header.id, .repo-info-header.floor, .repo-info-header.quantity {
+    width: 150px;
+}
+
+.repo-info-header.guard {
+    width: 250px;
 }
 
 .book-info-header.id, .book-info-header.type, .book-info-header.date {

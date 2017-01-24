@@ -45,9 +45,21 @@ app.get('/', function(req, res) {
     });
 });
 
-app.get('/query', function(req, res) {
-    res.render('query-page', {
-        title: 'Query Page'
+app.get('/book-query', function(req, res) {
+    res.render('book-query-page', {
+        title: 'Book Query Page'
+    });
+});
+
+app.get('/storage-query', function(req, res) {
+    res.render('store-query-page', {
+        title: 'Storage Query Page'
+    });
+});
+
+app.get('/vendor-query', function(req, res) {
+    res.render('vend-query-page', {
+        title: 'Vendor Query Page'
     });
 });
 
