@@ -9,3 +9,4 @@
 .externalNativeBuild
 /node_modules
 /public/js/*-template.handlebars
+*.log
