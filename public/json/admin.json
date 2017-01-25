@@ -1,0 +1,14 @@
+[
+    {
+        "username":"linux",
+        "password":"123456"
+    },
+    {
+        "username":"windows",
+        "password":"Passw0rd"
+    },
+    {
+        "username":"macos",
+        "password":"111111"
+    }
+]

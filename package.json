@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "",
-    "prestart": "",
+    "build": "handlebars views/partials/book-info-row.handlebars -f public/js/book-info-row-template.js",
+    "prestart": "npm run build",
     "start": "node server.js"
   },
   "repository": {

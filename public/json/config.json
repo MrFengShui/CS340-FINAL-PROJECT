@@ -1,0 +1,6 @@
+{
+    "host":"mysql.cs.orst.edu",
+    "username":"cs340_luans",
+    "password":"3500",
+    "dbname":"cs340_luans"
+}
