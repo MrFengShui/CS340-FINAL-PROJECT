@@ -70,6 +70,12 @@ app.get('/', function(req, res) {
     });
 });
 
+app.get('/buy-book', function(req, res) {
+    res.render('purchase-page', {
+        title: 'Book Purchase Page'
+    });
+});
+
 app.get('/book-query', function(req, res) {
     res.render('book-query-page', {
         title: 'Book Query Page'
@@ -88,13 +94,17 @@ app.get('/vendor-query', function(req, res) {
     });
 });
 
-connection.connect(function(err) {
-    if (err) {
-        console.console.log('Erro: Failed to connect to MySQL Database');
-        // throw err;
-    } else {
-        app.listen(10000, function() {
-            console.log('==', 'Listening on Port', 10000, '==');
-        });
-    }
+// connection.connect(function(err) {
+//     if (err) {
+//         console.console.log('Erro: Failed to connect to MySQL Database');
+//         throw err;
+//     } else {
+//         app.listen(10000, function() {
+//             console.log('==', 'Listening on Port', 10000, '==');
+//         });
+//     }
+// });
+
+app.listen(10000, function() {
+    console.log('==', 'Listening on Port', 10000, '==');
 });

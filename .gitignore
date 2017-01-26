@@ -1,12 +1,3 @@
-*.iml
-.gradle
-/local.properties
-/.idea/workspace.xml
-/.idea/libraries
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-/node_modules
-/public/js/*-template.handlebars
-*.log
+node_modules
+npm-debug.log
+public/js/*-template.js

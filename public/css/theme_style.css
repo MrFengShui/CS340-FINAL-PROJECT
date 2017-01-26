@@ -19,7 +19,7 @@ button:hover, select:hover, a:hover {
 
 html {
     background-color: crimson;
-    overflow-y: hidden;
+    /*overflow-y: hidden;*/
 }
 
 hr {
@@ -27,6 +27,25 @@ hr {
     margin: 0;
 }
 
+.control-toolbar {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.control-toolbar button {
+    background-color: crimson;
+    border-radius: 75px;
+    border-width: 0;
+    color: snow;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 24pt;
+    font-weight: normal;
+    margin: 5px;
+    width: 75px;
+    height: 75px;
+}
+/**/
 header {
     align-items: center;
     display: inline-flex;
@@ -87,11 +106,36 @@ nav {
     display: inline;
 }
 
-nav ul {
+nav .inner-page-nav {
     display: inline-flex;
     list-style-type: none;
     margin: 0;
     padding: 0;
+}
+
+nav .outer-page-nav {
+    display: inline-flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.outer-page-nav li {
+    width: 100%;
+}
+
+.outer-page-nav a {
+    align-items: center;
+    color: snow;
+    display: flex;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: normal;
+    justify-content: center;
+    text-decoration: none;
+    width: 100%;
+    height: 40px;
 }
 
 .dropdown-menu-bar {
@@ -171,7 +215,7 @@ nav ul {
     display: inline-block;
 }
 /**/
-.initial-page-main, .query-page-main {
+.initial-page-main, .query-page-main, .purchase-page-main {
     background-color: snow;
     display: inline-flex;
     justify-content: center;
@@ -221,18 +265,69 @@ nav ul {
     height: 50px;
 }
 /**/
+.purchase-page-content {
+    padding: 0 5px;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.purchase-info-table {
+    background-color: crimson;
+    width: 100%;
+}
+
+.purchase-info-header {
+    color: snow;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    height: 40px;
+}
+
+.purchase-info-row {
+    color: snow;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: normal;
+    height: 40px;
+}
+
+.purchase-info-header.id, .purchase-info-header.price {
+    width: 150px;
+}
+
+.purchase-info-header.name {
+    width: 350px;
+}
+
+.purchase-info-footer {
+    background-color: darkred;
+    color: snow;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    height: 40px;
+}
+
+.purchase-info-footer.total {
+    padding-left: 50px;
+}
+
+.purchase-info-footer.price {
+    text-align: center;
+}
+/**/
 .query-page-content {
     padding: 0 5px;
     width: 100%;
-    overflow: auto;
+    overflow-x: auto;
 }
 
-.query-page-side {
+.query-page-side, .purchase-page-side {
     width: 300px;
-    height: 750px;
 }
 
-.query-page-side section {
+.consumer-info-section, .condition-input-section {
     border-color: crimson;
     border-width: medium;
     border-style: solid;
@@ -240,11 +335,7 @@ nav ul {
     width: 100%;
 }
 
-.query-page-section-line {
-    padding: 5px;
-}
-
-.query-page-side section h1 {
+.consumer-info-section h1, .condition-input-section h1 {
     align-items: center;
     background-color: crimson;
     color: snow;
@@ -258,7 +349,11 @@ nav ul {
     padding: 0;
 }
 
-.query-page-side section label {
+.consumer-info-section div, .condition-input-section div {
+    padding: 5px;
+}
+
+.consumer-info-section label, .condition-input-section label {
     color: crimson;
     font-family: Tahoma, Geneva, sans-serif;
     font-size: 12pt;
@@ -266,14 +361,14 @@ nav ul {
     padding: 5px;
 }
 
-.query-page-side section span {
+.consumer-info-section span, .condition-input-section span {
     color: crimson;
     font-family: Tahoma, Geneva, sans-serif;
     font-size: 12pt;
     font-weight: bold;
 }
 
-.query-page-side section input[type='text'], .query-page-side section input[type='date'] {
+.condition-input-section input[type='text'], .condition-input-section input[type='date'] {
     color: crimson;
     font-family: Tahoma, Geneva, sans-serif;
     font-size: 12pt;
@@ -281,7 +376,7 @@ nav ul {
     height: 30px;
 }
 
-.query-page-side section input[type='number'] {
+.condition-input-section input[type='number'] {
     color: crimson;
     font-family: Tahoma, Geneva, sans-serif;
     font-size: 12pt;
@@ -290,7 +385,7 @@ nav ul {
     height: 30px;
 }
 
-.query-page-side select {
+.condition-input-section select {
     background-color: crimson;
     border-width: 0;
     color: snow;
@@ -301,7 +396,7 @@ nav ul {
     height: 30px;
 }
 
-.query-page-side button {
+.condition-input-section button {
     background-color: crimson;
     border-width: 0;
     color: snow;
@@ -311,7 +406,7 @@ nav ul {
     width: 100%;
     height: 30px;
 }
-
+/**/
 .book-info-table {
     background-color: crimson;
     width: 1750px;
@@ -319,14 +414,14 @@ nav ul {
 
 .repo-info-table {
     background-color: crimson;
-    width: 1350px;
+    width: 1500px;
 }
 
 .vend-info-table {
     background-color: crimson;
     width: 1100px;
 }
-
+/**/
 .book-info-header, .repo-info-header, .vend-info-header {
     color: snow;
     font-family: Tahoma, Geneva, sans-serif;
@@ -335,15 +430,16 @@ nav ul {
     height: 40px;
 }
 
-.book-info-row {
-    color: snow;
+.book-info-row, .repo-info-row, .vend-info-row {
+    background-color: snow;
+    color: crimson;
     font-family: Tahoma, Geneva, sans-serif;
     font-size: 12pt;
     font-weight: normal;
     height: 40px;
     text-align: center;
 }
-
+/**/
 .vend-info-header.id, .vend-info-header.phone {
     width: 150px;
 }
@@ -355,20 +451,20 @@ nav ul {
 .vend-info-header.address, .vend-info-header.email {
     width: 200px;
 }
-
-.repo-info-header.id, .repo-info-header.floor, .repo-info-header.quantity {
+/**/
+.repo-info-header.id, .repo-info-header.quantity {
     width: 150px;
+}
+
+.repo-info-header.floor {
+    width: 200px;
 }
 
 .repo-info-header.guard {
     width: 250px;
 }
-
+/**/
 .book-info-header.id, .book-info-header.type, .book-info-header.edition {
-    width: 150px;
-}
-
-.book-info-row.id, .book-info-row.type, .book-info-row.edition {
     width: 150px;
 }
 
@@ -376,22 +472,10 @@ nav ul {
     width: 350px;
 }
 
-.book-info-row.name {
-    width: 350px;
-}
-
 .book-info-header.author, .book-info-header.press, .book-info-header.isbn, .book-info-header.date {
     width: 200px;
 }
 
-.book-info-row.author, .book-info-row.press, .book-info-row.isbn, .book-info-row.date {
-    width: 200px;
-}
-
 .book-info-header.price {
-    width: 150px;
-}
-
-.book-info-row.price {
     width: 150px;
 }

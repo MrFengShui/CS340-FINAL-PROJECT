@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "handlebars views/partials/book-info-row.handlebars -f public/js/book-info-row-template.js",
+    "build": "handlebars views/partials/book-info-row.handlebars -f public/js/book-info-row-template.js && handlebars views/partials/store-info-row.handlebars -f public/js/store-info-row-template.js && handlebars views/partials/vend-info-row.handlebars -f public/js/vend-info-row-template.js && handlebars views/partials/purchase-info-row.handlebars -f public/js/purchase-info-row-template.js && handlebars views/partials/purchase-info-footer.handlebars -f public/js/purchase-info-footer-template.js",
     "prestart": "npm run build",
     "start": "node server.js"
   },
