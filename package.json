@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "handlebars views/partials/book-info-row.handlebars -f public/js/book-info-row-template.js && handlebars views/partials/store-info-row.handlebars -f public/js/store-info-row-template.js && handlebars views/partials/vend-info-row.handlebars -f public/js/vend-info-row-template.js && handlebars views/partials/purchase-info-row.handlebars -f public/js/purchase-info-row-template.js && handlebars views/partials/purchase-info-footer.handlebars -f public/js/purchase-info-footer-template.js",
+    "build": "handlebars views/partials/book/book-info-row.handlebars -f public/script/book-info-row-template.js && handlebars views/partials/book/book-mod-row.handlebars -f public/script/book-mod-row-template.js && handlebars views/partials/store/store-info-row.handlebars -f public/script/store-info-row-template.js && handlebars views/partials/store/store-mod-row.handlebars -f public/script/store-mod-row-template.js && handlebars views/partials/vend/vend-info-row.handlebars -f public/script/vend-info-row-template.js && handlebars views/partials/vend/vend-mod-row.handlebars -f public/script/vend-mod-row-template.js && handlebars views/partials/buy/purchase-info-row.handlebars -f public/script/purchase-info-row-template.js && handlebars views/partials/buy/purchase-info-foot.handlebars -f public/script/purchase-info-foot-template.js",
     "prestart": "npm run build",
     "start": "node server.js"
   },

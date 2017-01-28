@@ -1,7 +1,10 @@
 {{> outer-nav}}
 {{> header}}
 <main class="query-page-main">
-    {{> store-side-box}}
+    <div class="query-page-side">
+        {{> tool/visitor-info}}
+        {{> store/condition-input}}
+    </div>
     <div class="query-page-content">
         <table class="repo-info-table">
             <tr>

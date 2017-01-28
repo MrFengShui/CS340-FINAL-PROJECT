@@ -6,7 +6,7 @@ var exphbs = require('express-handlebars');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
 /**/
-var config = require('./public/json/config.json')
+var config = require('./public/config/config.json')
 var host = config['host'];
 var username = config['username'];
 var password = config['password'];
@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({
 
 app.post('/login#purpos-validation', function(req, res) {
     if (req.body['role'] == "administrator") {
-        var adminInfo = require('./public/json/admin.json');
+        var adminInfo = require('./public/config/admin.json');
         var flag = false;
 
         for (var i = 0; i < adminInfo.length; i++) {
@@ -82,15 +82,33 @@ app.get('/book-query', function(req, res) {
     });
 });
 
+app.get('/book-modify', function(req, res) {
+    res.render('book-modify-page', {
+        title: 'Book modify Page'
+    });
+});
+
 app.get('/storage-query', function(req, res) {
     res.render('store-query-page', {
         title: 'Storage Query Page'
     });
 });
 
+app.get('/storage-modify', function(req, res) {
+    res.render('store-modify-page', {
+        title: 'Storage Modify Page'
+    });
+});
+
 app.get('/vendor-query', function(req, res) {
     res.render('vend-query-page', {
         title: 'Vendor Query Page'
+    });
+});
+
+app.get('/vendor-modify', function(req, res) {
+    res.render('vend-modify-page', {
+        title: 'Vendor Modify Page'
     });
 });
 

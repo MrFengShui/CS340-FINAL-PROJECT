@@ -11,6 +11,12 @@ input[type='text'], input[type='password'], input[type='date'], input[type='numb
     height: 50px;
 }
 
+input[type='checkbox'] {
+    position: relative;
+    vertical-align: middle;
+    zoom: 1.5;
+}
+
 button:hover, select:hover, a:hover {
     background-color: darkred;
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.25), 0 5px 20px 0 rgba(0, 0, 0, 0.25);
@@ -19,7 +25,7 @@ button:hover, select:hover, a:hover {
 
 html {
     background-color: crimson;
-    /*overflow-y: hidden;*/
+    overflow-y: hidden;
 }
 
 hr {
@@ -28,7 +34,7 @@ hr {
 }
 
 .control-toolbar {
-    display: flex;
+    display: inline-flex;
     justify-content: flex-end;
     width: 100%;
 }
@@ -54,6 +60,16 @@ header {
     width: 100%;
 }
 
+header img {
+    margin: 5px;
+    width: 64px;
+    height: 64px;
+}
+
+header img:hover {
+    cursor: pointer;
+}
+
 .general-header-title h1 {
     color: snow;
     font-family: Tahoma, Geneva, sans-serif;
@@ -73,24 +89,13 @@ header {
     padding: 0;
     text-align: right;
 }
-
-footer ul {
-    align-items: center;
-    display: inline-flex;
-    justify-content: center;
-    list-style-type: none;
-    margin: 0;
-    padding: 10px;
+/**/
+footer {
     width: 100%;
+    height: 40px;
 }
 
-.footer-info-list {
-    display: inline-flex;
-    justify-content: center;
-    width: 100%;
-}
-
-.footer-info-list p {
+footer p {
     align-items: center;
     color: snow;
     display: inline-flex;
@@ -99,7 +104,8 @@ footer ul {
     font-weight: normal;
     justify-content: center;
     margin: 0;
-    height: 40px;
+    width: 100%;
+    height: 100%;
 }
 /**/
 nav {
@@ -222,9 +228,16 @@ nav .outer-page-nav {
     padding: 5px;
     width: 100%;
 }
+
+.initial-page-main {
+    align-items: center;
+    display: inline-flex;
+    height: 845px;
+}
 /**/
 .initial-form-table {
     background-color: crimson;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.25), 0 5px 20px 0 rgba(0, 0, 0, 0.25);
     margin: 10px;
     width: 500px;
 }
@@ -317,14 +330,24 @@ nav .outer-page-nav {
     text-align: center;
 }
 /**/
+.query-page-box {
+    width: calc(100% - 225px);
+    height: calc(795px - 80px);
+}
+
 .query-page-content {
     padding: 0 5px;
     width: 100%;
-    overflow-x: auto;
+    overflow: auto;
+}
+
+.query-page-box .query-page-content {
+    height: 100%;
 }
 
 .query-page-side, .purchase-page-side {
     width: 300px;
+    height: 795px;
 }
 
 .consumer-info-section, .condition-input-section {
@@ -350,6 +373,7 @@ nav .outer-page-nav {
 }
 
 .consumer-info-section div, .condition-input-section div {
+    display: block;
     padding: 5px;
 }
 
@@ -409,17 +433,92 @@ nav .outer-page-nav {
 /**/
 .book-info-table {
     background-color: crimson;
-    width: 1750px;
+    width: 1870px;
 }
 
+.book-info-table button {
+    background-color: crimson;
+    border-width: 0;
+    color: snow;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    width: 30px;
+    height: 30px;
+}
+
+.book-info-header.select {
+    width: 40px;
+}
+
+.book-info-header.control {
+    width: 80px;
+}
+
+.book-info-header.id, .book-info-header.type, .book-info-header.edition {
+    width: 150px;
+}
+
+.book-info-header.name {
+    width: 350px;
+}
+
+.book-info-header.author, .book-info-header.press, .book-info-header.isbn, .book-info-header.date {
+    width: 200px;
+}
+
+.book-info-header.price {
+    width: 150px;
+}
+/**/
 .repo-info-table {
     background-color: crimson;
-    width: 1500px;
+    width: 1620px;
 }
 
+.repo-info-header.select {
+    width: 40px;
+}
+
+.repo-info-header.control {
+    width: 80px;
+}
+
+.repo-info-header.id, .repo-info-header.quantity {
+    width: 150px;
+}
+
+.repo-info-header.floor {
+    width: 200px;
+}
+
+.repo-info-header.guard {
+    width: 250px;
+}
+/**/
 .vend-info-table {
     background-color: crimson;
-    width: 1100px;
+    width: 1220px;
+}
+
+.vend-info-header.select {
+    width: 40px;
+}
+
+.vend-info-header.control {
+    width: 80px;
+}
+
+.vend-info-header.id, .vend-info-header.phone {
+    width: 150px;
+}
+
+.vend-info-header.name {
+    width: 250px;
+}
+
+.vend-info-header.address, .vend-info-header.email {
+    width: 200px;
 }
 /**/
 .book-info-header, .repo-info-header, .vend-info-header {
@@ -438,44 +537,4 @@ nav .outer-page-nav {
     font-weight: normal;
     height: 40px;
     text-align: center;
-}
-/**/
-.vend-info-header.id, .vend-info-header.phone {
-    width: 150px;
-}
-
-.vend-info-header.name {
-    width: 250px;
-}
-
-.vend-info-header.address, .vend-info-header.email {
-    width: 200px;
-}
-/**/
-.repo-info-header.id, .repo-info-header.quantity {
-    width: 150px;
-}
-
-.repo-info-header.floor {
-    width: 200px;
-}
-
-.repo-info-header.guard {
-    width: 250px;
-}
-/**/
-.book-info-header.id, .book-info-header.type, .book-info-header.edition {
-    width: 150px;
-}
-
-.book-info-header.name {
-    width: 350px;
-}
-
-.book-info-header.author, .book-info-header.press, .book-info-header.isbn, .book-info-header.date {
-    width: 200px;
-}
-
-.book-info-header.price {
-    width: 150px;
 }
