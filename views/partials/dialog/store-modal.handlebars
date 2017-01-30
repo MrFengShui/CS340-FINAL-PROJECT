@@ -1,0 +1,48 @@
+<div class="modal-dialog-backdrop" id="signin-modal-backdrop"></div>
+<div class="modal-dialog-frame" id="signin-modal-framework">
+    <div class="modal-dialog-main">
+        <div class="modal-dialog-title">
+            <h1>Insert New Repository Information</h1>
+            <button type="button" id="signin-modal-close-button"><i class="fa fa-times" aria-hidden="true"></i></button>
+        </div>
+        <table>
+            <tr class="modal-dialog-input">
+                <td class="modal-input-tag">Repo ID</td>
+                <td class="modal-input-text"><input type="text" name="repoid" id="input-repo-id"></td>
+            </tr>
+            <tr class="modal-dialog-input">
+                <td class="modal-input-tag">Repo Address</td>
+                <td class="modal-input-text"><input type="text" name="repoaddress" id="input-repo-address"></td>
+            </tr>
+            <tr class="modal-dialog-input">
+                <td class="modal-input-tag">Repo Floor</td>
+                <td class="modal-input-text"><input type="number" step="1" min="0" max="10" name="repofloor" value="1"></td>
+            </tr>
+            <tr class="modal-dialog-input">
+                <td class="modal-input-tag">Repo Guarder</td>
+                <td class="modal-input-text"><input type="text" name="repoguard" id="input-repo-guard"></td>
+            </tr>
+            <tr class="modal-dialog-input">
+                <td class="modal-input-tag">Book ID</td>
+                <td class="modal-input-text"><input type="text" name="bookid" id="input-book-id"></td>
+            </tr>
+            <tr class="modal-dialog-input">
+                <td class="modal-input-tag">Book Quantity</td>
+                <td class="modal-input-text"><input type="number" step="1" min="0" max="100000" name="bookquantity" value="0"></td>
+            </tr>
+            <tr class="modal-dialog-input">
+                <td class="modal-input-tag">Vendor ID</td>
+                <td class="modal-input-text"><input type="date" name="vendorid" value=""></td>
+            </tr>
+            <tr class="modal-dialog-button">
+                <td colspan="2">
+                    <ul>
+                        <li><a href="">Add to Database</a></li>
+                        <li><a href="">Add to Table</a></li>
+                        <li><a href="">Clean Up</a></li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

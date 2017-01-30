@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql.eecs.oregonstate.edu
--- Generation Time: Jan 28, 2017 at 04:19 PM
+-- Generation Time: Jan 29, 2017 at 04:29 PM
 -- Server version: 5.5.37-MariaDB-wsrep
 -- PHP Version: 7.0.15
 
@@ -37,7 +37,7 @@ CREATE TABLE `BOOK_INFO_TB` (
   `BOOK_PUBLISH_MONTH` tinyint(2) NOT NULL,
   `BOOK_PUBLISH_DATE` tinyint(2) DEFAULT NULL,
   `BOOK_PUBLISH_PRESS` varchar(255) CHARACTER SET latin1 NOT NULL,
-  `BOOK_PUBLISH_ISBM` bigint(13) NOT NULL,
+  `BOOK_PUBLISH_ISBN` bigint(13) NOT NULL,
   `BOOK_PRICE` float(6,2) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
@@ -45,7 +45,7 @@ CREATE TABLE `BOOK_INFO_TB` (
 -- Dumping data for table `BOOK_INFO_TB`
 --
 
-INSERT INTO `BOOK_INFO_TB` (`BOOK_ID`, `BOOK_NAME`, `BOOK_TYPE`, `BOOK_AUTHOR_FIRST_NAME`, `BOOK_AUTHOR_LAST_NAME`, `BOOK_EDITION`, `BOOK_PUBLISH_YEAR`, `BOOK_PUBLISH_MONTH`, `BOOK_PUBLISH_DATE`, `BOOK_PUBLISH_PRESS`, `BOOK_PUBLISH_ISBM`, `BOOK_PRICE`) VALUES
+INSERT INTO `BOOK_INFO_TB` (`BOOK_ID`, `BOOK_NAME`, `BOOK_TYPE`, `BOOK_AUTHOR_FIRST_NAME`, `BOOK_AUTHOR_LAST_NAME`, `BOOK_EDITION`, `BOOK_PUBLISH_YEAR`, `BOOK_PUBLISH_MONTH`, `BOOK_PUBLISH_DATE`, `BOOK_PUBLISH_PRESS`, `BOOK_PUBLISH_ISBN`, `BOOK_PRICE`) VALUES
 ('ENGR-001', 'Learn JavaFX 8: Building User Experience and Interfaces with Java 8', 2, 'Kishori', 'Sharan', 1, 2015, 3, 18, 'Apress', 9781484211434, 59.99),
 ('ENGR-002', 'Absolute C++', 2, 'Walter', 'Savitch', 6, 2015, 3, 14, 'Pearson', 9780133970784, 148.52),
 ('ENGR-003', 'MongoDB: The Definitive Guide: Powerful and Scalable Data Storage', 2, 'Kristina', 'Chodorow', 2, 2013, 5, 26, 'O\'Reilly Media', 9781449344689, 34.02),

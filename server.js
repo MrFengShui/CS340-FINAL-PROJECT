@@ -70,9 +70,15 @@ app.get('/', function(req, res) {
     });
 });
 
-app.get('/buy-book', function(req, res) {
-    res.render('purchase-page', {
-        title: 'Book Purchase Page'
+app.get('/consumer-page%=:person%', function(req, res) {
+    res.render('consumer-page', {
+        title: 'Consumer Visit Page'
+    });
+});
+
+app.get('/staff-page%=:person%', function(req, res) {
+    res.render('staff-page', {
+        title: 'Staff Manage Page'
     });
 });
 

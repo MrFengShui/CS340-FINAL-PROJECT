@@ -1,0 +1,70 @@
+<div class="modal-dialog-backdrop" id="signin-modal-backdrop"></div>
+<div class="modal-dialog-frame" id="signin-modal-framework">
+    <div class="modal-dialog-main">
+        <div class="modal-dialog-title">
+            <h1>Insert New Book Information</h1>
+            <button type="button" id="signin-modal-close-button"><i class="fa fa-times" aria-hidden="true"></i></button>
+        </div>
+        <table>
+            <tr class="modal-dialog-input">
+                <td class="modal-input-tag">Book ID</td>
+                <td class="modal-input-text"><input type="text" name="bookid" id="input-book-id"></td>
+            </tr>
+            <tr class="modal-dialog-input">
+                <td class="modal-input-tag">Book Name</td>
+                <td class="modal-input-text"><input type="text" name="bookname" id="input-book-name"></td>
+            </tr>
+            <tr class="modal-dialog-input">
+                <td class="modal-input-tag">Book Type</td>
+                <td class="modal-input-text">
+                    <select class="" name="">
+                        <option selected="true" disabled>Select one book type</option>
+                        <option>Art</option>
+                        <option>Engineering</option>
+                        <option>History</option>
+                        <option>Literature</option>
+                        <option>Science</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="modal-dialog-input">
+                <td class="modal-input-tag">Book Author</td>
+                <td class="modal-input-text"><input type="text" name="bookauthor" id="input-book-author"></td>
+            </tr>
+            <tr class="modal-dialog-input">
+                <td class="modal-input-tag">Book Edition</td>
+                <td class="modal-input-text"><input type="text" name="bookedition" id="input-book-edition"></td>
+            </tr>
+            <tr class="modal-dialog-input">
+                <td class="modal-input-tag">Book Date</td>
+                <td class="modal-input-text"><input type="date" name="bookdate" value=""></td>
+            </tr>
+            <tr class="modal-dialog-input">
+                <td class="modal-input-tag">Book Press</td>
+                <td class="modal-input-text">
+                    <select class="" name="">
+                        <option selected="true" disabled>Select one publish press</option>
+                        <option></option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="modal-dialog-input">
+                <td class="modal-input-tag">Book ISBN</td>
+                <td class="modal-input-text"><input type="text" name="bookisbn" id="input-book-isbn"></td>
+            </tr>
+            <tr class="modal-dialog-input">
+                <td class="modal-input-tag">Book Price</td>
+                <td class="modal-input-text"><input type="number" step="0.01" min="0" max="100000" name="bookprice" value="0"></td>
+            </tr>
+            <tr class="modal-dialog-button">
+                <td colspan="2">
+                    <ul>
+                        <li><a href="">Add to Database</a></li>
+                        <li><a href="">Add to Table</a></li>
+                        <li><a href="">Clean Up</a></li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

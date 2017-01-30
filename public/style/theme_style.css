@@ -17,6 +17,17 @@ input[type='checkbox'] {
     zoom: 1.5;
 }
 
+select {
+    background-color: crimson;
+    border-width: 0;
+    color: snow;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: normal;
+    width: 100%;
+    height: 50px;
+}
+
 button:hover, select:hover, a:hover {
     background-color: darkred;
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.25), 0 5px 20px 0 rgba(0, 0, 0, 0.25);
@@ -73,7 +84,7 @@ header img:hover {
 .general-header-title h1 {
     color: snow;
     font-family: Tahoma, Geneva, sans-serif;
-    font-size: 24pt;
+    font-size: 18pt;
     font-weight: bold;
     margin: 0;
     padding: 0;
@@ -112,14 +123,7 @@ nav {
     display: inline;
 }
 
-nav .inner-page-nav {
-    display: inline-flex;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-nav .outer-page-nav {
+nav ul {
     display: inline-flex;
     list-style-type: none;
     margin: 0;
@@ -127,112 +131,124 @@ nav .outer-page-nav {
     width: 100%;
 }
 
-.outer-page-nav li {
+nav ul li {
+    align-items: center;
+    color: snow;
+    display: inline-flex;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: normal;
+    padding-left: 5px;
     width: 100%;
-}
-
-.outer-page-nav a {
-    align-items: center;
-    color: snow;
-    display: flex;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 12pt;
-    font-weight: normal;
-    justify-content: center;
-    text-decoration: none;
-    width: 100%;
-    height: 40px;
-}
-
-.dropdown-menu-bar {
-    width: 220px;
-    height: 40px;
-}
-
-.dropdown-menu-account {
-    align-items: center;
-    background-color: crimson;
-    color: snow;
-    display: flex;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 12pt;
-    font-weight: normal;
-    float: right;
-    justify-content: center;
-    text-decoration: none;
-    width: 220px;
-    height: 40px;
-}
-
-.dropdown-menu-title {
-    align-items: center;
-    background-color: crimson;
-    color: snow;
-    display: flex;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 12pt;
-    font-weight: normal;
-    justify-content: center;
-    text-decoration: none;
-    width: 100%;
-    height: 40px;
-}
-
-.dropdown-menu-title:hover {
-    background-color: darkred;
-    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.25), 0 5px 20px 0 rgba(0, 0, 0, 0.25);
-    cursor: pointer;
-}
-
-.dropdown-menu-item {
-    background-color: snow;
-    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.25), 0 5px 20px 0 rgba(0, 0, 0, 0.25);
-    display: none;
-    position: absolute;
-    top: 40px;
-    z-index: 10;
-}
-
-.dropdown-menu-item a {
-    align-items: center;
-    background-color: snow;
-    color: crimson;
-    display: flex;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 12pt;
-    font-weight: normal;
-    justify-content: center;
-    text-decoration: none;
-    width: 220px;
-    height: 40px;
-}
-
-.dropdown-menu-item a:hover {
-    background-color: crimson;
-    color: snow;
-}
-
-.dropdown-menu-item hr {
-    border-color: crimson;
-    width: 220px;
-}
-
-.dropdown-menu-bar:hover .dropdown-menu-item {
-    display: inline-block;
+    height: 30px;
 }
 /**/
-.initial-page-main, .query-page-main, .purchase-page-main {
+.initial-page-main {
+    align-items: center;
     background-color: snow;
     display: inline-flex;
     justify-content: center;
-    padding: 5px;
+    width: 100%;
+    height: 845px;
+}
+/**/
+.index-page-main {
+    background-color: snow;
     width: 100%;
 }
 
-.initial-page-main {
-    align-items: center;
+.index-page-main ul {
+    background-color: crimson;
     display: inline-flex;
-    height: 845px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.index-page-main ul li {
+    color: snow;
+    display: inline-block;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: normal;
+    width: 100%;
+}
+
+.index-page-main ul li a {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    width: 100%;
+    height: 30px;
+}
+
+.index-page-content {
+    /*display: none;*/
+    padding: 5px;
+}
+/**/
+.query-input-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.query-input-bar .query-input-bar-tag {
+    color: crimson;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: normal;
+    padding: 5px;
+    width: 60px;
+}
+
+.to {
+    text-align: center;
+}
+
+.query-input-bar input[type='text'] {
+    color: crimson;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    width: 100%;
+    height: 30px;
+}
+
+.query-input-bar input[type='date'] {
+    color: crimson;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    width: 100%;
+    height: 30px;
+}
+
+.query-input-bar input[type='number'] {
+    color: crimson;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    width: 100%;
+    height: 30px;
+}
+
+.query-input-bar select {
+    width: 200px;
+    height: 30px;
+}
+
+.query-input-bar button {
+    background-color: crimson;
+    border-width: 0;
+    color: snow;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: normal;
+    width: 100%;
+    height: 30px;
 }
 /**/
 .initial-form-table {
@@ -330,24 +346,13 @@ nav .outer-page-nav {
     text-align: center;
 }
 /**/
-.query-page-box {
-    width: calc(100% - 225px);
-    height: calc(795px - 80px);
-}
-
 .query-page-content {
-    padding: 0 5px;
     width: 100%;
     overflow: auto;
 }
 
 .query-page-box .query-page-content {
     height: 100%;
-}
-
-.query-page-side, .purchase-page-side {
-    width: 300px;
-    height: 795px;
 }
 
 .consumer-info-section, .condition-input-section {
@@ -537,4 +542,132 @@ nav .outer-page-nav {
     font-weight: normal;
     height: 40px;
     text-align: center;
+}
+/*Modal Dialog Styles*/
+.modal-dialog-backdrop {
+    background-color: rgba(0, 0, 0, 0.85);
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.modal-dialog-frame {
+    align-items: center;
+    display: none;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1010;
+    overflow: auto;
+}
+
+.modal-dialog-main {
+    border-color: crimson;
+    border-width: medium;
+    border-style: solid;
+    width: 400px;
+}
+
+.modal-dialog-title {
+    background-color: crimson;
+    display: inline-flex;
+    width: 100%;
+    height: 30px;
+}
+
+.modal-dialog-title h1 {
+    align-items: center;
+    color: snow;
+    display: inline-flex;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    justify-content: center;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.modal-dialog-title button {
+    background-color: crimson;
+    border-width: 0;
+    color: snow;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 10pt;
+    font-weight: normal;
+    width: 40px;
+}
+
+.modal-dialog-main table {
+    background-color: snow;
+}
+
+.modal-input-tag {
+    color: crimson;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 10pt;
+    font-weight: normal;
+    margin: 5px;
+    width: 100px;
+}
+
+.modal-input-text {
+    margin: 5px;
+    width: 300px;
+}
+
+.modal-input-text input[type='text'], .modal-input-text input[type='date'], .modal-input-text input[type='number'] {
+    height: 30px;
+}
+
+.modal-input-text select {
+    height: 30px;
+}
+
+.modal-dialog-input .modal-input-image {
+    color: crimson;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 10pt;
+    font-weight: normal;
+    width: 50%;
+}
+
+.modal-dialog-button ul {
+    display: inline-flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.modal-dialog-button ul li {
+    width: 100%;
+}
+
+.modal-dialog-button a {
+    align-items: center;
+    background-color: crimson;
+    border-width: 0;
+    color: snow;
+    display: inline-flex;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 10pt;
+    font-weight: normal;
+    justify-content: center;
+    text-decoration: none;
+    width: 100%;
+    height: 30px;
+}
+
+.modal-dialog-button a:hover, .modal-dialog-title button:hover {
+    background-color: darkred;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.25), 0 5px 20px 0 rgba(0, 0, 0, 0.25);
+    cursor: pointer;
 }
