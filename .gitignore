@@ -1,3 +1,6 @@
 node_modules
 npm-debug.log
 public/script/*-template.js
+
+public/config/home-config.json
+public/script/sample.js

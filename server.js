@@ -6,7 +6,8 @@ var exphbs = require('express-handlebars');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
 /**/
-var config = require('./public/config/config.json')
+// var config = require('./public/config/config.json');
+var config = require('./public/config/home-config.json');
 var host = config['host'];
 var username = config['username'];
 var password = config['password'];
@@ -118,17 +119,17 @@ app.get('/vendor-modify', function(req, res) {
     });
 });
 
-// connection.connect(function(err) {
-//     if (err) {
-//         console.console.log('Erro: Failed to connect to MySQL Database');
-//         throw err;
-//     } else {
-//         app.listen(10000, function() {
-//             console.log('==', 'Listening on Port', 10000, '==');
-//         });
-//     }
-// });
-
-app.listen(10000, function() {
-    console.log('==', 'Listening on Port', 10000, '==');
+connection.connect(function(err) {
+    if (err) {
+        console.console.log('Erro: Failed to connect to MySQL Database');
+        throw err;
+    } else {
+        app.listen(10000, function() {
+            console.log('==', 'Listening on Port', 10000, '==');
+        });
+    }
 });
+
+// app.listen(10000, function() {
+//     console.log('==', 'Listening on Port', 10000, '==');
+// });
