@@ -19,6 +19,8 @@ var connection = mysql.createConnection({
     database: dbname
 });
 /**/
+select = require('./modules/prog-select.js');
+/**/
 var app = express();
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars');
@@ -31,35 +33,36 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.post('/login#purpos-validation', function(req, res) {
+app.post('/validate/signin', function(req, res) {
     if (req.body['role'] == "administrator") {
         var adminInfo = require('./public/config/admin.json');
         var flag = false;
+        var rs = {};
 
         for (var i = 0; i < adminInfo.length; i++) {
             if (adminInfo[i]['username'] == req.body['username'] && adminInfo[i]['password'] == req.body['password']) {
+                rs['id'] = adminInfo[i].id;
+                rs['name'] = adminInfo[i].name;
+                rs['type'] = adminInfo[i].type;
                 flag = true;
                 break;
             }
         }
-
+        
         if (flag) {
-            res.status(200).send();
+            res.status(200).json({role:"administrator", result:rs});
         } else {
             res.status(404).send();
         }
     } else {
-        var sql = 'SELECT * FROM CONSUMER_INFO_TB WHERE USERNAME=\'' + req.body['username'] + '\' AND PASSWORD=\'' + req.body['password'] + '\'';
+        var sql = 'SELECT * FROM CONSUMER_INFO_TB WHERE CONSUMER_USERNAME=\'' + req.body['username'] + '\' AND CONSUMER_PASSWORD=\'' + req.body['password'] + '\'';
 
-        connection.query(sql, function(err, rows) {
-            if (err) {
-                console.log('Error: Fail to fetch result from database.', err);
+        select.consumerQuery(sql, connection, function(rs) {
+            console.log('$MySQL-Login-Validation$', rs);
+            if (rs == 'error') {
+                res.status(404).send();
             } else {
-                if (rows.length > 0) {
-                    res.status(200).send();
-                } else {
-                    res.status(404).send();
-                }
+                res.status(200).json({role:"visitor", result:rs});
             }
         });
     }
@@ -71,15 +74,21 @@ app.get('/', function(req, res) {
     });
 });
 
-app.get('/consumer-page%=:person%', function(req, res) {
+app.get('/consumer-page%id=:id%%name=:name%%type=:type%', function(req, res) {
     res.render('consumer-page', {
-        title: 'Consumer Visit Page'
+        title: 'Consumer Visit Page',
+        id: req.params.id,
+        name: req.params.name,
+        type: req.params.type
     });
 });
 
-app.get('/staff-page%=:person%', function(req, res) {
+app.get('/staff-page%id=:id%%name=:name%%type=:type%', function(req, res) {
     res.render('staff-page', {
-        title: 'Staff Manage Page'
+        title: 'Staff Manage Page',
+        id: req.params.id,
+        name: req.params.name,
+        type: req.params.type
     });
 });
 
