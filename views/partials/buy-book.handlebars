@@ -1,10 +1,5 @@
-<div class="purchase-page-content" style="height:870px">
-    <table class="purchase-info-table">
-        <tr>
-            <th class="purchase-info-header id">Book ID</th>
-            <th class="purchase-info-header name">Book Name</th>
-            <th class="purchase-info-header price">Book Price</th>
-        </tr>
-    </table>
+<div id="consumer-buy-content" class="consumer-tabbed-content">
+    {{> buy/buy-info-content-pane}}
     {{> tool/buy-control-bar}}
 </div>
+{{> dialog/buy-modal}}

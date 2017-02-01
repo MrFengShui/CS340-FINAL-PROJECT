@@ -2,10 +2,14 @@
 {{> header}}
 <main class="index-page-main">
     <ul>
-        <li><a href="">Purchase Book</a></li>
-        <li><a href="">Query Book Information</a></li>
-        <li><a href="">Query Book Storage</a></li>
+        <li><a href="#" title="buy" class="consumer-tabbed-title">Purchase Book</a></li>
+        <li><a href="#" title="book" class="consumer-tabbed-title" style="background-color: darkred">Query Book Information</a></li>
+        <li><a href="#" title="store" class="consumer-tabbed-title">Query Book Storage</a></li>
     </ul>
-    <div class="index-page-content">{{> book-query}}</div>
+    <div class="index-page-content">
+        {{> buy-book}}
+        {{> book-query}}
+        {{> store-query}}
+    </div>
 </main>
 {{> footer}}

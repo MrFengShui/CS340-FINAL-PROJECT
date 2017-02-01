@@ -1,45 +1,58 @@
 <table class="query-input-bar">
     <tr>
         <td class="query-input-bar-tag">Name</td>
-        <td><input type="text" name="bookname" value=""></td>
+        <td><input type="text" name="bookname" value="" id="consumer-input-bookname"></td>
         <td class="query-input-bar-tag">Type</td>
         <td>
-            <select class="" name="">
-                <option selected="true" disabled>Select one book type</option>
-                <option>Art</option>
-                <option>Engineering</option>
-                <option>History</option>
-                <option>Literature</option>
-                <option>Science</option>
+            <select id="consumer-select-booktype" name="">
+                <option selected="true" value="0" disabled>Select one book type</option>
+                <option value="0">Any Type</option>
+                <option value="1">Art</option>
+                <option value="2">Engineering</option>
+                <option value="3">History</option>
+                <option value="4">Literature</option>
+                <option value="5">Science</option>
             </select>
         </td>
         <td class="query-input-bar-tag">Author</td>
-        <td><input type="text" name="bookauthor" value=""></td>
+        <td><input type="text" name="bookauthor" value="" id="consumer-input-bookauthor"></td>
     </tr>
     <tr>
         <td class="query-input-bar-tag">Date</td>
-        <td><input type="date" name="bookstart" value=""></td>
+        <td><input type="date" name="bookdate" value="" class="consumer-input-bookdate"></td>
         <td class="query-input-bar-tag to">
             <i class="fa fa-arrow-left" aria-hidden="true"></i>
             <i class="fa fa-arrow-right" aria-hidden="true"></i>
         </td>
-        <td><input type="date" name="bookend" value=""></td>
+        <td><input type="date" name="bookdate" value="" class="consumer-input-bookdate"></td>
         <td class="query-input-bar-tag">Press</td>
         <td>
-            <select class="" name="">
-                <option selected="true" disabled>Select one publish press</option>
-                <option></option>
+            <select id="consumer-select-bookpress" name="">
+                <option selected="true" value="anypress" disabled>Select one publish press</option>
+                <option value="anypress">Any Press</option>
+                <option value="apress">Apress</option>
+                <option value="pearson">Pearson</option>
+                <option value="oreilly">O'Reilly Media</option>
+                <option value="addison">Addison-Wesley Professional</option>
+                <option value="nostarch">No Starch Press</option>
+                <option value="scholastic">Scholastic</option>
+                <option value="createspace">CreateSpace Independent Publishing Platform</option>
+                <option value="scribner">Scribner</option>
+                <option value="dover">Dover Publications</option>
+                <option value="cambridge">Cambridge University Press</option>
+                <option value="britannica">Encyclopaedia Britannica</option>
+                <option value="brooks">Brooks Cole</option>
             </select>
         </td>
     </tr>
     <tr>
         <td class="query-input-bar-tag">Price</td>
-        <td><input type="number" step="0.01" min="0" max="100000" name="bookprice" value=""></td>
+        <td><input type="number" step="0.01" min="-1" max="100000" name="bookprice" value="-1" class="consumer-input-bookprice"></td>
         <td class="query-input-bar-tag to">
             <i class="fa fa-arrow-left" aria-hidden="true"></i>
             <i class="fa fa-arrow-right" aria-hidden="true"></i>
         </td>
-        <td><input type="number" step="0.01" min="0" max="100000" name="bookprice" value=""></td>
-        <td colspan="2"><button type="button" name="dosearch">Search</button></td>
+        <td><input type="number" step="0.01" min="-1" max="100000" name="bookprice" value="-1" class="consumer-input-bookprice"></td>
+        <td colspan="2"><button type="button" name="dosearch" id="consumer-search-button">Search</button></td>
     </tr>
 </table>
