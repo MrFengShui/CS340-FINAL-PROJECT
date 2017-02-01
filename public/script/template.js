@@ -1,3 +1,18 @@
+function convertType(type) {
+    switch (type) {
+        case 1:
+            return 'Art';
+        case 2:
+            return 'Engineering';
+        case 3:
+            return 'History';
+        case 4:
+            return 'Literature';
+        case 5:
+            return 'Science';
+    }
+}
+
 var createBookInfo = Handlebars.templates['book-info-row'];
 
 function buildBookInfoHTML(id, name, type, fname, lname, edition, year, month, date, press, isbn, price) {
@@ -11,6 +26,20 @@ function buildBookInfoHTML(id, name, type, fname, lname, edition, year, month, d
         bookpress: press,
         bookisbn: isbn,
         bookprice: '$' + price
+    });
+}
+
+var createStoreInfo = Handlebars.templates['store-info-row'];
+
+function buildStoreInfoHTML(id, name, type, quantity, repo, street, number, guarder) {
+    return createStoreInfo({
+        bookid: id,
+        bookname: name,
+        booktype: convertType(type),
+        bookquantity: quantity,
+        repoid: repo,
+        repoaddress: street + ' ' + number,
+        repoguard: guarder,
     });
 }
 
@@ -30,19 +59,4 @@ function buildPriceTotalHTML(price) {
     return createBookTotal({
         totalPrice: '$' + price
     });
-}
-
-function convertType(type) {
-    switch (type) {
-        case 1:
-            return 'Art';
-        case 2:
-            return 'Engineering';
-        case 3:
-            return 'History';
-        case 4:
-            return 'Literature';
-        case 5:
-            return 'Science';
-    }
 }

@@ -37,6 +37,12 @@ function handleConsumerEvents() {
         consumerSearchButton.addEventListener('click', todoConsumerBookSearch);
     }
 
+    var consumerStorageSearchButton = document.getElementById('consumer-repo-search-button');
+
+    if (consumerStorageSearchButton) {
+        consumerStorageSearchButton.addEventListener('click', todoBookStorageSearch);
+    }
+
     var consumerTabbedButtons = document.getElementsByClassName('consumer-tabbed-title');
 
     for (var i = 0; i < consumerTabbedButtons.length; i++) {

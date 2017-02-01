@@ -6,8 +6,8 @@ var exphbs = require('express-handlebars');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
 /**/
-// var config = require('./public/config/config.json');
-var config = require('./public/config/home-config.json');
+var config = require('./public/config/config.json');
+// var config = require('./public/config/home-config.json');
 var host = config['host'];
 var username = config['username'];
 var password = config['password'];
@@ -132,6 +132,30 @@ app.post('/validate/consumerBookSearch', function(req, res) {
 
     select.consumerBookInfoQuery(sql, connection, function(rs) {
         console.log('$MySQL-BOOK-Validation$', rs);
+        if (rs == 'error') {
+            res.status(404).send();
+        } else {
+            res.status(200).json(rs);
+        }
+    });
+});
+
+app.post('/validate/consumerStoreSearch', function(req, res) {
+    var booktype = function() {
+        return (req.body['booktype'] == '0') ? '' : req.body['booktype'];
+    }
+    var repopurpose = function() {
+        return (req.body['repopurpose'] == '0') ? '' : req.body['repopurpose'];
+    }
+    var sql = 'SELECT BOOK_INFO_TB.BOOK_ID, BOOK_INFO_TB.BOOK_NAME, BOOK_INFO_TB.BOOK_TYPE, BOOK_INFO_TB.BOOK_QUANTITY, REPOSITORY_INFO_TB.REPOSITORY_ID, REPOSITORY_INFO_TB.REPOSITORY_ADDRESS_STREET, REPOSITORY_INFO_TB.REPOSITORY_ADDRESS_NUMBER, REPOSITORY_INFO_TB.REPOSITORY_GUARD_ID FROM (BOOK_INFO_TB INNER JOIN BOOK_REPOSITORY_TB ON BOOK_INFO_TB.BOOK_ID = BOOK_REPOSITORY_TB.BOOK_ID) INNER JOIN REPOSITORY_INFO_TB ON BOOK_REPOSITORY_TB.REPOSITORY_ID = REPOSITORY_INFO_TB.REPOSITORY_ID WHERE '
+    + 'BOOK_INFO_TB.BOOK_ID LIKE \'\%' + req.body['bookid'] + '\%\' AND '
+    + 'BOOK_INFO_TB.BOOK_NAME LIKE \'\%' + req.body['bookname'] + '\%\' AND '
+    + 'BOOK_INFO_TB.BOOK_TYPE LIKE \'\%' + booktype() + '\%\' AND '
+    + 'BOOK_INFO_TB.BOOK_ISBN LIKE \'\%' + req.body['bookisbn'] + '\%\' AND '
+    + 'REPOSITORY_INFO_TB.REPOSITORY_PURPOSE LIKE \'\%' + repopurpose() + '\%\'';
+
+    select.consumerStoreInfoQuery(sql, connection, function(rs) {
+        console.log('$MySQL-STORE-Validation$', rs);
         if (rs == 'error') {
             res.status(404).send();
         } else {

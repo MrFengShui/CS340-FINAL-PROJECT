@@ -62,10 +62,54 @@ function todoConsumerBookSearch() {
                 item['BOOK_PUBLISH_MONTH'],
                 item['BOOK_PUBLISH_DATE'],
                 item['BOOK_PUBLISH_PRESS'],
-                item['BOOK_PUBLISH_ISBM'],
+                item['BOOK_ISBN'],
                 item['BOOK_PRICE']
             );
             bookInfoTable.insertAdjacentHTML('beforeend', rowHTML);
+        });
+    });
+}
+
+function todoBookStorageSearch() {
+    var bookStoreTable = document.getElementById('consumer-repo-info-table');
+    var bookid = document.getElementById('consumer-repo-input-bookid').value;
+    var bookname = document.getElementById('consumer-repo-input-bookname').value;
+    var booktype = document.getElementById('consumer-repo-select-booktype').value;
+    var bookisbn = document.getElementById('consumer-repo-input-bookisbn').value;
+    var repopurpose = document.getElementById('consumer-repo-select-purpose').value;
+
+    var postURL = '/validate/consumerStoreSearch';
+    var postRequest = new XMLHttpRequest();
+    postRequest.open('POST', postURL);
+    postRequest.setRequestHeader('Content-Type', 'application/json');
+
+    postRequest.send(JSON.stringify({
+        bookid: bookid,
+        bookname: bookname,
+        booktype: booktype,
+        bookisbn: bookisbn,
+        repopurpose: repopurpose
+    }));
+
+    postRequest.addEventListener('load', function(event) {
+        console.log(event.target.response);
+        for (var i = bookStoreTable.rows.length - 1; i > 0; i--) {
+            bookStoreTable.deleteRow(i);
+        }
+
+        book = JSON.parse(event.target.response);
+        book.forEach(function(item) {
+            var rowHTML = buildStoreInfoHTML(
+                item['BOOK_ID'],
+                item['BOOK_NAME'],
+                item['BOOK_TYPE'],
+                item['BOOK_QUANTITY'],
+                item['REPOSITORY_ID'],
+                item['REPOSITORY_ADDRESS_STREET'],
+                item['REPOSITORY_ADDRESS_NUMBER'],
+                item['REPOSITORY_GUARD_ID']
+            );
+            bookStoreTable.insertAdjacentHTML('beforeend', rowHTML);
         });
     });
 }

@@ -7,14 +7,16 @@
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
         <link rel="stylesheet" href="style/theme_style.css">
     </head>
-    <body>
+    <body onresize="matchGlobalHeight()" onload="matchGlobalHeight()">
         {{{body}}}
     </body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.runtime.js"></script>
+    <script src="script/store-info-row-template.js" type="text/javascript"></script>
     <script src="script/book-info-row-template.js" type="text/javascript"></script>
     <script src="script/buy-info-row-template.js" type="text/javascript"></script>
     <script src="script/buy-info-foot-template.js" type="text/javascript"></script>
     <script src="script/buy.js" type="text/javascript"></script>
+    <script src="script/global.js" type="text/javascript"></script>
     <script src="script/main.js" type="text/javascript"></script>
     <script src="script/login.js" type="text/javascript"></script>
     <script src="script/search.js" type="text/javascript"></script>

@@ -33,6 +33,17 @@ exports.consumerBookInfoQuery = function(sql, connection, callback) {
     });
 }
 
+exports.consumerStoreInfoQuery = function(sql, connection, callback) {
+    connection.query(sql, function(err, rows) {
+        if (err) {
+            console.log('Error: Fail to fetch result from database.', err);
+            callback('error');
+        } else {
+            callback(rows);
+        }
+    });
+}
+
 exports.consumerBuyBookQuery = function(sql, connection, callback) {
     connection.query(sql, function(err, rows) {
         if (err) {

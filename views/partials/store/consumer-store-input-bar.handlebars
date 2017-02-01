@@ -1,22 +1,37 @@
 <table class="query-input-bar">
     <tr>
         <td class="query-input-bar-tag">ID</td>
-        <td><input type="text" name="bookid" value=""></td>
+        <td><input type="text" name="bookid" value="" id="consumer-repo-input-bookid"></td>
         <td class="query-input-bar-tag">Name</td>
-        <td><input type="text" name="bookname" value=""></td>
+        <td><input type="text" name="bookname" value="" id="consumer-repo-input-bookname"></td>
         <td class="query-input-bar-tag">Type</td>
         <td>
-            <select class="" name="">
-                <option selected="true" disabled>Select one book type</option>
-                <option>Art</option>
-                <option>Engineering</option>
-                <option>History</option>
-                <option>Literature</option>
-                <option>Science</option>
+            <select id="consumer-repo-select-booktype" name="">
+                <option selected="true" value="0" disabled>Select one book type</option>
+                <option value="0">Any Type</option>
+                <option value="1">Art</option>
+                <option value="2">Engineering</option>
+                <option value="3">History</option>
+                <option value="4">Literature</option>
+                <option value="5">Science</option>
             </select>
         </td>
     </tr>
     <tr>
-        <td colspan="6"><button type="button" name="dosearch">Search</button></td>
+        <td class="query-input-bar-tag">ISBN</td>
+        <td><input type="text" name="bookisbn" value="" id="consumer-repo-input-bookisbn"></td>
+        <td class="query-input-bar-tag">Purpose</td>
+        <td>
+            <select id="consumer-repo-select-purpose" name="">
+                <option selected="true" value="0" disabled>Select one Repository purpose</option>
+                <option value="0">Any Purpose</option>
+                <option value="1">Art, Engineering</option>
+                <option value="2">Engineering, History</option>
+                <option value="3">History, Literature</option>
+                <option value="4">Literature, Science</option>
+                <option value="5">Science</option>
+            </select>
+        </td>
+        <td colspan="4"><button type="button" name="dosearch" id="consumer-repo-search-button">Search</button></td>
     </tr>
 </table>
