@@ -34,7 +34,7 @@ function handleConsumerEvents() {
     var consumerSearchButton = document.getElementById('consumer-search-button');
 
     if (consumerSearchButton) {
-        consumerSearchButton.addEventListener('click', todoConsumerBookSearch);
+        consumerSearchButton.addEventListener('click', todoBookInformationSearch);
     }
 
     var consumerStorageSearchButton = document.getElementById('consumer-repo-search-button');
@@ -43,11 +43,11 @@ function handleConsumerEvents() {
         consumerStorageSearchButton.addEventListener('click', todoBookStorageSearch);
     }
 
-    var consumerTabbedButtons = document.getElementsByClassName('consumer-tabbed-title');
+    var queryTabbedButtons = document.getElementsByClassName('query-tabbed-title');
 
-    for (var i = 0; i < consumerTabbedButtons.length; i++) {
-        if (consumerTabbedButtons[i]) {
-            consumerTabbedButtons[i].addEventListener('click', todoConsumerTabbedPane);
+    for (var i = 0; i < queryTabbedButtons.length; i++) {
+        if (queryTabbedButtons[i]) {
+            queryTabbedButtons[i].addEventListener('click', todoQueryTabbedPane);
         }
     }
 }

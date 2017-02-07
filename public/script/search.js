@@ -1,6 +1,6 @@
-function todoConsumerTabbedPane(event) {
-    var tabbedTitles = document.getElementsByClassName('consumer-tabbed-title');
-    var tabbedContents = document.getElementsByClassName('consumer-tabbed-content');
+function todoQueryTabbedPane(event) {
+    var tabbedTitles = document.getElementsByClassName('query-tabbed-title');
+    var tabbedContents = document.getElementsByClassName('query-tabbed-content');
 
     for (var i = 0; i < tabbedContents.length; i++) {
         if (tabbedContents[i]) {
@@ -9,13 +9,13 @@ function todoConsumerTabbedPane(event) {
         }
     }
 
-    var content = document.getElementById('consumer-' + event.target.title + '-content');
+    var content = document.getElementById(event.target.title + '-content');
     content.style.display = 'block';
     event.target.style.backgroundColor = 'darkred';
 }
 
-function todoConsumerBookSearch() {
-    var bookInfoTable = document.getElementById('consumer-book-info-table');
+function todoBookInformationSearch() {
+    var bookInfoTable = document.getElementById('book-info-query-table');
     var bookname = document.getElementById('consumer-input-bookname').value;
     var booktype = document.getElementById('consumer-select-booktype').value;
     var bookauthor = document.getElementById('consumer-input-bookauthor').value;
@@ -71,7 +71,7 @@ function todoConsumerBookSearch() {
 }
 
 function todoBookStorageSearch() {
-    var bookStoreTable = document.getElementById('consumer-repo-info-table');
+    var bookStoreTable = document.getElementById('store-info-query-table');
     var bookid = document.getElementById('consumer-repo-input-bookid').value;
     var bookname = document.getElementById('consumer-repo-input-bookname').value;
     var booktype = document.getElementById('consumer-repo-select-booktype').value;

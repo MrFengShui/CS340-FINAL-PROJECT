@@ -1,0 +1,53 @@
+.purchase-page-content {
+    padding: 0 5px;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.purchase-info-table {
+    background-color: crimson;
+    width: 100%;
+}
+
+.purchase-info-header {
+    color: snow;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    height: 40px;
+}
+
+.purchase-info-header.id, .purchase-info-header.price {
+    width: 150px;
+}
+
+.purchase-info-header.name {
+    width: 350px;
+}
+
+.purchase-info-footer {
+    background-color: darkred;
+    color: snow;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    height: 40px;
+}
+
+.purchase-info-footer.total {
+    padding-left: 50px;
+}
+
+.purchase-info-footer.price {
+    text-align: center;
+}
+
+.purchase-info-row {
+    background-color: snow;
+    color: crimson;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: normal;
+    height: 40px;
+    text-align: center;
+}

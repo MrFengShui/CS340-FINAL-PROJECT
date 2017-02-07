@@ -1,21 +1,21 @@
 function matchGlobalHeight() {
-    var indexPageContents = document.getElementsByClassName('index-page-content');
+    var indexPageContent = document.getElementsByClassName('index-page-content');
     /**/
-    var consumerBuyListContent = document.getElementById('consumer-buy-list-content');
-    var consumerBookInfoContent = document.getElementById('consumer-book-info-content');
-    var consumerStoreInfoContent = document.getElementById('consumer-store-info-content');
+    var consumerBuyListContent = document.getElementById('buy-list-content');
+    var consumerBookInfoContent = document.getElementById('book-query-content');
+    var consumerStoreInfoContent = document.getElementById('store-query-content');
     /**/
-    var consumerBookInfoTable = document.getElementById('consumer-book-info-table');
-    var consumerRepoInfoTable = document.getElementById('consumer-repo-info-table');
+    var consumerBookInfoTable = document.getElementById('book-info-query-table');
+    var consumerRepoInfoTable = document.getElementById('store-info-query-table');
 
-    for (var i = 0; i < indexPageContents.length; i++) {
-        indexPageContents[i].style.height = 'calc(' + window.innerHeight + 'px - 175px)';
+    for (var i = 0; i < indexPageContent.length; i++) {
+        indexPageContent[i].style.height = 'calc(' + window.innerHeight + 'px - 175px)';
     }
 
-    consumerBuyListContent.style.height = 'calc(' + indexPageContents[0].clientHeight + 'px - 90px)';
-    consumerBookInfoContent.style.height = 'calc(' + indexPageContents[0].clientHeight + 'px - 120px)';
-    consumerStoreInfoContent.style.height = 'calc(' + indexPageContents[0].clientHeight + 'px - 84px)';
+    consumerBuyListContent.style.height = 'calc(' + indexPageContent[0].clientHeight + 'px - 90px)';
+    consumerBookInfoContent.style.height = 'calc(' + indexPageContent[0].clientHeight + 'px - 120px)';
+    consumerStoreInfoContent.style.height = 'calc(' + indexPageContent[0].clientHeight + 'px - 84px)';
 
-    consumerBookInfoTable.style.width = (indexPageContents[0].clientWidth <= 1870) ? '1870px' : '100%';
-    consumerRepoInfoTable.style.width = (indexPageContents[0].clientWidth <= 1620) ? '1620px' : '100%';
+    consumerBookInfoTable.style.width = (indexPageContent[0].clientWidth <= 1870) ? '1870px' : '100%';
+    consumerRepoInfoTable.style.width = (indexPageContent[0].clientWidth <= 1620) ? '1620px' : '100%';
 }

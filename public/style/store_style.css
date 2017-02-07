@@ -1,0 +1,41 @@
+.store-info-table {
+    background-color: crimson;
+}
+
+.store-info-header {
+    color: snow;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    height: 40px;
+}
+
+.store-info-header.select {
+    width: 40px;
+}
+
+.store-info-header.control {
+    width: 80px;
+}
+
+.store-info-header.id, .store-info-header.quantity {
+    width: 150px;
+}
+
+.store-info-header.floor {
+    width: 200px;
+}
+
+.store-info-header.guard {
+    width: 250px;
+}
+
+.store-info-row {
+    background-color: snow;
+    color: crimson;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: normal;
+    height: 40px;
+    text-align: center;
+}

@@ -1,0 +1,56 @@
+.book-info-table {
+    background-color: crimson;
+}
+
+.book-info-table button {
+    background-color: crimson;
+    border-width: 0;
+    color: snow;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    width: 30px;
+    height: 30px;
+}
+
+.book-info-header.select {
+    width: 40px;
+}
+
+.book-info-header.control {
+    width: 80px;
+}
+
+.book-info-header.id, .book-info-header.type, .book-info-header.edition {
+    width: 150px;
+}
+
+.book-info-header.name {
+    width: 350px;
+}
+
+.book-info-header.author, .book-info-header.press, .book-info-header.isbn, .book-info-header.date {
+    width: 200px;
+}
+
+.book-info-header.price {
+    width: 150px;
+}
+
+.book-info-header {
+    color: snow;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    height: 40px;
+}
+
+.book-info-row {
+    background-color: snow;
+    color: crimson;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: normal;
+    height: 40px;
+    text-align: center;
+}
