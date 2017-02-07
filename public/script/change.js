@@ -1,6 +1,6 @@
-function todoQueryTabbedPane(event) {
-    var tabbedTitles = document.getElementsByClassName('query-tabbed-title');
-    var tabbedContents = document.getElementsByClassName('query-tabbed-content');
+function todoModifyTabbedPane(event) {
+    var tabbedTitles = document.getElementsByClassName('modify-tabbed-title');
+    var tabbedContents = document.getElementsByClassName('modify-tabbed-content');
 
     for (var i = 0; i < tabbedContents.length; i++) {
         if (tabbedContents[i]) {
@@ -14,19 +14,19 @@ function todoQueryTabbedPane(event) {
     event.target.style.backgroundColor = 'darkred';
 }
 
-function todoBookInformationSearch() {
-    var bookInfoTable = document.getElementById('book-info-query-table');
-    var bookname = document.getElementById('consumer-input-bookname').value;
-    var booktype = document.getElementById('consumer-select-booktype').value;
-    var bookauthor = document.getElementById('consumer-input-bookauthor').value;
+function todoBookModifySearch() {
+    var bookInfoTable = document.getElementById('book-info-modify-table');
+    var bookname = document.getElementById('staff-input-bookname').value;
+    var booktype = document.getElementById('staff-select-booktype').value;
+    var bookauthor = document.getElementById('staff-input-bookauthor').value;
     var bookdate = [
-        document.getElementsByClassName('consumer-input-bookdate')[0].value,
-        document.getElementsByClassName('consumer-input-bookdate')[1].value
+        document.getElementsByClassName('staff-input-bookdate')[0].value,
+        document.getElementsByClassName('staff-input-bookdate')[1].value
     ];
-    var bookpress = document.getElementById('consumer-select-bookpress').value;
+    var bookpress = document.getElementById('staff-select-bookpress').value;
     var bookprice = [
-        document.getElementsByClassName('consumer-input-bookprice')[0].value,
-        document.getElementsByClassName('consumer-input-bookprice')[1].value
+        document.getElementsByClassName('staff-input-bookprice')[0].value,
+        document.getElementsByClassName('staff-input-bookprice')[1].value
     ];
 
     var postURL = '/validate/bookInfoSearch';
@@ -51,7 +51,7 @@ function todoBookInformationSearch() {
 
         book = JSON.parse(event.target.response);
         book.forEach(function(item) {
-            var rowHTML = buildBookInfoHTML(
+            var rowHTML = buildBookModHTML(
                 item['BOOK_ID'],
                 item['BOOK_NAME'],
                 item['BOOK_TYPE'],
@@ -70,13 +70,15 @@ function todoBookInformationSearch() {
     });
 }
 
-function todoBookStorageSearch() {
-    var bookStoreTable = document.getElementById('store-info-query-table');
-    var bookid = document.getElementById('consumer-repo-input-bookid').value;
-    var bookname = document.getElementById('consumer-repo-input-bookname').value;
-    var booktype = document.getElementById('consumer-repo-select-booktype').value;
-    var bookisbn = document.getElementById('consumer-repo-input-bookisbn').value;
-    var repopurpose = document.getElementById('consumer-repo-select-purpose').value;
+function todoStorageModifySearch() {
+    var bookStoreTable = document.getElementById('store-info-modify-table');
+    var bookid = document.getElementById('staff-store-input-bookid').value;
+    var bookname = document.getElementById('staff-store-input-bookname').value;
+    var booktype = document.getElementById('staff-store-select-booktype').value;
+    var bookisbn = document.getElementById('staff-store-input-bookisbn').value;
+    var repoid = document.getElementById('staff-store-input-repoid').value;
+    var repoaddress = document.getElementById('staff-store-input-address').value;
+    var repopurpose = document.getElementById('staff-store-select-purpose').value;
 
     var postURL = '/validate/storeInfoSearch';
     var postRequest = new XMLHttpRequest();
@@ -88,6 +90,8 @@ function todoBookStorageSearch() {
         bookname: bookname,
         booktype: booktype,
         bookisbn: bookisbn,
+        repoid: repoid,
+        repoaddress: repoaddress,
         repopurpose: repopurpose
     }));
 

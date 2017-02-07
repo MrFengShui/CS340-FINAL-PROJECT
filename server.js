@@ -4,10 +4,11 @@ var path = require('path');
 var express = require('express');
 var exphbs = require('express-handlebars');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 var mysql = require('mysql');
 /**/
-// var config = require('./public/config/config.json');
-var config = require('./public/config/home-config.json');
+var config = require('./public/config/config.json');
+// var config = require('./public/config/home-config.json');
 var host = config['host'];
 var username = config['username'];
 var password = config['password'];
@@ -24,6 +25,7 @@ select = require('./modules/prog-select.js');
 var app = express();
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars');
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json({
     limit: '32mb'
@@ -68,7 +70,7 @@ app.post('/validate/signin', function(req, res) {
     }
 });
 
-app.post('/validate/consumerBookSearch', function(req, res) {
+app.post('/validate/bookInfoSearch', function(req, res) {
     var booktype = function() {
         return (req.body['booktype'] == '0') ? '' : req.body['booktype'];
     }
@@ -140,7 +142,7 @@ app.post('/validate/consumerBookSearch', function(req, res) {
     });
 });
 
-app.post('/validate/consumerStoreSearch', function(req, res) {
+app.post('/validate/storeInfoSearch', function(req, res) {
     var booktype = function() {
         return (req.body['booktype'] == '0') ? '' : req.body['booktype'];
     }
@@ -181,6 +183,20 @@ app.get('/', function(req, res) {
     res.render('initial-page', {
         title: 'Initial Page'
     });
+});
+
+app.get('/logout', function(req, res) {
+    var cookies = req.cookies;
+
+    for (var i = 0; i < cookies.length; i++) {
+        if (!cookies.hasOwnProperty(cookies[i])) {
+            continue;
+        }
+
+        res.cookie(cookies[i], '', {expires: new Date(0)});
+    }
+
+    res.redirect('/');
 });
 
 app.get('/consumer-page%id=:id%%name=:name%%type=:type%', function(req, res) {

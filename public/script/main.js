@@ -52,7 +52,24 @@ function handleConsumerEvents() {
     }
 }
 
+function handleStaffEvents() {
+    var staffSearchButton = document.getElementById('staff-search-button');
+
+    if (staffSearchButton) {
+        staffSearchButton.addEventListener('click', todoBookModifySearch);
+    }
+
+    var modifyTabbedButtons = document.getElementsByClassName('modify-tabbed-title');
+
+    for (var i = 0; i < modifyTabbedButtons.length; i++) {
+        if (modifyTabbedButtons[i]) {
+            modifyTabbedButtons[i].addEventListener('click', todoModifyTabbedPane);
+        }
+    }
+}
+
 window.addEventListener('DOMContentLoaded', function(event) {
     handleLoginEvents();
     handleConsumerEvents();
+    handleStaffEvents();
 });
