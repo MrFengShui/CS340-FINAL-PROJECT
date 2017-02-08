@@ -7,8 +7,8 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var mysql = require('mysql');
 /**/
-var config = require('./public/config/config.json');
-// var config = require('./public/config/home-config.json');
+// var config = require('./public/config/config.json');
+var config = require('./public/config/home-config.json');
 var host = config['host'];
 var username = config['username'];
 var password = config['password'];

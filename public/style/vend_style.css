@@ -3,6 +3,17 @@
     width: 1220px;
 }
 
+.vend-info-table button {
+    background-color: crimson;
+    border-width: 0;
+    color: snow;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    width: 30px;
+    height: 30px;
+}
+
 .vend-info-header {
     color: snow;
     font-family: Tahoma, Geneva, sans-serif;

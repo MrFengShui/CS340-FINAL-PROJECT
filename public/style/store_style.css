@@ -2,6 +2,17 @@
     background-color: crimson;
 }
 
+.store-info-table button {
+    background-color: crimson;
+    border-width: 0;
+    color: snow;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    width: 30px;
+    height: 30px;
+}
+
 .store-info-header {
     color: snow;
     font-family: Tahoma, Geneva, sans-serif;

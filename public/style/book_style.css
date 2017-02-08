@@ -13,6 +13,14 @@
     height: 30px;
 }
 
+.book-info-header {
+    color: snow;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    height: 40px;
+}
+
 .book-info-header.select {
     width: 40px;
 }

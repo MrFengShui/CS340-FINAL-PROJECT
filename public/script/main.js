@@ -59,6 +59,12 @@ function handleStaffEvents() {
         staffSearchButton.addEventListener('click', todoBookModifySearch);
     }
 
+    var staffStoreSearchButton = document.getElementById('staff-store-search-button');
+
+    if (staffStoreSearchButton) {
+        staffStoreSearchButton.addEventListener('click', todoStorageModifySearch);
+    }
+
     var modifyTabbedButtons = document.getElementsByClassName('modify-tabbed-title');
 
     for (var i = 0; i < modifyTabbedButtons.length; i++) {
