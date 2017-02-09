@@ -51,31 +51,36 @@ function matchConsumerHeight(indexPageContent) {
 }
 
 function matchStaffHeight(indexPageContent) {
+    var staffBuyInfoContent = document.getElementById('buy-query-content');
     var staffBookModContent = document.getElementById('book-modify-content');
     var staffStoreModContent = document.getElementById('store-modify-content');
-    var staffVendModContent = document.getElementById('vend-mod-content');
+    var staffVendModContent = document.getElementById('vend-modify-content');
     var staffModifyContents = document.getElementsByClassName('modify-page-content');
     var staffBookModTable = document.getElementById('book-info-modify-table');
     var staffStoreModTable = document.getElementById('store-info-modify-table');
     var staffVendModTable = document.getElementById('vend-info-modify-table');
 
-    if (staffBookModContent) {
-        staffBookModContent.style.height = 'calc(' + indexPageContent[0].clientHeight + 'px - 90px)';
-    }
-
-    if (staffStoreModContent) {
-        staffStoreModContent.style.height = 'calc(' + indexPageContent[0].clientHeight + 'px - 120px)';
-    }
-
-    if (staffVendModContent) {
-        staffVendModContent.style.height = 'calc(' + indexPageContent[0].clientHeight + 'px - 84px)';
-    }
+    // if (staffBuyInfoContent) {
+    //     staffBuyInfoContent.style.height = 'calc(' + indexPageContent[0].clientHeight + 'px - 10px)';
+    // }
+    //
+    // if (staffBookModContent) {
+    //     staffBookModContent.style.height = 'calc(' + indexPageContent[0].clientHeight + 'px - 90px)';
+    // }
+    //
+    // if (staffStoreModContent) {
+    //     staffStoreModContent.style.height = 'calc(' + indexPageContent[0].clientHeight + 'px - 120px)';
+    // }
+    //
+    // if (staffVendModContent) {
+    //     staffVendModContent.style.height = 'calc(' + indexPageContent[0].clientHeight + 'px - 84px)';
+    // }
 
     if (staffModifyContents) {
         for (var i = 0; i < staffModifyContents.length; i++) {
-            if (staffModifyContents[i] && i == 1) {
-                staffModifyContents[i].style.height = 'calc(' + indexPageContent[0].clientHeight + 'px - 200px)';
-            } else if (staffModifyContents[i] && i == 2) {
+            if (staffModifyContents[i] && i == 0) {
+                staffModifyContents[i].style.height = 'calc(' + indexPageContent[0].clientHeight + 'px - 80px)';
+            } else if (staffModifyContents[i] && i == 3) {
                 staffModifyContents[i].style.height = 'calc(' + indexPageContent[0].clientHeight + 'px - 164px)';
             } else {
                 staffModifyContents[i].style.height = 'calc(' + indexPageContent[0].clientHeight + 'px - 200px)';

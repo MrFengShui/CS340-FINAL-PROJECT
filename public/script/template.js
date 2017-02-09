@@ -73,7 +73,7 @@ function buildStoreModHTML(id, name, type, quantity, repo, street, number, guard
     });
 }
 
-var createBookBuy = Handlebars.templates['buy-info-row'];
+var createBookBuy = Handlebars.templates['buy-list-row'];
 
 function buildBuyBookHTML(id, name, price) {
     return createBookBuy({
@@ -83,7 +83,7 @@ function buildBuyBookHTML(id, name, price) {
     });
 }
 
-var createBookTotal = Handlebars.templates['buy-info-foot'];
+var createBookTotal = Handlebars.templates['buy-list-foot'];
 
 function buildPriceTotalHTML(price) {
     return createBookTotal({

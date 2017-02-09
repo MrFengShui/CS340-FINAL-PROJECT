@@ -2,17 +2,13 @@
 {{> header}}
 <main class="index-page-main">
     <ul>
-        <li>
-            <a href="#" title="book-modify" class="modify-tabbed-title" style="background-color: darkred">Modify Book Information</a>
-        </li>
-        <li>
-            <a href="#" title="store-modify" class="modify-tabbed-title">Modify Storage Information</a>
-        </li>
-        <li>
-            <a href="#" title="vend-modify" class="modify-tabbed-title">Modify Vendor Information</a>
-        </li>
+        <li><a href="#" title="buy-query" class="modify-tabbed-title">Consumer Buy Information</a></li>
+        <li><a href="#" title="book-modify" class="modify-tabbed-title" style="background-color: darkred">Modify Book Information</a></li>
+        <li><a href="#" title="store-modify" class="modify-tabbed-title">Modify Storage Information</a></li>
+        <li><a href="#" title="vend-modify" class="modify-tabbed-title">Modify Vendor Information</a></li>
     </ul>
     <div class="index-page-content">
+        {{> buy-query}}
         {{> book-modify}}
         {{> store-modify}}
         {{> vend-modify}}
