@@ -65,7 +65,47 @@ function todoCalculatePrice() {
                 price += parseFloat(bookBuyTable.rows[i].cells[2].innerHTML.substr(1));
             }
         }
+
         var rowHTML = buildPriceTotalHTML(price.toFixed(2));
         bookBuyTable.insertAdjacentHTML('beforeend', rowHTML);
     }
+}
+
+function todoPayBook() {
+    var bookBuyTable = document.getElementById('consumer-buy-book-table');
+    var personID = document.getElementById('person-info-id').innerHTML;
+    var personName = document.getElementById('person-info-name').innerHTML;
+    var personType = document.getElementById('person-info-type').innerHTML;
+    var items = [];
+    var totalPrice = 0;
+
+    for (var i = 1; i < bookBuyTable.rows.length; i++) {
+        if (bookBuyTable.rows[i]) {
+            if (i == bookBuyTable.rows.length - 1) {
+                totalPrice = bookBuyTable.rows[i].cells[1].innerHTML.substr(1);
+            } else {
+                var item = {personid: personID.split(': ')[1], bookid: bookBuyTable.rows[i].cells[0].innerHTML};
+                items.push(item);
+            }
+        }
+    }
+    console.log(items, totalPrice);
+    var postURL = '/validate/buyInfoInsert';
+    var postRequest = new XMLHttpRequest();
+    postRequest.open('POST', postURL);
+    postRequest.setRequestHeader('Content-Type', 'application/json');
+
+    postRequest.send(JSON.stringify({
+        items: items,
+        totalprice: totalPrice
+    }));
+
+    postRequest.addEventListener('load', function(event) {
+        console.log(event.target.response);
+        if (event.target.response == 'success') {
+            window.location.href = '/success';
+        } else {
+            alert(event.target.response);
+        }
+    });
 }

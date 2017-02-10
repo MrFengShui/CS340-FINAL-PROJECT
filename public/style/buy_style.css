@@ -1,15 +1,9 @@
-.purchase-page-content {
-    padding: 0 5px;
-    width: 100%;
-    overflow-y: auto;
-}
-
-.purchase-info-table {
+.buy-info-table {
     background-color: crimson;
     width: 100%;
 }
 
-.purchase-info-header {
+.buy-info-header {
     color: snow;
     font-family: Tahoma, Geneva, sans-serif;
     font-size: 12pt;
@@ -17,15 +11,15 @@
     height: 40px;
 }
 
-.purchase-info-header.id, .purchase-info-header.price {
+.buy-info-header.id, .buy-info-header.type {
     width: 150px;
 }
 
-.purchase-info-header.name {
-    width: 350px;
+.buy-info-header.name, .buy-info-header.date {
+    width: 200px;
 }
 
-.purchase-info-footer {
+.buy-info-footer {
     background-color: darkred;
     color: snow;
     font-family: Tahoma, Geneva, sans-serif;
@@ -34,15 +28,15 @@
     height: 40px;
 }
 
-.purchase-info-footer.total {
+.buy-info-footer.total {
     padding-left: 50px;
 }
 
-.purchase-info-footer.price {
+.buy-info-footer.price {
     text-align: center;
 }
 
-.purchase-info-row {
+.buy-info-row {
     background-color: snow;
     color: crimson;
     font-family: Tahoma, Geneva, sans-serif;

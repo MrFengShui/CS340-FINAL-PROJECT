@@ -1,9 +1,17 @@
 function defineType(type) {
     switch (type) {
+        case 1:
+            return 'Iron'
+        case 2:
+            return 'Bronze';
+        case 3:
+            return 'Silver'
+        case 4:
+            return 'Gold'
         case 5:
-            return 'VIP';
+            return 'Platinum';
         default:
-            return 'Nothing';
+            return 'None';
     }
 }
 

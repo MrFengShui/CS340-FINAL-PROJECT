@@ -31,6 +31,12 @@ function handleConsumerEvents() {
         consumerCalculateTotalButton.addEventListener('click', todoCalculatePrice);
     }
 
+    var consumerPayBookButton = document.getElementById('buy-pay-book-button');
+
+    if (consumerPayBookButton) {
+        consumerPayBookButton.addEventListener('click', todoPayBook);
+    }
+
     var consumerSearchButton = document.getElementById('consumer-search-button');
 
     if (consumerSearchButton) {

@@ -20,7 +20,10 @@ var connection = mysql.createConnection({
     database: dbname
 });
 /**/
-select = require('./modules/prog-select.js');
+sqlInsert = require('./modules/prog-insert.js');
+sqlUpdate = require('./modules/prog-update.js');
+sqlDelete = require('./modules/prog-delete.js');
+sqlSelect = require('./modules/prog-select.js');
 /**/
 var app = express();
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
@@ -34,6 +37,23 @@ app.use(bodyParser.urlencoded({
     limit: '32mb',
     extended: true
 }));
+
+app.post('/validate/buyInfoInsert', function(req, res) {
+    var sql = 'INSERT INTO CONSUMER_BOOK_TB (CONSUMER_ID, BOOK_ID) VALUES ';
+
+    for (var i = 0; i < req.body.items.length; i++) {
+        sql += '(\'' + req.body.items[i].personid + '\', \'' + req.body.items[i].bookid + '\')' + ((i == req.body.items.length - 1) ? '' : ', ');
+    }
+    console.log(sql);
+    sqlInsert.buyBookInfoAdd(sql, connection, function(rs) {
+        console.log('$MySQL-BUY-INSERT-Validation$', rs);
+        if (rs == 'error') {
+            res.status(404).send(rs);
+        } else {
+            res.status(200).send(rs);
+        }
+    });
+});
 
 app.post('/validate/signin', function(req, res) {
     if (req.body['role'] == "administrator") {
@@ -59,7 +79,7 @@ app.post('/validate/signin', function(req, res) {
     } else {
         var sql = 'SELECT * FROM CONSUMER_INFO_TB WHERE CONSUMER_USERNAME=\'' + req.body['username'] + '\' AND CONSUMER_PASSWORD=\'' + req.body['password'] + '\'';
 
-        select.loginQuery(sql, connection, function(rs) {
+        sqlSelect.loginQuery(sql, connection, function(rs) {
             console.log('$MySQL-Login-Validation$', rs);
             if (rs == 'error') {
                 res.status(404).send();
@@ -132,7 +152,7 @@ app.post('/validate/bookInfoSearch', function(req, res) {
             + 'BOOK_PUBLISH_PRESS LIKE \'\%' + bookpress() + '\%\' AND '
             + bookprice();
 
-    select.consumerBookInfoQuery(sql, connection, function(rs) {
+    sqlSelect.consumerBookInfoQuery(sql, connection, function(rs) {
         console.log('$MySQL-BOOK-Validation$', rs);
         if (rs == 'error') {
             res.status(404).send();
@@ -156,7 +176,7 @@ app.post('/validate/storeInfoSearch', function(req, res) {
     + 'BOOK_INFO_TB.BOOK_ISBN LIKE \'\%' + req.body['bookisbn'] + '\%\' AND '
     + 'REPOSITORY_INFO_TB.REPOSITORY_PURPOSE LIKE \'\%' + repopurpose() + '\%\'';
 
-    select.consumerStoreInfoQuery(sql, connection, function(rs) {
+    sqlSelect.consumerStoreInfoQuery(sql, connection, function(rs) {
         console.log('$MySQL-STORE-Validation$', rs);
         if (rs == 'error') {
             res.status(404).send();
@@ -169,7 +189,7 @@ app.post('/validate/storeInfoSearch', function(req, res) {
 app.post('/validate/consumerBuyBook', function(req, res) {
     var sql = 'SELECT BOOK_ID, BOOK_NAME, BOOK_PRICE FROM BOOK_INFO_TB WHERE BOOK_ISBN=\'' + req.body['bookisbn'] + '\'';
 
-    select.consumerBuyBookQuery(sql, connection, function(rs) {
+    sqlSelect.consumerBuyBookQuery(sql, connection, function(rs) {
         console.log('$MySQL-BUY-Validation$', rs);
         if (rs == 'error') {
             res.status(404).send();
@@ -183,6 +203,10 @@ app.get('/', function(req, res) {
     res.render('initial-page', {
         title: 'Initial Page'
     });
+});
+
+app.get('/success', function(req, res) {
+    res.render('success-page', {});
 });
 
 app.get('/logout', function(req, res) {

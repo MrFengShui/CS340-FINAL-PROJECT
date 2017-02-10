@@ -1,22 +1,30 @@
 <table class="query-input-bar">
     <tr>
         <td class="query-input-bar-tag">ID</td>
-        <td><input type="text" name="vendid" value=""></td>
+        <td><input type="text" name="vendid" value="" id="buy-input-bookid"></td>
         <td class="query-input-bar-tag">Name</td>
-        <td><input type="text" name="vendname" value=""></td>
+        <td><input type="text" name="vendname" value="" id="buy-input-bookname"></td>
         <td class="query-input-bar-tag">Type</td>
         <td>
-            <select class="" name="">
-                <option selected="true" disabled>Select one book type</option>
-                <option>Art</option>
-                <option>Engineering</option>
-                <option>History</option>
-                <option>Literature</option>
-                <option>Science</option>
+            <select class="" name="" id="buy-input-booktype">
+                <option selected="true" value="0" disabled>Select one book type</option>
+                <option value="0">Any Type</option>
+                <option value="1">Art</option>
+                <option value="2">Engineering</option>
+                <option value="3">History</option>
+                <option value="4">Literature</option>
+                <option value="5">Science</option>
             </select>
         </td>
     </tr>
     <tr>
-        <td colspan="6"><button type="button" name="dosearch">Search</button></td>
+        <td class="query-input-bar-tag">Date</td>
+        <td><input type="date" name="bookdate" value="" class="buy-input-bookdate"></td>
+        <td class="query-input-bar-tag to">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+        </td>
+        <td><input type="date" name="bookdate" value="" class="buy-input-bookdate"></td>
+        <td colspan="2"><button type="button" name="dosearch" id="buy-info-search-button">Search</button></td>
     </tr>
 </table>

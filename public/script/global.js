@@ -56,25 +56,10 @@ function matchStaffHeight(indexPageContent) {
     var staffStoreModContent = document.getElementById('store-modify-content');
     var staffVendModContent = document.getElementById('vend-modify-content');
     var staffModifyContents = document.getElementsByClassName('modify-page-content');
+    var staffBuyInfoContent = document.getElementById('buy-info-query-table');
     var staffBookModTable = document.getElementById('book-info-modify-table');
     var staffStoreModTable = document.getElementById('store-info-modify-table');
     var staffVendModTable = document.getElementById('vend-info-modify-table');
-
-    // if (staffBuyInfoContent) {
-    //     staffBuyInfoContent.style.height = 'calc(' + indexPageContent[0].clientHeight + 'px - 10px)';
-    // }
-    //
-    // if (staffBookModContent) {
-    //     staffBookModContent.style.height = 'calc(' + indexPageContent[0].clientHeight + 'px - 90px)';
-    // }
-    //
-    // if (staffStoreModContent) {
-    //     staffStoreModContent.style.height = 'calc(' + indexPageContent[0].clientHeight + 'px - 120px)';
-    // }
-    //
-    // if (staffVendModContent) {
-    //     staffVendModContent.style.height = 'calc(' + indexPageContent[0].clientHeight + 'px - 84px)';
-    // }
 
     if (staffModifyContents) {
         for (var i = 0; i < staffModifyContents.length; i++) {
@@ -86,6 +71,10 @@ function matchStaffHeight(indexPageContent) {
                 staffModifyContents[i].style.height = 'calc(' + indexPageContent[0].clientHeight + 'px - 200px)';
             }
         }
+    }
+
+    if (staffBuyInfoContent) {
+        staffBuyInfoContent.style.width = (indexPageContent[0].clientWidth <= 1500) ? '1700px' : '100%';
     }
 
     if (staffBookModTable) {
