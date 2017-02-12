@@ -45,14 +45,6 @@
     width: 150px;
 }
 
-.book-info-header {
-    color: snow;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 12pt;
-    font-weight: bold;
-    height: 40px;
-}
-
 .book-info-row {
     background-color: snow;
     color: crimson;

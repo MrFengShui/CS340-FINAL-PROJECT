@@ -73,6 +73,19 @@ function buildStoreModHTML(id, name, type, quantity, repo, street, number, guard
     });
 }
 
+var createVendorMod = Handlebars.templates['vend-mod-row'];
+
+function buildVendorModHTML(id, name, city, state, country, phone, email, type) {
+    return createVendorMod({
+        vendorid: id,
+        vendorname: name,
+        vendoraddress: city + ' ' + state + ', ' + country,
+        vendorphone: phone,
+        vendoremail: email,
+        booktype: convertType(type)
+    });
+}
+
 var createBookBuy = Handlebars.templates['buy-list-row'];
 
 function buildBuyBookHTML(id, name, price) {

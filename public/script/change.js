@@ -101,9 +101,9 @@ function todoStorageModifySearch() {
             bookStoreTable.deleteRow(i);
         }
 
-        book = JSON.parse(event.target.response);
-        book.forEach(function(item) {
-            var rowHTML = buildStoreInfoHTML(
+        store = JSON.parse(event.target.response);
+        store.forEach(function(item) {
+            var rowHTML = buildStoreModHTML(
                 item['BOOK_ID'],
                 item['BOOK_NAME'],
                 item['BOOK_TYPE'],
@@ -114,6 +114,50 @@ function todoStorageModifySearch() {
                 item['REPOSITORY_GUARD_ID']
             );
             bookStoreTable.insertAdjacentHTML('beforeend', rowHTML);
+        });
+    });
+}
+
+function todoVendorModifySearch() {
+    var bookVendTable = document.getElementById('vend-info-modify-table');
+    var bookid = document.getElementById('staff-vend-input-bookid').value;
+    var booktype = document.getElementById('staff-vend-select-booktype').value;
+    var repoid = document.getElementById('staff-vend-input-repoid').value;
+    var vendid = document.getElementById('staff-vend-input-vendid').value;
+    var vendname = document.getElementById('staff-vend-input-vendname').value;
+
+    var postURL = '/validate/vendInfoSearch';
+    var postRequest = new XMLHttpRequest();
+    postRequest.open('POST', postURL);
+    postRequest.setRequestHeader('Content-Type', 'application/json');
+
+    postRequest.send(JSON.stringify({
+        bookid: bookid,
+        booktype: booktype,
+        repoid: repoid,
+        vendid: vendid,
+        vendname: vendname
+    }));
+
+    postRequest.addEventListener('load', function(event) {
+        console.log(event.target.response);
+        for (var i = bookVendTable.rows.length - 1; i > 0; i--) {
+            bookVendTable.deleteRow(i);
+        }
+
+        vend = JSON.parse(event.target.response);
+        vend.forEach(function(item) {
+            var rowHTML = buildVendorModHTML(
+                item['VENDOR_ID'],
+                item['VENDOR_NAME'],
+                item['VENDOR_ADDRESS_CITY'],
+                item['VENDOR_ADDRESS_STATE'],
+                item['VENDOR_ADDRESS_COUNTRY'],
+                item['VENDOR_PHONE'],
+                item['VENDOR_EMAIL'],
+                item['BOOK_TYPE']
+            );
+            bookVendTable.insertAdjacentHTML('beforeend', rowHTML);
         });
     });
 }

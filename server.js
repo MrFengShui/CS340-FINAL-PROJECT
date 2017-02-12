@@ -169,15 +169,37 @@ app.post('/validate/storeInfoSearch', function(req, res) {
     var repopurpose = function() {
         return (req.body['repopurpose'] == '0') ? '' : req.body['repopurpose'];
     }
-    var sql = 'SELECT BOOK_INFO_TB.BOOK_ID, BOOK_INFO_TB.BOOK_NAME, BOOK_INFO_TB.BOOK_TYPE, BOOK_INFO_TB.BOOK_QUANTITY, REPOSITORY_INFO_TB.REPOSITORY_ID, REPOSITORY_INFO_TB.REPOSITORY_ADDRESS_STREET, REPOSITORY_INFO_TB.REPOSITORY_ADDRESS_NUMBER, REPOSITORY_INFO_TB.REPOSITORY_GUARD_ID FROM (BOOK_INFO_TB INNER JOIN BOOK_REPOSITORY_TB ON BOOK_INFO_TB.BOOK_ID = BOOK_REPOSITORY_TB.BOOK_ID) INNER JOIN REPOSITORY_INFO_TB ON BOOK_REPOSITORY_TB.REPOSITORY_ID = REPOSITORY_INFO_TB.REPOSITORY_ID WHERE '
+    var sql = 'SELECT BOOK_INFO_TB.BOOK_ID, BOOK_INFO_TB.BOOK_NAME, BOOK_INFO_TB.BOOK_TYPE, BOOK_INFO_TB.BOOK_QUANTITY, REPOSITORY_INFO_TB.REPOSITORY_ID, REPOSITORY_INFO_TB.REPOSITORY_ADDRESS_STREET, REPOSITORY_INFO_TB.REPOSITORY_ADDRESS_NUMBER, REPOSITORY_INFO_TB.REPOSITORY_GUARD_ID FROM BOOK_INFO_TB INNER JOIN BOOK_REPOSITORY_TB ON BOOK_INFO_TB.BOOK_ID = BOOK_REPOSITORY_TB.BOOK_ID INNER JOIN REPOSITORY_INFO_TB ON BOOK_REPOSITORY_TB.REPOSITORY_ID = REPOSITORY_INFO_TB.REPOSITORY_ID WHERE '
     + 'BOOK_INFO_TB.BOOK_ID LIKE \'\%' + req.body['bookid'] + '\%\' AND '
     + 'BOOK_INFO_TB.BOOK_NAME LIKE \'\%' + req.body['bookname'] + '\%\' AND '
     + 'BOOK_INFO_TB.BOOK_TYPE LIKE \'\%' + booktype() + '\%\' AND '
     + 'BOOK_INFO_TB.BOOK_ISBN LIKE \'\%' + req.body['bookisbn'] + '\%\' AND '
+    + 'REPOSITORY_INFO_TB.REPOSITORY_ID LIKE \'\%' + req.body['repoid'] + '\%\' AND '
     + 'REPOSITORY_INFO_TB.REPOSITORY_PURPOSE LIKE \'\%' + repopurpose() + '\%\'';
 
     sqlSelect.consumerStoreInfoQuery(sql, connection, function(rs) {
         console.log('$MySQL-STORE-Validation$', rs);
+        if (rs == 'error') {
+            res.status(404).send();
+        } else {
+            res.status(200).json(rs);
+        }
+    });
+});
+
+app.post('/validate/vendInfoSearch', function(req, res) {
+    var booktype = function() {
+        return (req.body['booktype'] == '0') ? '' : req.body['booktype'];
+    }
+    var sql = 'SELECT VENDOR_INFO_TB.VENDOR_ID, VENDOR_INFO_TB.VENDOR_NAME, VENDOR_INFO_TB.VENDOR_ADDRESS_CITY, VENDOR_INFO_TB.VENDOR_ADDRESS_STATE, VENDOR_INFO_TB.VENDOR_ADDRESS_COUNTRY, VENDOR_INFO_TB.VENDOR_PHONE, VENDOR_INFO_TB.VENDOR_EMAIL, BOOK_INFO_TB.BOOK_TYPE FROM VENDOR_INFO_TB LEFT JOIN BOOK_REPOSITORY_TB ON VENDOR_INFO_TB.VENDOR_REPOSITORY_ID = BOOK_REPOSITORY_TB.REPOSITORY_ID LEFT JOIN BOOK_INFO_TB ON BOOK_REPOSITORY_TB.BOOK_ID = BOOK_INFO_TB.BOOK_ID WHERE '
+    + 'BOOK_INFO_TB.BOOK_ID LIKE \'\%' + req.body['bookid'] + '\%\' AND '
+    + 'BOOK_INFO_TB.BOOK_TYPE LIKE \'\%' + booktype() + '\%\' AND '
+    + 'BOOK_REPOSITORY_TB.REPOSITORY_ID LIKE \'\%' + req.body['repoid'] + '\%\' AND '
+    + 'VENDOR_INFO_TB.VENDOR_ID LIKE \'\%' + req.body['vendid'] + '\%\' AND '
+    + 'VENDOR_INFO_TB.VENDOR_NAME LIKE \'\%' + req.body['vendname'] + '\%\'';
+
+    sqlSelect.consumerVendInfoQuery(sql, connection, function(rs) {
+        console.log('$MySQL-VEND-Validation$', rs);
         if (rs == 'error') {
             res.status(404).send();
         } else {

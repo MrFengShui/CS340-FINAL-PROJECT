@@ -1,24 +1,27 @@
 <table class="query-input-bar">
     <tr>
         <td class="query-input-bar-tag">ID</td>
-        <td><input type="text" name="vendid" value=""></td>
-        <td class="query-input-bar-tag">Name</td>
-        <td><input type="text" name="vendname" value=""></td>
+        <td><input type="text" name="vendid" placeholder="Book ID" id="staff-vend-input-bookid"></td>
         <td class="query-input-bar-tag">Type</td>
         <td>
-            <select class="" name="">
-                <option selected="true" disabled>Select one book type</option>
-                <option>Art</option>
-                <option>Engineering</option>
-                <option>History</option>
-                <option>Literature</option>
-                <option>Science</option>
+            <select class="" name="" id="staff-vend-select-booktype">
+                <option selected="true" value="0" disabled>Select one book type</option>
+                <option value="0">Any Type</option>
+                <option value="1">Art</option>
+                <option value="2">Engineering</option>
+                <option value="3">History</option>
+                <option value="4">Literature</option>
+                <option value="5">Science</option>
             </select>
         </td>
+        <td class="query-input-bar-tag">Repository</td>
+        <td><input type="text" name="repoid" placeholder="Repository ID" id="staff-vend-input-repoid"></td>
     </tr>
     <tr>
-        <td class="query-input-bar-tag">Repository</td>
-        <td><input type="text" name="repoid" value=""></td>
-        <td colspan="4"><button type="button" name="dosearch">Search</button></td>
+        <td class="query-input-bar-tag">ID</td>
+        <td><input type="text" name="vendid" placeholder="Vendor ID" id="staff-vend-input-vendid"></td>
+        <td class="query-input-bar-tag">Name</td>
+        <td><input type="text" name="vendname" placeholder="Vendor Name" id="staff-vend-input-vendname"></td>
+        <td colspan="2"><button type="button" name="dosearch" id="staff-vend-search-button">Search</button></td>
     </tr>
 </table>
