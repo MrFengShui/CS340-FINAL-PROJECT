@@ -1,4 +1,16 @@
 function matchGlobalHeight() {
+    var initialMainPage = document.getElementsByClassName('initial-page-main');
+
+    if (initialMainPage[0]) {
+        initialMainPage[0].style.height = 'calc(' + window.innerHeight + 'px - 120px)';
+    }
+
+    var successMainPage = document.getElementsByClassName('success-page-main');
+
+    if (successMainPage[0]) {
+        successMainPage[0].style.height = window.innerHeight + 'px';
+    }
+
     var indexPageContent = document.getElementsByClassName('index-page-content');
 
     for (var i = 0; i < indexPageContent.length; i++) {

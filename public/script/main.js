@@ -59,10 +59,10 @@ function handleConsumerEvents() {
 }
 
 function handleStaffEvents() {
-    var staffSearchButton = document.getElementById('staff-search-button');
+    var staffBookSearchButton = document.getElementById('staff-search-button');
 
-    if (staffSearchButton) {
-        staffSearchButton.addEventListener('click', todoBookModifySearch);
+    if (staffBookSearchButton) {
+        staffBookSearchButton.addEventListener('click', todoBookModifySearch);
     }
 
     var staffStoreSearchButton = document.getElementById('staff-store-search-button');
@@ -75,6 +75,12 @@ function handleStaffEvents() {
 
     if (staffVendSearchButton) {
         staffVendSearchButton.addEventListener('click', todoVendorModifySearch);
+    }
+
+    var staffBuySearchButton = document.getElementById('buy-info-search-button');
+
+    if (staffBuySearchButton) {
+        staffBuySearchButton.addEventListener('click', todoBuyInfoSearch);
     }
 
     var modifyTabbedButtons = document.getElementsByClassName('modify-tabbed-title');

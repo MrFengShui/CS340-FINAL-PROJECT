@@ -86,6 +86,22 @@ function buildVendorModHTML(id, name, city, state, country, phone, email, type) 
     });
 }
 
+var createBuyInfo = Handlebars.templates['buy-info-row'];
+
+function buildBuyInfoHTML(buyid, buyname, buytype, buydate, bookid, bookname, booktype, bookisbn, bookprice) {
+    return createBuyInfo({
+        buyid: buyid,
+        buyname: buyname,
+        buytype: buytype,
+        buydate: buydate,
+        bookid: bookid,
+        bookname: bookname,
+        booktype: booktype,
+        bookisbn: bookisbn,
+        bookprice: bookprice
+    });
+}
+
 var createBookBuy = Handlebars.templates['buy-list-row'];
 
 function buildBuyBookHTML(id, name, price) {

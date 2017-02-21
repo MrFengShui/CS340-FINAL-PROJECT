@@ -14,6 +14,52 @@ function todoModifyTabbedPane(event) {
     event.target.style.backgroundColor = 'darkred';
 }
 
+function todoBuyInfoSearch() {
+    var buyInfoTable = document.getElementById('buy-info-query-table');
+    var bookid = document.getElementById('buy-input-bookid').value;
+    var bookname = document.getElementById('buy-input-bookname').value;
+    var booktype = document.getElementById('buy-input-booktype').value;
+    var bookdate = [
+        document.getElementsByClassName('buy-input-bookdate')[0].value,
+        document.getElementsByClassName('buy-input-bookdate')[1].value
+    ];
+
+    var postURL = '/validate/buyInfoSearch';
+    var postRequest = new XMLHttpRequest();
+    postRequest.open('POST', postURL);
+    postRequest.setRequestHeader('Content-Type', 'application/json');
+
+    postRequest.send(JSON.stringify({
+        bookid: bookid,
+        bookname: bookname,
+        booktype: booktype,
+        bookdate: bookdate
+    }));
+
+    postRequest.addEventListener('load', function(event) {
+        console.log(event.target.response);
+        for (var i = buyInfoTable.rows.length - 1; i > 0; i--) {
+            buyInfoTable.deleteRow(i);
+        }
+
+        book = JSON.parse(event.target.response);
+        book.forEach(function(item) {
+            var rowHTML = buildBuyInfoHTML(
+                item['CONSUMER_ID'],
+                item['CONSUMER_FIRST_NAME'],
+                item['CONSUMER_LAST_NAME'],
+                item['CONSUMER_TYPE'],
+                item['BOOK_ID'],
+                item['BOOK_NAME'],
+                item['BOOK_TYPE'],
+                item['BOOK_ISBN'],
+                item['BOOK_PRICE']
+            );
+            buyInfoTable.insertAdjacentHTML('beforeend', rowHTML);
+        });
+    });
+}
+
 function todoBookModifySearch() {
     var bookInfoTable = document.getElementById('book-info-modify-table');
     var bookname = document.getElementById('staff-input-bookname').value;

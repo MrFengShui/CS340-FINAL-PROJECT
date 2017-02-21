@@ -221,6 +221,48 @@ app.post('/validate/consumerBuyBook', function(req, res) {
     });
 });
 
+app.post('/validate/buyInfoSearch', function(req, res) {
+    var booktype = function() {
+        return (req.body['booktype'] == '0') ? '' : req.body['booktype'];
+    }
+    var bookdate = function() {
+        if (req.body['bookdate'][0] == '' && req.body['bookdate'][1] == '') {
+            return 'BOOK_PUBLISH_YEAR LIKE \'\%\%\' AND ';
+        } else {
+            var date = [{year:'', month:'', date:''}, {year:'', month:'', date:''}];
+
+            if (req.body['bookdate'][0] != '') {
+                var temp = req.body['bookdate'][0].split('-');
+                date[0].year = temp[0];
+                date[0].month = temp[1];
+                date[0].date = temp[2];
+            }
+
+            if (req.body['bookdate'][1] != '') {
+                var temp = req.body['bookdate'][1].split('-');
+                date[1].year = temp[0];
+                date[1].month = temp[1];
+                date[1].date = temp[2];
+            }
+
+            return 'BOOK_PUBLISH_YEAR*10000+BOOK_PUBLISH_MONTH*100+BOOK_PUBLISH_DATE BETWEEN ' + date[0].year + date[0].month + date[0].date + ' AND ' + date[1].year + date[1].month + date[1].date + ' AND ';
+        }
+    };
+    var sql = 'SELECT CONSUMER_INFO_TB.CONSUMER_ID, CONSUMER_INFO_TB.CONSUMER_FIRST_NAME, CONSUMER_INFO_TB.CONSUMER_LAST_NAME, CONSUMER_INFO_TB.COMSUMER_TYPE, BOOK_INFO_TB.BOOK_ID, BOOK_INFO_TB.BOOK_NAME, BOOK_INFO_TB.BOOK_TYPE, BOOK_INFO_TB.BOOK_ISBN, BOOK_INFO_TB.BOOK_PRICE FROM BOOK_INFO_TB INNER JOIN CONSUMER_BOOK_TB ON BOOK_INFO_TB.BOOK_ID = CONSUMER_BOOK_TB.BOOK_ID INNER JOIN CONSUMER_INFO_TB ON CONSUMER_BOOK_TB.CONSUMER_ID = CONSUMER_INFO_TB.CONSUMER_ID WHERE'
+            + ' BOOK_INFO_TB.BOOK_ID LIKE \'' + req.body['bookid'] + '\' AND '
+            + ' BOOK_INFO_TB.BOOK_NAME LIKE \'' + req.body['bookname'] + '\' AND '
+            + ' BOOK_INFO_TB.BOOK_TYPE LIKE \'' + booktype() + '\'';
+
+    sqlSelect.staffBuyInfoQuery(sql, connection, function(rs) {
+        console.log('$MySQL-BUY-Validation$', rs);
+        if (rs == 'error') {
+            res.status(404).send();
+        } else {
+            res.status(200).json(rs);
+        }
+    });
+});
+
 app.get('/', function(req, res) {
     res.render('initial-page', {
         title: 'Initial Page'
@@ -309,7 +351,3 @@ connection.connect(function(err) {
         });
     }
 });
-
-// app.listen(10000, function() {
-//     console.log('==', 'Listening on Port', 10000, '==');
-// });

@@ -1,3 +1,29 @@
-<main>
-    Success
+<main class="success-page-main">
+    <div class="success-info-container">
+        <h1>SUCCESS</h1>
+        <hr>
+        <p>
+            You have paid your books.
+            Thank you to buy in this store and welcome later.
+            Current system will jump to initial page automatically after 10 seconds.
+        </p>
+        <hr>
+        <div class="success-count-down">Time Leaving: 10</div>
+        <script type="text/javascript">
+            var node = document.getElementsByClassName('success-count-down')[0];
+            var start = setInterval(todoCountDown, 1000);
+            var count = 10;
+
+            function todoCountDown() {
+                if (count >= 0 ) {
+                    node.innerHTML = ((count < 10) ? 'Time Leaving: 0' : 'Time Leaving: ') + count;
+                } else {
+                    clearInterval(start);
+                    window.location.href = '/logout';
+                }
+
+                count --;
+            }
+        </script>
+    </div>
 </main>
