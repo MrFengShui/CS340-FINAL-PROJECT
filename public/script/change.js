@@ -49,6 +49,7 @@ function todoBuyInfoSearch() {
                 item['CONSUMER_FIRST_NAME'],
                 item['CONSUMER_LAST_NAME'],
                 item['CONSUMER_TYPE'],
+                item['DATE_OF_BUY'],
                 item['BOOK_ID'],
                 item['BOOK_NAME'],
                 item['BOOK_TYPE'],

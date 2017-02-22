@@ -1,13 +1,13 @@
 function defineType(type) {
     switch (type) {
         case 1:
-            return 'Iron'
+            return 'Iron';
         case 2:
             return 'Bronze';
         case 3:
-            return 'Silver'
+            return 'Silver';
         case 4:
-            return 'Gold'
+            return 'Gold';
         case 5:
             return 'Platinum';
         default:

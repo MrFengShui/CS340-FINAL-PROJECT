@@ -29,7 +29,7 @@
     width: 80px;
 }
 
-.book-info-header.id, .book-info-header.type, .book-info-header.edition {
+.book-info-header.id, .book-info-header.type, .book-info-header.edition, .book-info-header.price {
     width: 150px;
 }
 

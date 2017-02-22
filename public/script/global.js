@@ -86,7 +86,7 @@ function matchStaffHeight(indexPageContent) {
     }
 
     if (staffBuyInfoContent) {
-        staffBuyInfoContent.style.width = (indexPageContent[0].clientWidth <= 1500) ? '1700px' : '100%';
+        staffBuyInfoContent.style.width = (indexPageContent[0].clientWidth <= 1700) ? '1700px' : '100%';
     }
 
     if (staffBookModTable) {

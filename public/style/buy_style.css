@@ -11,11 +11,11 @@
     height: 40px;
 }
 
-.buy-info-header.id, .buy-info-header.type {
+.buy-info-header.type, .buy-info-header.date {
     width: 150px;
 }
 
-.buy-info-header.name, .buy-info-header.date {
+.buy-info-header.id, .buy-info-header.name {
     width: 200px;
 }
 

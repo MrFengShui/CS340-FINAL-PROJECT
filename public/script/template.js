@@ -13,6 +13,30 @@ function convertType(type) {
     }
 }
 
+function defineType(type) {
+    switch (type) {
+        case 1:
+            return'Iron';
+        case 2:
+            return 'Bronze';
+        case 3:
+            return 'Silver';
+        case 4:
+            return 'Gold';
+        case 5:
+            return 'Platinum';
+        default:
+            return 'None';
+    }
+}
+
+function formateDate(date) {
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    return year + '-' + ((month < 10) ? '0' + month : month) + '-' + ((day < 10) ? '0' + day : day);
+}
+
 var createBookInfo = Handlebars.templates['book-info-row'];
 
 function buildBookInfoHTML(id, name, type, fname, lname, edition, year, month, date, press, isbn, price) {
@@ -88,17 +112,17 @@ function buildVendorModHTML(id, name, city, state, country, phone, email, type) 
 
 var createBuyInfo = Handlebars.templates['buy-info-row'];
 
-function buildBuyInfoHTML(buyid, buyname, buytype, buydate, bookid, bookname, booktype, bookisbn, bookprice) {
+function buildBuyInfoHTML(buyid, buyfname, buylname, buytype, buydate, bookid, bookname, booktype, bookisbn, bookprice) {
     return createBuyInfo({
         buyid: buyid,
-        buyname: buyname,
-        buytype: buytype,
-        buydate: buydate,
+        buyname: buyfname + ' ' + buylname,
+        buytype: defineType(buytype),
+        buydate: formateDate(new Date(buydate)),
         bookid: bookid,
         bookname: bookname,
-        booktype: booktype,
+        booktype: convertType(booktype),
         bookisbn: bookisbn,
-        bookprice: bookprice
+        bookprice: '$' + bookprice
     });
 }
 
