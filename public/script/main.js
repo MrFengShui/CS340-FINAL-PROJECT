@@ -92,8 +92,53 @@ function handleStaffEvents() {
     }
 }
 
+function handleModalEvents() {
+    var openBookModalButton = document.getElementById('book-modal-open-button');
+
+    if (openBookModalButton) {
+        openBookModalButton.addEventListener('click', todoOpenBookModal);
+    }
+
+    var closeBookModalButton = document.getElementById('book-modal-close-button');
+
+    if (closeBookModalButton) {
+        closeBookModalButton.addEventListener('click', todoCloseBookModal);
+    }
+
+    var openStoreModalButton = document.getElementById('store-modal-open-button');
+
+    if (openStoreModalButton) {
+        openStoreModalButton.addEventListener('click', todoOpenStoreModal);
+    }
+
+    var closeStoreModalButton = document.getElementById('store-modal-close-button');
+
+    if (closeStoreModalButton) {
+        closeStoreModalButton.addEventListener('click', todoCloseStoreModal);
+    }
+
+    var openVendModalButton = document.getElementById('vend-modal-open-button');
+
+    if (openVendModalButton) {
+        openVendModalButton.addEventListener('click', todoOpenVendModal);
+    }
+
+    var closeVendModalButton = document.getElementById('vend-modal-close-button');
+
+    if (closeVendModalButton) {
+        closeVendModalButton.addEventListener('click', todoCloseVendModal);
+    }
+
+    var bookInsertModalButton = document.getElementById('book-modal-button-insert');
+
+    if (bookInsertModalButton) {
+        bookInsertModalButton.addEventListener('click', todoAddSingleBookInfo);
+    }
+}
+
 window.addEventListener('DOMContentLoaded', function(event) {
     handleLoginEvents();
     handleConsumerEvents();
     handleStaffEvents();
+    handleModalEvents();
 });

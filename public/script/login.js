@@ -1,3 +1,31 @@
+function defineVisitorType(type) {
+    switch (type) {
+        case 1:
+            return 'Iron';
+        case 2:
+            return 'Bronze';
+        case 3:
+            return 'Silver';
+        case 4:
+            return 'Gold';
+        case 5:
+            return 'Platinum';
+        default:
+            return 'None';
+    }
+}
+
+function defineAdminType(type) {
+    switch (type) {
+        case 1:
+            return 'Manager';
+        case 2:
+            return 'Supervisor';
+        default:
+            return 'Staff';
+    }
+}
+
 function todoSignIn() {
     var username = document.getElementById('initial-input-username').value;
     var password = document.getElementById('initial-input-password').value;
@@ -20,9 +48,9 @@ function todoSignIn() {
             person = JSON.parse(event.target.response);
 
             if (person.role == 'visitor') {
-                window.location.href = '/consumer-page%id=' + person.result.id + '%%name=' + person.result.name + '%%type=' + person.result.type + '%';
+                window.location.href = '/consumer-page%id=' + person.result['CONSUMER_ID'] + '%%name=' + person.result['CONSUMER_FIRST_NAME'] + ' ' + person.result['CONSUMER_LAST_NAME'] + '%%type=' + defineVisitorType(person.result['CONSUMER_TYPE']) + '%';
             } else {
-                window.location.href = '/staff-page%id=' + person.result.id + '%%name=' + person.result.name + '%%type=' + person.result.type + '%';
+                window.location.href = '/staff-page%id=' + person.result.id + '%%name=' + person.result.name + '%%type=' + defineAdminType(person.result.type) + '%';
             }
         });
     } else {

@@ -4,27 +4,27 @@
         "password":"Who&LSJ2017",
         "id":999999999,
         "name":"Songjian Luan",
-        "type":"Supervisor"
+        "type":2
     },
     {
         "username":"linux",
         "password":"123456",
         "id":111111111,
         "name":"Linus Torvalds",
-        "type":"Staff"
+        "type":0
     },
     {
         "username":"windows",
         "password":"Passw0rd",
         "id":222222222,
         "name":"Bill Gates",
-        "type":"Staff"
+        "type":0
     },
     {
         "username":"macos",
         "password":"111111",
         "id":333333333,
         "name":"Steve Jobs",
-        "type":"Staff"
+        "type":0
     }
 ]

@@ -99,7 +99,7 @@ function todoBookStorageSearch() {
 
         book = JSON.parse(event.target.response);
         book.forEach(function(item) {
-            var rowHTML = buildVendorModHTML(
+            var rowHTML = buildStoreInfoHTML(
                 item['BOOK_ID'],
                 item['BOOK_NAME'],
                 item['BOOK_TYPE'],
