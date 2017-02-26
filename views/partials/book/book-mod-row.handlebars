@@ -1,5 +1,11 @@
 <tr>
-    <td class="book-info-row select"><input type="checkbox" name="" value=""></td>
+    <td class="book-info-row select">
+        {{#if checked}}
+            <input type="checkbox" name="" value="" checked>
+        {{else}}
+            <input type="checkbox" name="" value="">
+        {{/if}}
+    </td>
     <td class="book-info-row id">{{bookid}}</td>
     <td class="book-info-row name">{{bookname}}</td>
     <td class="book-info-row type">{{booktype}}</td>
@@ -9,6 +15,7 @@
     <td class="book-info-row press">{{bookpress}}</td>
     <td class="book-info-row isbn">{{bookisbn}}</td>
     <td class="book-info-row price">{{bookprice}}</td>
+    <td class="book-info-row qunaity">{{bookquantity}}</td>
     <td class="book-info-row control">
         <button type="button" name="change-info-button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
         <button type="button" name="remove-info-button"><i class="fa fa-trash-o" aria-hidden="true"></i></button>

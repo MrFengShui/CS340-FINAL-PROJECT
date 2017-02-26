@@ -99,6 +99,12 @@ function handleModalEvents() {
         openBookModalButton.addEventListener('click', todoOpenBookModal);
     }
 
+    var bookUploadRowsButton = document.getElementById('book-upload-rows-button');
+
+    if (bookUploadRowsButton) {
+        bookUploadRowsButton.addEventListener('click', todoAddMultipleBookInfo);
+    }
+
     var closeBookModalButton = document.getElementById('book-modal-close-button');
 
     if (closeBookModalButton) {
@@ -133,6 +139,12 @@ function handleModalEvents() {
 
     if (bookInsertModalButton) {
         bookInsertModalButton.addEventListener('click', todoAddSingleBookInfo);
+    }
+
+    var bookAddModalButton = document.getElementById('book-modal-button-add');
+
+    if (bookAddModalButton) {
+        bookAddModalButton.addEventListener('click', todoAddTableBookInfo);
     }
 }
 

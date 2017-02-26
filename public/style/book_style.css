@@ -29,7 +29,7 @@
     width: 80px;
 }
 
-.book-info-header.id, .book-info-header.type, .book-info-header.edition, .book-info-header.price {
+.book-info-header.id, .book-info-header.type, .book-info-header.edition, .book-info-header.price, .book-info-header.quantity {
     width: 150px;
 }
 
@@ -39,10 +39,6 @@
 
 .book-info-header.author, .book-info-header.press, .book-info-header.isbn, .book-info-header.date {
     width: 200px;
-}
-
-.book-info-header.price {
-    width: 150px;
 }
 
 .book-info-row {

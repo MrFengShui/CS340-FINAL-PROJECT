@@ -55,8 +55,9 @@ function buildBookInfoHTML(id, name, type, fname, lname, edition, year, month, d
 
 var createBookMod = Handlebars.templates['book-mod-row'];
 
-function buildBookModHTML(id, name, type, fname, lname, edition, year, month, date, press, isbn, price) {
+function buildBookModHTML(flag, id, name, type, fname, lname, edition, year, month, date, press, isbn, price, quantity) {
     return createBookMod({
+        checked: flag,
         bookid: id,
         bookname: name,
         booktype: convertType(type),
@@ -65,7 +66,8 @@ function buildBookModHTML(id, name, type, fname, lname, edition, year, month, da
         bookdate: year + '-' + month + '-' + date,
         bookpress: press,
         bookisbn: isbn,
-        bookprice: '$' + price
+        bookprice: '$' + price,
+        bookquantity: quantity
     });
 }
 

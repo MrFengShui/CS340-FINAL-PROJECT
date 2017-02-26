@@ -99,6 +99,7 @@ function todoBookModifySearch() {
         book = JSON.parse(event.target.response);
         book.forEach(function(item) {
             var rowHTML = buildBookModHTML(
+                false,
                 item['BOOK_ID'],
                 item['BOOK_NAME'],
                 item['BOOK_TYPE'],
@@ -110,7 +111,8 @@ function todoBookModifySearch() {
                 item['BOOK_PUBLISH_DATE'],
                 item['BOOK_PUBLISH_PRESS'],
                 item['BOOK_ISBN'],
-                item['BOOK_PRICE']
+                item['BOOK_PRICE'],
+                item['BOOK_QUANTITY']
             );
             bookInfoTable.insertAdjacentHTML('beforeend', rowHTML);
         });
