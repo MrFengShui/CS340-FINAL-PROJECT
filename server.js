@@ -101,6 +101,16 @@ app.post('/validate/bookInfoAdd', function(req, res) {
     });
 });
 
+app.post('/validate/bookInfoChange', function(req, res) {
+    sqlUpdate.staffBookInfoChange(req.body, connection, function(rs) {
+        if (rs == 'error') {
+            res.status(404).send('error');
+        } else {
+            res.status(200).send('success');
+        }
+    });
+});
+
 app.post('/validate/storeInfoSearch', function(req, res) {
     sqlSelect.consumerStoreInfoQuery(req.body, connection, function(rs) {
         if (rs == 'error') {

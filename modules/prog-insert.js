@@ -7,7 +7,7 @@ exports.buyBookInfoAdd = function(condition, connection, callback) {
 
     connection.query(sql, function(err, rows) {
         if (err) {
-            console.log('Error: Fail to fetch result from database.', err);
+            console.log('Error: Fail to insert result from database.', err);
             callback('error');
         } else {
             callback('success');
@@ -39,7 +39,7 @@ exports.staffBookInfoAdd = function(condition, connection, callback) {
     console.log(sql);
     connection.query(sql, function(err) {
         if (err) {
-            console.log('Error: Fail to fetch result from database.', err);
+            console.log('Error: Fail to insert result from database.', err);
             callback('error');
         } else {
             callback('success');

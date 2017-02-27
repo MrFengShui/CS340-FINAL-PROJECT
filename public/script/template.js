@@ -1,42 +1,3 @@
-function convertType(type) {
-    switch (type) {
-        case 1:
-            return 'Art';
-        case 2:
-            return 'Engineering';
-        case 3:
-            return 'History';
-        case 4:
-            return 'Literature';
-        case 5:
-            return 'Science';
-    }
-}
-
-function defineType(type) {
-    switch (type) {
-        case 1:
-            return'Iron';
-        case 2:
-            return 'Bronze';
-        case 3:
-            return 'Silver';
-        case 4:
-            return 'Gold';
-        case 5:
-            return 'Platinum';
-        default:
-            return 'None';
-    }
-}
-
-function formateDate(date) {
-    var year = date.getFullYear();
-    var month = date.getMonth() + 1;
-    var day = date.getDate();
-    return year + '-' + ((month < 10) ? '0' + month : month) + '-' + ((day < 10) ? '0' + day : day);
-}
-
 var createBookInfo = Handlebars.templates['book-info-row'];
 
 function buildBookInfoHTML(id, name, type, fname, lname, edition, year, month, date, press, isbn, price) {
@@ -63,7 +24,7 @@ function buildBookModHTML(flag, id, name, type, fname, lname, edition, year, mon
         booktype: convertType(type),
         bookauthor: fname + ' ' + lname,
         bookedition: edition,
-        bookdate: year + '-' + month + '-' + date,
+        bookdate: year + '-' + ((month < 10) ? '0' + month : month) + '-' + ((date < 10) ? '0' + date : date),
         bookpress: press,
         bookisbn: isbn,
         bookprice: '$' + price,

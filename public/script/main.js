@@ -146,6 +146,12 @@ function handleModalEvents() {
     if (bookAddModalButton) {
         bookAddModalButton.addEventListener('click', todoAddTableBookInfo);
     }
+
+    var bookUpdateModalButton = document.getElementById('book-modal-button-update');
+
+    if (bookUpdateModalButton) {
+        bookUpdateModalButton.addEventListener('click', todoChangeSingleBookInfo);
+    }
 }
 
 window.addEventListener('DOMContentLoaded', function(event) {
@@ -154,3 +160,117 @@ window.addEventListener('DOMContentLoaded', function(event) {
     handleStaffEvents();
     handleModalEvents();
 });
+
+function convertType(type) {
+    switch (type) {
+        case 1:
+            return 'Art';
+        case 2:
+            return 'Engineering';
+        case 3:
+            return 'History';
+        case 4:
+            return 'Literature';
+        case 5:
+            return 'Science';
+    }
+}
+
+function antiConvertType(type) {
+    switch (type) {
+        case 'Art':
+            return 1;
+        case 'Engineering':
+            return 2;
+        case 'History':
+            return 3;
+        case 'Listerature':
+            return 4;
+        case 'Science':
+            return 5;
+        default:
+            return 0;
+    }
+}
+
+function defineType(type) {
+    switch (type) {
+        case 1:
+            return'Iron';
+        case 2:
+            return 'Bronze';
+        case 3:
+            return 'Silver';
+        case 4:
+            return 'Gold';
+        case 5:
+            return 'Platinum';
+        default:
+            return 'None';
+    }
+}
+
+function convertPress(press) {
+    switch (press) {
+        case 'apress':
+            return 'Apress';
+        case 'pearson':
+            return 'Pearson';
+        case 'oreilly':
+            return 'O\\\'Reilly Media';
+        case 'addison':
+            return 'Addison-Wesley Professional';
+        case 'nostarch':
+            return 'No Starch Press';
+        case 'scholastic':
+            return 'Scholastic';
+        case 'createspace':
+            return 'CreateSpace Independent Publishing Platform';
+        case 'scribner':
+            return 'Scribner';
+        case 'dover':
+            return 'Dover Publications';
+        case 'cambridge':
+            return 'Cambridge University Press';
+        case 'britannica':
+            return 'Encyclopaedia Britannica';
+        case 'brooks':
+            return 'Brooks Cole';
+    }
+}
+
+function antiConvertPress(press) {
+    switch (press) {
+        case 'Apress':
+            return 'apress';
+        case 'Pearson':
+            return 'pearson';
+        case 'O\'Reilly Media':
+            return 'oreilly';
+        case 'Addison-Wesley Professional':
+            return 'addison';
+        case 'No Starch Press':
+            return 'nostarch';
+        case 'Scholastic':
+            return 'scholastic';
+        case 'CreateSpace Independent Publishing Platform':
+            return 'createspace';
+        case 'Scribner':
+            return 'scribner';
+        case 'Dover Publications':
+            return 'dover';
+        case 'Cambridge University Press':
+            return 'cambridge';
+        case 'Encyclopaedia Britanni':
+            return 'cabritannica';
+        case 'Brooks Cole':
+            return 'brooks';
+    }
+}
+
+function formateDate(date) {
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    return year + '-' + ((month < 10) ? '0' + month : month) + '-' + ((day < 10) ? '0' + day : day);
+}

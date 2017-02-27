@@ -37,7 +37,6 @@ function todoBuyInfoSearch() {
     }));
 
     postRequest.addEventListener('load', function(event) {
-        console.log(event.target.response);
         for (var i = buyInfoTable.rows.length - 1; i > 0; i--) {
             buyInfoTable.deleteRow(i);
         }
@@ -91,7 +90,6 @@ function todoBookModifySearch() {
     }));
 
     postRequest.addEventListener('load', function(event) {
-        console.log(event.target.response);
         for (var i = bookInfoTable.rows.length - 1; i > 0; i--) {
             bookInfoTable.deleteRow(i);
         }
@@ -145,7 +143,6 @@ function todoStorageModifySearch() {
     }));
 
     postRequest.addEventListener('load', function(event) {
-        console.log(event.target.response);
         for (var i = bookStoreTable.rows.length - 1; i > 0; i--) {
             bookStoreTable.deleteRow(i);
         }
@@ -189,7 +186,6 @@ function todoVendorModifySearch() {
     }));
 
     postRequest.addEventListener('load', function(event) {
-        console.log(event.target.response);
         for (var i = bookVendTable.rows.length - 1; i > 0; i--) {
             bookVendTable.deleteRow(i);
         }
@@ -209,4 +205,19 @@ function todoVendorModifySearch() {
             bookVendTable.insertAdjacentHTML('beforeend', rowHTML);
         });
     });
+}
+
+function todoBookModifyEdit(event) {
+    todoOpenBookModal();
+    var row = event.parentNode.parentNode;
+    document.getElementById('book-modal-input-bookid').value = row.cells[1].innerHTML;
+    document.getElementById('book-modal-input-bookname').value = row.cells[2].innerHTML;
+    document.getElementById('book-modal-select-booktype').selectedIndex = antiConvertType(row.cells[3].innerHTML) + 1;
+    document.getElementById('book-modal-input-bookauthor').value = row.cells[4].innerHTML;
+    document.getElementById('book-modal-input-bookedition').value = row.cells[5].innerHTML;
+    document.getElementById('book-modal-input-bookdate').value = row.cells[6].innerHTML;
+    document.getElementById('book-modal-select-bookpress').value = antiConvertPress(row.cells[7].innerHTML);
+    document.getElementById('book-modal-input-bookisbn').value = row.cells[8].innerHTML;
+    document.getElementById('book-modal-input-bookprice').value = row.cells[9].innerHTML.substr(1);
+    document.getElementById('book-modal-input-bookquantity').value = row.cells[10].innerHTML;
 }
