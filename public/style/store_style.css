@@ -29,12 +29,16 @@
     width: 80px;
 }
 
-.store-info-header.id, .store-info-header.quantity, .store-info-header.guard {
+.store-info-header.id, .store-info-header.quantity {
     width: 150px;
 }
 
-.store-info-header.floor {
+.store-info-header.address, .store-info-header.guard {
     width: 200px;
+}
+
+.store-info-header.purpose {
+    width: 300px;
 }
 
 .store-info-row {

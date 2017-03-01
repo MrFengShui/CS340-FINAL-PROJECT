@@ -100,7 +100,7 @@ exports.consumerBookInfoQuery = function(condition, connection, callback) {
  * Parameter: condition, connection, and callback
  * Description: To search storage basic information based on typed conditions
  */
-exports.consumerStoreInfoQuery = function(condition, connection, callback) {
+exports.todoStoreInfoQuery = function(condition, connection, callback) {
     var booktype = function() {
         return (condition['booktype'] == '0') ? '' : condition['booktype'];
     }
@@ -108,7 +108,7 @@ exports.consumerStoreInfoQuery = function(condition, connection, callback) {
         return (condition['repopurpose'] == '0') ? '' : condition['repopurpose'];
     }
 
-    var sql = 'SELECT BOOK_INFO_TB.BOOK_ID, BOOK_INFO_TB.BOOK_NAME, BOOK_INFO_TB.BOOK_TYPE, BOOK_INFO_TB.BOOK_QUANTITY, REPOSITORY_INFO_TB.REPOSITORY_ID, REPOSITORY_INFO_TB.REPOSITORY_ADDRESS_STREET, REPOSITORY_INFO_TB.REPOSITORY_ADDRESS_NUMBER, REPOSITORY_INFO_TB.REPOSITORY_GUARD_ID FROM BOOK_INFO_TB INNER JOIN BOOK_REPOSITORY_TB ON BOOK_INFO_TB.BOOK_ID = BOOK_REPOSITORY_TB.BOOK_ID INNER JOIN REPOSITORY_INFO_TB ON BOOK_REPOSITORY_TB.REPOSITORY_ID = REPOSITORY_INFO_TB.REPOSITORY_ID WHERE'
+    var sql = 'SELECT BOOK_INFO_TB.BOOK_ID, BOOK_INFO_TB.BOOK_NAME, BOOK_INFO_TB.BOOK_TYPE, BOOK_INFO_TB.BOOK_QUANTITY, REPOSITORY_INFO_TB.REPOSITORY_ID, REPOSITORY_INFO_TB.REPOSITORY_ADDRESS_STREET, REPOSITORY_INFO_TB.REPOSITORY_ADDRESS_NUMBER, REPOSITORY_INFO_TB.REPOSITORY_PURPOSE, REPOSITORY_INFO_TB.REPOSITORY_GUARD_ID, REPOSITORY_INFO_TB.REPOSITORY_VENDOR_ID FROM BOOK_INFO_TB INNER JOIN BOOK_REPOSITORY_TB ON BOOK_INFO_TB.BOOK_ID = BOOK_REPOSITORY_TB.BOOK_ID INNER JOIN REPOSITORY_INFO_TB ON BOOK_REPOSITORY_TB.REPOSITORY_ID = REPOSITORY_INFO_TB.REPOSITORY_ID WHERE'
             + ' BOOK_INFO_TB.BOOK_ID LIKE \'\%' + condition['bookid'] + '\%\' AND'
             + ' BOOK_INFO_TB.BOOK_NAME LIKE \'\%' + condition['bookname'] + '\%\' AND'
             + ' BOOK_INFO_TB.BOOK_TYPE LIKE \'\%' + booktype() + '\%\' AND'

@@ -48,15 +48,18 @@ function buildStoreInfoHTML(id, name, type, quantity, repo, street, number, guar
 
 var createStoreMod = Handlebars.templates['store-mod-row'];
 
-function buildStoreModHTML(id, name, type, quantity, repo, street, number, guarder) {
+function buildStoreModHTML(flag, id, name, type, quantity, repo, street, number, purpose, guarder, vend) {
     return createStoreMod({
+        checked: flag,
         bookid: id,
         bookname: name,
         booktype: convertType(type),
         bookquantity: quantity,
         repoid: repo,
         repoaddress: street + ' ' + number,
+        repopurpose: convertPurpose(purpose),
         repoguard: guarder,
+        vendid: vend
     });
 }
 

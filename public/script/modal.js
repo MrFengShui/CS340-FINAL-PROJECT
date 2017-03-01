@@ -1,6 +1,6 @@
 function validateInputValue() {
     for (var i = 0; i < arguments.length; i++) {
-        if (arguments[i] == null || arguments[i] == '' || arguments[i] == '0' || arguments[i] == 'anypress') {
+        if (arguments[i] == null || arguments[i] == '' || arguments[i] == '0' || arguments[i] == 'anypress' || arguments[i] == 'undefined') {
             return false;
         }
     }
@@ -39,6 +39,16 @@ function todoCloseBookModal() {
     todoClearBookModal();
 }
 
+function todoClearStoreModal() {
+    document.getElementById('store-modal-input-repoid').value = '';
+    document.getElementById('store-modal-input-repostreet').value = '';
+    document.getElementById('store-modal-input-reponumber').value = '';
+    document.getElementById('store-modal-select-purpose').selectedIndex = 0;
+    document.getElementById('store-modal-input-repoguard').value = '';
+    document.getElementById('store-modal-input-bookid').value = '';
+    document.getElementById('store-modal-input-vendid').value = '';
+}
+
 function todoOpenStoreModal() {
     var backdrop = document.getElementById('store-modal-backdrop');
     var dialog = document.getElementById('store-modal-framework');
@@ -53,6 +63,8 @@ function todoCloseStoreModal() {
 
     backdrop.style.display = 'none';
     dialog.style.display = 'none';
+
+    todoClearStoreModal();
 }
 
 function todoOpenVendModal() {
@@ -70,7 +82,7 @@ function todoCloseVendModal() {
     backdrop.style.display = 'none';
     dialog.style.display = 'none';
 }
-
+/**/
 function todoAddTableBookInfo() {
     var bookInfoTable = document.getElementById('book-info-modify-table');
     var bookid = document.getElementById('book-modal-input-bookid').value;
@@ -114,62 +126,6 @@ function todoAddTableBookInfo() {
     }
 }
 
-function todoAddMultipleBookInfo() {
-    var bookInfoTable = document.getElementById('book-info-modify-table');
-    var data = [];
-
-    for (var i = bookInfoTable.rows.length - 1; i > 0; i--) {
-        if (bookInfoTable.rows[i].cells[0].children[0].checked) {
-            var bookid = bookInfoTable.rows[i].cells[1].innerHTML;
-            var bookname = bookInfoTable.rows[i].cells[2].innerHTML;
-            var booktype = bookInfoTable.rows[i].cells[3].innerHTML;
-            var bookauthor = bookInfoTable.rows[i].cells[4].innerHTML;
-            var bookedition = bookInfoTable.rows[i].cells[5].innerHTML;
-            var bookdate = bookInfoTable.rows[i].cells[6].innerHTML;
-            var bookpress = bookInfoTable.rows[i].cells[7].innerHTML;
-            var bookisbn = bookInfoTable.rows[i].cells[8].innerHTML;
-            var bookprice = bookInfoTable.rows[i].cells[9].innerHTML;
-            var bookquantity = bookInfoTable.rows[i].cells[10].innerHTML;
-            var row = {
-                bookid: bookid,
-                bookname: bookname,
-                booktype: antiConvertType(booktype),
-                bookfname: bookauthor.split(' ')[0],
-                booklname: bookauthor.split(' ')[1],
-                bookedition: parseInt(bookedition),
-                bookyear: parseInt(bookdate.split('-')[0]),
-                bookmonth: parseInt(bookdate.split('-')[1]),
-                bookdate: parseInt(bookdate.split('-')[2]),
-                bookpress: convertPress(bookpress),
-                bookisbn: Number(bookisbn),
-                bookprice: parseFloat(bookprice.substr(1)),
-                bookquantity: parseInt(bookquantity)};
-            data.push(row);
-        }
-    }
-
-    if (data.length > 0) {
-        var postURL = '/validate/bookInfoAdd';
-        var postRequest = new XMLHttpRequest();
-        postRequest.open('POST', postURL);
-        postRequest.setRequestHeader('Content-Type', 'application/json');
-        postRequest.send(JSON.stringify(data));
-
-        postRequest.addEventListener('load', function(event) {
-            console.log(event.target.response);
-            todoCloseBookModal();
-
-            if (event.target.response == 'success') {
-                alert('Echo: Add a new book successfully.');
-            } else {
-                alert('Error: Add a new book unsuccessfully.');
-            }
-        });
-    } else {
-        alert('Warning: Please add a new book into table.');
-    }
-}
-
 function todoAddSingleBookInfo() {
     var bookid = document.getElementById('book-modal-input-bookid').value;
     var bookname = document.getElementById('book-modal-input-bookname').value;
@@ -206,7 +162,6 @@ function todoAddSingleBookInfo() {
         }]));
 
         postRequest.addEventListener('load', function(event) {
-            console.log(event.target.response);
             todoCloseBookModal();
 
             if (event.target.response == 'success') {
@@ -258,9 +213,124 @@ function todoChangeSingleBookInfo() {
             todoCloseBookModal();
 
             if (event.target.response == 'success') {
-                alert('Echo: Change a new book successfully.');
+                alert('Echo: Change a book successfully.');
             } else {
-                alert('Error: Change a new book unsuccessfully.');
+                alert('Error: Change a book unsuccessfully.');
+            }
+        });
+    }
+}
+/**/
+function todoAddTableStoreInfo() {
+    var storeInfoTable = document.getElementById('store-info-modify-table');
+    var repoid = document.getElementById('store-modal-input-repoid').value;
+    var repostreet = document.getElementById('store-modal-input-repostreet').value;
+    var reponumber = document.getElementById('store-modal-input-reponumber').value;
+    var repopurpose = document.getElementById('store-modal-select-purpose').value;
+    var repoguard = document.getElementById('store-modal-input-repoguard').value;
+    var bookid = document.getElementById('store-modal-input-bookid').value;
+    var vendid = document.getElementById('store-modal-input-vendid').value;
+    var flag = validateInputValue(repoid, repostreet, reponumber, repopurpose, repoguard, bookid, vendid);
+
+    if (flag) {
+        for (var i = storeInfoTable.rows.length - 1; i > 0; i--) {
+            if (!storeInfoTable.rows[i].cells[0].children[0].checked) {
+                storeInfoTable.deleteRow(i);
+            }
+        }
+
+        var rowHTML = buildStoreModHTML(
+            true,
+            bookid,
+            null,
+            null,
+            null,
+            repoid,
+            repostreet,
+            reponumber,
+            parseInt(repopurpose),
+            repoguard,
+            vendid
+        );
+
+        storeInfoTable.insertAdjacentHTML('beforeend', rowHTML);
+        todoCloseStoreModal();
+    }
+}
+
+function todoAddSingleStoreInfo() {
+    var repoid = document.getElementById('store-modal-input-repoid').value;
+    var repostreet = document.getElementById('store-modal-input-repostreet').value;
+    var reponumber = document.getElementById('store-modal-input-reponumber').value;
+    var repopurpose = document.getElementById('store-modal-select-purpose').value;
+    var repoguard = document.getElementById('store-modal-input-repoguard').value;
+    var bookid = document.getElementById('store-modal-input-bookid').value;
+    var vendid = document.getElementById('store-modal-input-vendid').value;
+    var flag = validateInputValue(repoid, repostreet, reponumber, repopurpose, repoguard, bookid, vendid);
+
+    if (flag) {
+        var postURL = '/validate/storeInfoAdd';
+        var postRequest = new XMLHttpRequest();
+        postRequest.open('POST', postURL);
+        postRequest.setRequestHeader('Content-Type', 'application/json');
+
+        postRequest.send(JSON.stringify([{
+            repoid: repoid,
+            repostreet: repostreet,
+            reponumber: reponumber,
+            repopurpose: parseInt(repopurpose),
+            repoguard: repoguard,
+            bookid: bookid,
+            vendid: vendid
+        }]));
+
+        postRequest.addEventListener('load', function(event) {
+            console.log(event.target.response);
+            todoCloseStoreModal();
+
+            if (event.target.response == 'success') {
+                alert('Echo: Add a new store successfully.');
+            } else {
+                alert('Error: Add a new store unsuccessfully.');
+            }
+        });
+    }
+}
+
+function todoChangeSingleStoreInfo() {
+    var repoid = document.getElementById('store-modal-input-repoid').value;
+    var repostreet = document.getElementById('store-modal-input-repostreet').value;
+    var reponumber = document.getElementById('store-modal-input-reponumber').value;
+    var repopurpose = document.getElementById('store-modal-select-purpose').value;
+    var repoguard = document.getElementById('store-modal-input-repoguard').value;
+    var bookid = document.getElementById('store-modal-input-bookid').value;
+    var vendid = document.getElementById('store-modal-input-vendid').value;
+    var flag = validateInputValue(bookid, repoid, repostreet, reponumber, repopurpose, repoguard, vendid);
+
+    if (flag) {
+        var postURL = '/validate/storeInfoChange';
+        var postRequest = new XMLHttpRequest();
+        postRequest.open('POST', postURL);
+        postRequest.setRequestHeader('Content-Type', 'application/json');
+
+        postRequest.send(JSON.stringify({
+            repoid: repoid,
+            repostreet: repostreet,
+            reponumber: reponumber,
+            repopurpose: parseInt(repopurpose),
+            repoguard: repoguard,
+            bookid: bookid,
+            vendid: vendid
+        }));
+
+        postRequest.addEventListener('load', function(event) {
+            console.log(event.target.response);
+            todoCloseStoreModal();
+
+            if (event.target.response == 'success') {
+                alert('Echo: Change a store successfully.');
+            } else {
+                alert('Error: Change a store unsuccessfully.');
             }
         });
     }

@@ -150,6 +150,7 @@ function todoStorageModifySearch() {
         store = JSON.parse(event.target.response);
         store.forEach(function(item) {
             var rowHTML = buildStoreModHTML(
+                false,
                 item['BOOK_ID'],
                 item['BOOK_NAME'],
                 item['BOOK_TYPE'],
@@ -157,7 +158,9 @@ function todoStorageModifySearch() {
                 item['REPOSITORY_ID'],
                 item['REPOSITORY_ADDRESS_STREET'],
                 item['REPOSITORY_ADDRESS_NUMBER'],
-                item['REPOSITORY_GUARD_ID']
+                item['REPOSITORY_PURPOSE'],
+                item['REPOSITORY_GUARD_ID'],
+                item['REPOSITORY_VENDOR_ID']
             );
             bookStoreTable.insertAdjacentHTML('beforeend', rowHTML);
         });
@@ -220,4 +223,213 @@ function todoBookModifyEdit(event) {
     document.getElementById('book-modal-input-bookisbn').value = row.cells[8].innerHTML;
     document.getElementById('book-modal-input-bookprice').value = row.cells[9].innerHTML.substr(1);
     document.getElementById('book-modal-input-bookquantity').value = row.cells[10].innerHTML;
+}
+
+function todoAddMultipleBookInfo() {
+    var bookInfoTable = document.getElementById('book-info-modify-table');
+    var data = [];
+
+    for (var i = bookInfoTable.rows.length - 1; i > 0; i--) {
+        if (bookInfoTable.rows[i].cells[0].children[0].checked) {
+            var bookid = bookInfoTable.rows[i].cells[1].innerHTML;
+            var bookname = bookInfoTable.rows[i].cells[2].innerHTML;
+            var booktype = bookInfoTable.rows[i].cells[3].innerHTML;
+            var bookauthor = bookInfoTable.rows[i].cells[4].innerHTML;
+            var bookedition = bookInfoTable.rows[i].cells[5].innerHTML;
+            var bookdate = bookInfoTable.rows[i].cells[6].innerHTML;
+            var bookpress = bookInfoTable.rows[i].cells[7].innerHTML;
+            var bookisbn = bookInfoTable.rows[i].cells[8].innerHTML;
+            var bookprice = bookInfoTable.rows[i].cells[9].innerHTML;
+            var bookquantity = bookInfoTable.rows[i].cells[10].innerHTML;
+            var row = {
+                bookid: bookid,
+                bookname: bookname,
+                booktype: antiConvertType(booktype),
+                bookfname: bookauthor.split(' ')[0],
+                booklname: bookauthor.split(' ')[1],
+                bookedition: parseInt(bookedition),
+                bookyear: parseInt(bookdate.split('-')[0]),
+                bookmonth: parseInt(bookdate.split('-')[1]),
+                bookdate: parseInt(bookdate.split('-')[2]),
+                bookpress: convertPress(bookpress),
+                bookisbn: Number(bookisbn),
+                bookprice: parseFloat(bookprice.substr(1)),
+                bookquantity: parseInt(bookquantity)
+            };
+            data.push(row);
+        }
+    }
+
+    if (data.length > 0) {
+        var postURL = '/validate/bookInfoAdd';
+        var postRequest = new XMLHttpRequest();
+        postRequest.open('POST', postURL);
+        postRequest.setRequestHeader('Content-Type', 'application/json');
+        postRequest.send(JSON.stringify(data));
+
+        postRequest.addEventListener('load', function(event) {
+            console.log(event.target.response);
+            todoCloseBookModal();
+
+            if (event.target.response == 'success') {
+                alert('Echo: Add a new book successfully.');
+            } else {
+                alert('Error: Add a new book unsuccessfully.');
+            }
+        });
+    } else {
+        alert('Warning: Please add a new book into table.');
+    }
+}
+
+function todoDeleteSingleBookInfo(event) {
+    var row = event.parentNode.parentNode;
+    var bookid = row.cells[1].innerHTML;
+
+    var postURL = '/validate/bookInfoRemove';
+    var postRequest = new XMLHttpRequest();
+    postRequest.open('POST', postURL);
+    postRequest.setRequestHeader('Content-Type', 'application/json');
+    postRequest.send(JSON.stringify([{bookid: bookid}]));
+
+    postRequest.addEventListener('load', function(event) {
+        if (event.target.response == 'success') {
+            alert('Echo: Remove a book successfully.');
+        } else {
+            alert('Error: Remove a book unsuccessfully.');
+        }
+    });
+}
+
+function todoDeleteMultipleBookInfo() {
+    var bookInfoTable = document.getElementById('book-info-modify-table');
+    var data = [];
+
+    for (var i = bookInfoTable.rows.length - 1; i > 0; i--) {
+        if (bookInfoTable.rows[i].cells[0].children[0].checked) {
+            var bookid = bookInfoTable.rows[i].cells[1].innerHTML;
+            var row = {bookid: bookid};
+            data.push(row);
+        }
+    }
+
+    var postURL = '/validate/bookInfoRemove';
+    var postRequest = new XMLHttpRequest();
+    postRequest.open('POST', postURL);
+    postRequest.setRequestHeader('Content-Type', 'application/json');
+    postRequest.send(JSON.stringify(data));
+
+    postRequest.addEventListener('load', function(event) {
+        if (event.target.response == 'success') {
+            alert('Echo: Remove books successfully.');
+        } else {
+            alert('Error: Remove books unsuccessfully.');
+        }
+    });
+}
+/**/
+function todoAddMultipleStoreInfo() {
+    var storeInfoTable = document.getElementById('store-info-modify-table');
+    var data = [];
+
+    for (var i = storeInfoTable.rows.length - 1; i > 0; i--) {
+        if (storeInfoTable.rows[i].cells[0].children[0].checked) {
+            var bookid = storeInfoTable.rows[i].cells[1].innerHTML;
+            var repoid = storeInfoTable.rows[i].cells[5].innerHTML;
+            var repostreet = storeInfoTable.rows[i].cells[6].innerHTML.split(' ')[0];
+            var reponumber = storeInfoTable.rows[i].cells[6].innerHTML.split(' ')[1];
+            var repopurpose = storeInfoTable.rows[i].cells[7].innerHTML;
+            var repoguard = storeInfoTable.rows[i].cells[8].innerHTML;
+            var vendid = storeInfoTable.rows[i].cells[9].innerHTML;
+            var row = {
+                bookid: bookid,
+                repoid: repoid,
+                repostreet: repostreet,
+                reponumber: reponumber,
+                repopurpose: convertPurpose(repopurpose),
+                repoguard: repoguard,
+                vendid: vendid
+            };
+            data.push(row);
+        }
+    }
+
+    if (data.length > 0) {
+        var postURL = '/validate/storeInfoAdd';
+        var postRequest = new XMLHttpRequest();
+        postRequest.open('POST', postURL);
+        postRequest.setRequestHeader('Content-Type', 'application/json');
+        postRequest.send(JSON.stringify(data));
+
+        postRequest.addEventListener('load', function(event) {
+            console.log(event.target.response);
+            todoCloseStoreModal();
+
+            if (event.target.response == 'success') {
+                alert('Echo: Add a new store successfully.');
+            } else {
+                alert('Error: Add a new store unsuccessfully.');
+            }
+        });
+    } else {
+        alert('Warning: Please add a new store into table.');
+    }
+}
+
+function todoStoreModifyEdit(event) {
+    todoOpenStoreModal();
+    var row = event.parentNode.parentNode;
+    document.getElementById('store-modal-input-bookid').value = row.cells[1].innerHTML;
+    document.getElementById('store-modal-input-repoid').value = row.cells[5].innerHTML;
+    document.getElementById('store-modal-input-repostreet').value = row.cells[6].innerHTML.split(' ')[0];
+    document.getElementById('store-modal-input-reponumber').value = row.cells[6].innerHTML.split(' ')[1];
+    document.getElementById('store-modal-select-purpose').selectedIndex = antiConvertPurpose(row.cells[7].innerHTML) + 1;
+    document.getElementById('store-modal-input-repoguard').value = row.cells[8].innerHTML;
+    document.getElementById('store-modal-input-vendid').value = row.cells[9].innerHTML;
+}
+
+function todoDeleteSingleStoreInfo(event) {
+    var row = event.parentNode.parentNode;
+    var repoid = row.cells[5].innerHTML;
+
+    var postURL = '/validate/storeInfoRemove';
+    var postRequest = new XMLHttpRequest();
+    postRequest.open('POST', postURL);
+    postRequest.setRequestHeader('Content-Type', 'application/json');
+    postRequest.send(JSON.stringify([{repoid: repoid}]));
+
+    postRequest.addEventListener('load', function(event) {
+        if (event.target.response == 'success') {
+            alert('Echo: Remove a store successfully.');
+        } else {
+            alert('Error: Remove a store unsuccessfully.');
+        }
+    });
+}
+
+function todoDeleteMultipleStoreInfo() {
+    var storeInfoTable = document.getElementById('store-info-modify-table');
+    var data = [];
+
+    for (var i = storeInfoTable.rows.length - 1; i > 0; i--) {
+        if (storeInfoTable.rows[i].cells[0].children[0].checked) {
+            var repoid = storeInfoTable.rows[i].cells[5].innerHTML;
+            var row = {repoid: repoid};
+            data.push(row);
+        }
+    }
+
+    var postURL = '/validate/storeInfoRemove';
+    var postRequest = new XMLHttpRequest();
+    postRequest.open('POST', postURL);
+    postRequest.setRequestHeader('Content-Type', 'application/json');
+    postRequest.send(JSON.stringify(data));
+
+    postRequest.addEventListener('load', function(event) {
+        if (event.target.response == 'success') {
+            alert('Echo: Remove books successfully.');
+        } else {
+            alert('Error: Remove books unsuccessfully.');
+        }
+    });
 }

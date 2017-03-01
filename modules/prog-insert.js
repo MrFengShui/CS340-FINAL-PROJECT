@@ -1,3 +1,8 @@
+/**
+ * Function: buyBookInfoAdd
+ * Parameter: condition, connection, and callback
+ * Description: To add one or more purchasing information based on typed conditions
+ */
 exports.buyBookInfoAdd = function(condition, connection, callback) {
     var sql = 'INSERT INTO CONSUMER_BOOK_TB (CONSUMER_ID, BOOK_ID) VALUES ';
 
@@ -7,14 +12,18 @@ exports.buyBookInfoAdd = function(condition, connection, callback) {
 
     connection.query(sql, function(err, rows) {
         if (err) {
-            console.log('Error: Fail to insert result from database.', err);
+            console.log('Error: Fail to insert result to database.', err);
             callback('error');
         } else {
             callback('success');
         }
     });
 }
-
+/**
+ * Function: staffBookInfoAdd
+ * Parameter: condition, connection, and callback
+ * Description: To add one or more books information based on typed conditions
+ */
 exports.staffBookInfoAdd = function(condition, connection, callback) {
     var sql = 'INSERT INTO BOOK_INFO_TB (BOOK_ID, BOOK_NAME, BOOK_TYPE, BOOK_AUTHOR_FIRST_NAME, BOOK_AUTHOR_LAST_NAME, BOOK_EDITION, BOOK_PUBLISH_YEAR, BOOK_PUBLISH_MONTH, BOOK_PUBLISH_DATE, BOOK_PUBLISH_PRESS, BOOK_ISBN, BOOK_PRICE, BOOK_QUANTITY) VALUES ';
 
@@ -36,13 +45,57 @@ exports.staffBookInfoAdd = function(condition, connection, callback) {
             + '\')'
             + ((i == condition.length - 1) ? '' : ', ');
     }
-    console.log(sql);
+
     connection.query(sql, function(err) {
         if (err) {
-            console.log('Error: Fail to insert result from database.', err);
+            console.log('Error: Fail to insert result to database.', err);
             callback('error');
         } else {
             callback('success');
+        }
+    });
+}
+/**
+ * Function: staffStoreInfoAdd
+ * Parameter: condition, connection, and callback
+ * Description: To add one or more storage information based on typed conditions
+ */
+exports.staffStoreInfoAdd = function(condition, connection, callback) {
+    var primarySQL = 'INSERT INTO REPOSITORY_INFO_TB (REPOSITORY_ID, REPOSITORY_ADDRESS_STREET, REPOSITORY_ADDRESS_NUMBER, REPOSITORY_PURPOSE, REPOSITORY_GUARD_ID, REPOSITORY_VENDOR_ID) VALUES ';
+
+    var foreignSQL = 'INSERT INTO BOOK_REPOSITORY_TB (BOOK_ID, REPOSITORY_ID) VALUES ';
+
+    for (var i = 0; i < condition.length; i++) {
+        primarySQL += '(\''
+            + condition[i].repoid + '\', \''
+            + condition[i].repostreet + '\', \''
+            + condition[i].reponumber + '\', \''
+            + condition[i].repopurpose + '\', \''
+            + condition[i].repoguard + '\', \''
+            + condition[i].vendid
+            + '\')'
+            + ((i == condition.length - 1) ? '' : ', ');
+
+        foreignSQL += '(\''
+            + condition[i].bookid + '\', \''
+            + condition[i].repoid
+            + '\')'
+            + ((i == condition.length - 1) ? '' : ', ');
+    }
+
+    connection.query(primarySQL, function(outerError) {
+        if (outerError) {
+            console.log('Error: Fail to insert result to database.', outerError);
+            callback('error');
+        } else {
+            connection.query(foreignSQL, function(innerError) {
+                if (innerError) {
+                    console.log('Error: Fail to insert result to database.', innerError);
+                    callback('error');
+                } else {
+                    callback('success');
+                }
+            });
         }
     });
 }

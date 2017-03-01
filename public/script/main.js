@@ -90,6 +90,18 @@ function handleStaffEvents() {
             modifyTabbedButtons[i].addEventListener('click', todoModifyTabbedPane);
         }
     }
+
+    var staffBookDeleteButton = document.getElementById('book-delete-rows-button');
+
+    if (staffBookDeleteButton) {
+        staffBookDeleteButton.addEventListener('click', todoDeleteMultipleBookInfo);
+    }
+
+    var staffStoreDeleteButton = document.getElementById('store-delete-rows-button');
+
+    if (staffStoreDeleteButton) {
+        staffStoreDeleteButton.addEventListener('click', todoDeleteMultipleStoreInfo);
+    }
 }
 
 function handleModalEvents() {
@@ -111,30 +123,6 @@ function handleModalEvents() {
         closeBookModalButton.addEventListener('click', todoCloseBookModal);
     }
 
-    var openStoreModalButton = document.getElementById('store-modal-open-button');
-
-    if (openStoreModalButton) {
-        openStoreModalButton.addEventListener('click', todoOpenStoreModal);
-    }
-
-    var closeStoreModalButton = document.getElementById('store-modal-close-button');
-
-    if (closeStoreModalButton) {
-        closeStoreModalButton.addEventListener('click', todoCloseStoreModal);
-    }
-
-    var openVendModalButton = document.getElementById('vend-modal-open-button');
-
-    if (openVendModalButton) {
-        openVendModalButton.addEventListener('click', todoOpenVendModal);
-    }
-
-    var closeVendModalButton = document.getElementById('vend-modal-close-button');
-
-    if (closeVendModalButton) {
-        closeVendModalButton.addEventListener('click', todoCloseVendModal);
-    }
-
     var bookInsertModalButton = document.getElementById('book-modal-button-insert');
 
     if (bookInsertModalButton) {
@@ -151,6 +139,54 @@ function handleModalEvents() {
 
     if (bookUpdateModalButton) {
         bookUpdateModalButton.addEventListener('click', todoChangeSingleBookInfo);
+    }
+    /**/
+    var openStoreModalButton = document.getElementById('store-modal-open-button');
+
+    if (openStoreModalButton) {
+        openStoreModalButton.addEventListener('click', todoOpenStoreModal);
+    }
+
+    var storeUploadRowsButton = document.getElementById('store-upload-rows-button');
+
+    if (storeUploadRowsButton) {
+        storeUploadRowsButton.addEventListener('click', todoAddMultipleStoreInfo);
+    }
+
+    var closeStoreModalButton = document.getElementById('store-modal-close-button');
+
+    if (closeStoreModalButton) {
+        closeStoreModalButton.addEventListener('click', todoCloseStoreModal);
+    }
+
+    var storeAddModalButton = document.getElementById('store-modal-button-add');
+
+    if (storeAddModalButton) {
+        storeAddModalButton.addEventListener('click', todoAddTableStoreInfo);
+    }
+
+    var storeInsertModalButton = document.getElementById('store-modal-button-insert');
+
+    if (storeInsertModalButton) {
+        storeInsertModalButton.addEventListener('click', todoAddSingleStoreInfo);
+    }
+
+    var storeUpdateModalButton = document.getElementById('store-modal-button-update');
+
+    if (storeUpdateModalButton) {
+        storeUpdateModalButton.addEventListener('click', todoChangeSingleStoreInfo);
+    }
+    /**/
+    var openVendModalButton = document.getElementById('vend-modal-open-button');
+
+    if (openVendModalButton) {
+        openVendModalButton.addEventListener('click', todoOpenVendModal);
+    }
+
+    var closeVendModalButton = document.getElementById('vend-modal-close-button');
+
+    if (closeVendModalButton) {
+        closeVendModalButton.addEventListener('click', todoCloseVendModal);
     }
 }
 
@@ -265,6 +301,36 @@ function antiConvertPress(press) {
             return 'cabritannica';
         case 'Brooks Cole':
             return 'brooks';
+    }
+}
+
+function convertPurpose(purpose) {
+    switch (purpose) {
+        case 1:
+            return 'Art, History, Literature';
+        case 2:
+            return 'Engineering, Art';
+        case 3:
+            return 'Engineering, Science, History';
+        case 4:
+            return 'Literature, Engineering, Science';
+        case 5:
+            return 'Art, Science';
+    }
+}
+
+function antiConvertPurpose(purpose) {
+    switch (purpose) {
+        case 'Art, History, Literature':
+            return 1;
+        case 'Engineering, Art':
+            return 2;
+        case 'Engineering, Science, History':
+            return 3;
+        case 'Literature, Engineering, Science':
+            return 4;
+        case 'Art, Science':
+            return 5;
     }
 }
 

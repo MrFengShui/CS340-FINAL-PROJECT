@@ -111,12 +111,52 @@ app.post('/validate/bookInfoChange', function(req, res) {
     });
 });
 
+app.post('/validate/bookInfoRemove', function(req, res) {
+    sqlDelete.staffBookInfoRemove(req.body, connection, function(rs) {
+        if (rs == 'error') {
+            res.status(404).send('error');
+        } else {
+            res.status(200).send('success');
+        }
+    });
+});
+
 app.post('/validate/storeInfoSearch', function(req, res) {
-    sqlSelect.consumerStoreInfoQuery(req.body, connection, function(rs) {
+    sqlSelect.todoStoreInfoQuery(req.body, connection, function(rs) {
         if (rs == 'error') {
             res.status(404).send();
         } else {
             res.status(200).json(rs);
+        }
+    });
+});
+
+app.post('/validate/storeInfoAdd', function(req, res) {
+    sqlInsert.staffStoreInfoAdd(req.body, connection, function(rs) {
+        if (rs == 'error') {
+            res.status(404).send('error');
+        } else {
+            res.status(200).send('success');
+        }
+    });
+});
+
+app.post('/validate/storeInfoChange', function(req, res) {
+    sqlUpdate.staffStoreInfoChange(req.body, connection, function(rs) {
+        if (rs == 'error') {
+            res.status(404).send('error');
+        } else {
+            res.status(200).send('success');
+        }
+    });
+});
+
+app.post('/validate/storeInfoRemove', function(req, res) {
+    sqlDelete.staffStoreInfoRemove(req.body, connection, function(rs) {
+        if (rs == 'error') {
+            res.status(404).send('error');
+        } else {
+            res.status(200).send('success');
         }
     });
 });
