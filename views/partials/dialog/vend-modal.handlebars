@@ -8,47 +8,60 @@
         <table>
             <tr class="modal-dialog-input">
                 <td class="modal-input-tag">Vendor ID</td>
-                <td class="modal-input-text"><input type="text" name="vendid" id="input-vend-id"></td>
+                <td class="modal-input-text"><input type="text" name="vendid"  id="vend-modal-input-vendid"></td>
             </tr>
             <tr class="modal-dialog-input">
                 <td class="modal-input-tag">Vendor Name</td>
-                <td class="modal-input-text"><input type="text" name="vendname" id="input-vend-name"></td>
+                <td class="modal-input-text"><input type="text" name="vendname" id="vend-modal-input-vendname"></td>
             </tr>
             <tr class="modal-dialog-input">
-                <td class="modal-input-tag">Vendor Address</td>
-                <td class="modal-input-text"><input type="text" name="vendaddress" id="input-vend-address"></td>
+                <td class="modal-input-tag">Vendor City</td>
+                <td class="modal-input-text"><input type="text" name="vendcity" id="vend-modal-input-vendcity"></td>
             </tr>
             <tr class="modal-dialog-input">
-                <td class="modal-input-tag">Vendor Phone</td>
-                <td class="modal-input-text"><input type="text" name="vendphone" id="input-vend-phone"></td>
-            </tr>
-            <tr class="modal-dialog-input">
-                <td class="modal-input-tag">Vendor Email</td>
-                <td class="modal-input-text"><input type="text" name="vendemail" id="input-vend-email"></td>
-            </tr>
-            <tr class="modal-dialog-input">
-                <td class="modal-input-tag">Book Type</td>
+                <td class="modal-input-tag">Vendor State</td>
                 <td class="modal-input-text">
-                    <select class="" name="">
-                        <option selected="true" disabled>Select one book type</option>
-                        <option>Art</option>
-                        <option>Engineering</option>
-                        <option>History</option>
-                        <option>Literature</option>
-                        <option>Science</option>
+                    <select id="vend-modal-input-vendstate" name="">
+                        <option selected="true" value="anystate" disabled>Select one State</option>
+                        <option value="anystate">Any States</option>
+                        <option value="ca">California</option>
+                        <option value="ny">New York</option>
+                        <option value="or">Oregon</option>
+                        <option value="tx">Texas</option>
+                        <option value="wa">Washington</option>
                     </select>
                 </td>
             </tr>
             <tr class="modal-dialog-input">
+                <td class="modal-input-tag">Vendor Country</td>
+                <td class="modal-input-text">
+                    <select id="vend-modal-input-vendcountry" name="">
+                        <option selected="true" value="anycountry" disabled>Select one Country</option>
+                        <option value="anystate">Any Country</option>
+                        <option value="chn">China</option>
+                        <option value="us">United States</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="modal-dialog-input">
+                <td class="modal-input-tag">Vendor Phone</td>
+                <td class="modal-input-text"><input type="text" name="vendphone"  id="vend-modal-input-vendphone"></td>
+            </tr>
+            <tr class="modal-dialog-input">
+                <td class="modal-input-tag">Vendor Email</td>
+                <td class="modal-input-text"><input type="text" name="vendemail" id="vend-modal-input-vendemail"></td>
+            </tr>
+            <tr class="modal-dialog-input">
                 <td class="modal-input-tag">Repo ID</td>
-                <td class="modal-input-text"><input type="text" name="repoid" id="input-repo-id"></td>
+                <td class="modal-input-text"><input type="text" name="repoid" id="vend-modal-input-repoid"></td>
             </tr>
             <tr class="modal-dialog-button">
-                <td colspan="2">
+                <td colspan="4">
                     <ul>
-                        <li><a href="">Add to Database</a></li>
-                        <li><a href="">Add to Table</a></li>
-                        <li><a href="">Clean Up</a></li>
+                        <li><a href="#" id="vend-modal-button-insert">Insert</a></li>
+                        <li><a href="#" id="vend-modal-button-add">Add</a></li>
+                        <li><a href="#" id="vend-modal-button-update">Update</a></li>
+                        <li><a href="#" id="vend-modal-button-clear">Clear</a></li>
                     </ul>
                 </td>
             </tr>

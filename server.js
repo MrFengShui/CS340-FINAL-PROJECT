@@ -40,7 +40,6 @@ app.use(bodyParser.urlencoded({
 
 app.post('/validate/buyInfoInsert', function(req, res) {
     sqlInsert.buyBookInfoAdd(req.body, connection, function(rs) {
-        console.log('$MySQL-BUY-INSERT-Validation$', rs);
         if (rs == 'error') {
             res.status(404).send(rs);
         } else {
@@ -171,9 +170,38 @@ app.post('/validate/vendInfoSearch', function(req, res) {
     });
 });
 
+app.post('/validate/vendInfoAdd', function(req, res) {
+    sqlInsert.staffVendInfoAdd(req.body, connection, function(rs) {
+        if (rs == 'error') {
+            res.status(404).send('error');
+        } else {
+            res.status(200).send('success');
+        }
+    });
+});
+
+app.post('/validate/vendInfoChange', function(req, res) {
+    sqlUpdate.staffVendInfoChange(req.body, connection, function(rs) {
+        if (rs == 'error') {
+            res.status(404).send('error');
+        } else {
+            res.status(200).send('success');
+        }
+    });
+});
+
+app.post('/validate/vendInfoRemove', function(req, res) {
+    sqlDelete.staffVendInfoRemove(req.body, connection, function(rs) {
+        if (rs == 'error') {
+            res.status(404).send('error');
+        } else {
+            res.status(200).send('success');
+        }
+    });
+});
+
 app.post('/validate/consumerBuyBook', function(req, res) {
     sqlSelect.consumerBuyBookQuery(req.body, connection, function(rs) {
-        console.log('$MySQL-BUY-Validation$', rs);
         if (rs == 'error') {
             res.status(404).send();
         } else {
@@ -272,7 +300,7 @@ app.get('/vendor-modify', function(req, res) {
 
 connection.connect(function(err) {
     if (err) {
-        console.console.log('Erro: Failed to connect to MySQL Database');
+        console.log('Erro: Failed to connect to MySQL Database');
         throw err;
     } else {
         app.listen(10000, function() {

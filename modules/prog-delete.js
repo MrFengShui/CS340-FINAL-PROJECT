@@ -30,7 +30,28 @@ exports.staffStoreInfoRemove = function(condition, connection, callback) {
     for (var i = 0; i < condition.length; i++) {
         sql += '\'' + condition[i].repoid + '\'' + ((i == condition.length - 1) ? ')' : ', ');
     }
-    
+
+    connection.query(sql, function(err) {
+        if (err) {
+            console.log('Error: Fail to delete result from database.', err);
+            callback('error');
+        } else {
+            callback('success');
+        }
+    });
+}
+/**
+ * Function: staffVendInfoRemove
+ * Parameter: condition, connection, and callback
+ * Description: To remove one or more vendors information based on typed conditions
+ */
+exports.staffVendInfoRemove = function(condition, connection, callback) {
+    var sql = 'DELETE FROM VENDOR_INFO_TB WHERE VENDOR_INFO_TB.VENDOR_ID IN (';
+
+    for (var i = 0; i < condition.length; i++) {
+        sql += '\'' + condition[i].vendid + '\'' + ((i == condition.length - 1) ? ')' : ', ');
+    }
+
     connection.query(sql, function(err) {
         if (err) {
             console.log('Error: Fail to delete result from database.', err);

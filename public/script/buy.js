@@ -40,7 +40,6 @@ function totdoAddBuyList() {
     }));
 
     postRequest.addEventListener('load', function(event) {
-        console.log(event.target.response);
         book = JSON.parse(event.target.response);
         var rowHTML = buildBuyBookHTML(
             book['BOOK_ID'],
@@ -78,18 +77,23 @@ function todoPayBook() {
     var personType = document.getElementById('person-info-type').innerHTML;
     var items = [];
     var totalPrice = 0;
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var today = year + '-' + ((month < 10) ? '0' + month : month) + '-' + ((day < 10) ? '0' + day : day);
 
     for (var i = 1; i < bookBuyTable.rows.length; i++) {
         if (bookBuyTable.rows[i]) {
             if (i == bookBuyTable.rows.length - 1) {
                 totalPrice = bookBuyTable.rows[i].cells[1].innerHTML.substr(1);
             } else {
-                var item = {personid: personID.split(': ')[1], bookid: bookBuyTable.rows[i].cells[0].innerHTML};
+                var item = {personid: personID.split(': ')[1], bookid: bookBuyTable.rows[i].cells[0].innerHTML, buydate: today};
                 items.push(item);
             }
         }
     }
-    console.log(items, totalPrice);
+
     var postURL = '/validate/buyInfoInsert';
     var postRequest = new XMLHttpRequest();
     postRequest.open('POST', postURL);
@@ -101,7 +105,6 @@ function todoPayBook() {
     }));
 
     postRequest.addEventListener('load', function(event) {
-        console.log(event.target.response);
         if (event.target.response == 'success') {
             window.location.href = '/success';
         } else {

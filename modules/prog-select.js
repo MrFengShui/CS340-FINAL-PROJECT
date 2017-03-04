@@ -135,7 +135,7 @@ exports.consumerVendInfoQuery = function(condition, connection, callback) {
         return (condition['booktype'] == '0') ? '' : condition['booktype'];
     }
 
-    var sql = 'SELECT VENDOR_INFO_TB.VENDOR_ID, VENDOR_INFO_TB.VENDOR_NAME, VENDOR_INFO_TB.VENDOR_ADDRESS_CITY, VENDOR_INFO_TB.VENDOR_ADDRESS_STATE, VENDOR_INFO_TB.VENDOR_ADDRESS_COUNTRY, VENDOR_INFO_TB.VENDOR_PHONE, VENDOR_INFO_TB.VENDOR_EMAIL, BOOK_INFO_TB.BOOK_TYPE FROM VENDOR_INFO_TB LEFT JOIN BOOK_REPOSITORY_TB ON VENDOR_INFO_TB.VENDOR_REPOSITORY_ID = BOOK_REPOSITORY_TB.REPOSITORY_ID LEFT JOIN BOOK_INFO_TB ON BOOK_REPOSITORY_TB.BOOK_ID = BOOK_INFO_TB.BOOK_ID WHERE'
+    var sql = 'SELECT VENDOR_INFO_TB.VENDOR_ID, VENDOR_INFO_TB.VENDOR_NAME, VENDOR_INFO_TB.VENDOR_ADDRESS_CITY, VENDOR_INFO_TB.VENDOR_ADDRESS_STATE, VENDOR_INFO_TB.VENDOR_ADDRESS_COUNTRY, VENDOR_INFO_TB.VENDOR_PHONE, VENDOR_INFO_TB.VENDOR_EMAIL, VENDOR_REPOSITORY_ID, BOOK_INFO_TB.BOOK_TYPE FROM VENDOR_INFO_TB LEFT JOIN BOOK_REPOSITORY_TB ON VENDOR_INFO_TB.VENDOR_REPOSITORY_ID = BOOK_REPOSITORY_TB.REPOSITORY_ID LEFT JOIN BOOK_INFO_TB ON BOOK_REPOSITORY_TB.BOOK_ID = BOOK_INFO_TB.BOOK_ID WHERE'
         + ' BOOK_INFO_TB.BOOK_ID LIKE \'\%' + condition['bookid'] + '\%\' AND'
         + ' BOOK_INFO_TB.BOOK_TYPE LIKE \'\%' + booktype() + '\%\' AND'
         + ' BOOK_REPOSITORY_TB.REPOSITORY_ID LIKE \'\%' + condition['repoid'] + '\%\' AND'
@@ -152,7 +152,11 @@ exports.consumerVendInfoQuery = function(condition, connection, callback) {
         }
     });
 }
-
+/**
+ * Function: consumerBuyBookQuery
+ * Parameter: condition, connection, and callback
+ * Description: To search book basically purchasing information based on typed conditions
+ */
 exports.consumerBuyBookQuery = function(condition, connection, callback) {
     var sql = 'SELECT BOOK_ID, BOOK_NAME, BOOK_PRICE FROM BOOK_INFO_TB WHERE'
             + ' BOOK_ISBN=\'' + condition['bookisbn'] + '\'';
@@ -173,39 +177,26 @@ exports.consumerBuyBookQuery = function(condition, connection, callback) {
  */
 exports.staffBuyInfoQuery = function(condition, connection, callback) {
     var booktype = function() {
-        return (condition['booktype'] == '0') ? '' : condition['booktype'];
+        return (condition.booktype == '0') ? '' : condition.booktype;
     }
-    var bookdate = function() {
-        if (condition['bookdate'][0] == '' && condition['bookdate'][1] == '') {
-            return 'BOOK_PUBLISH_YEAR LIKE \'\%\%\' AND ';
+    var buydate = function() {
+        if (condition.buydate[0] == '' && condition.buydate[1] == '') {
+            return ' DATE(CONSUMER_BOOK_TB.DATE_OF_BUY) LIKE \'\%\%\'';
+        } else if (condition.buydate[0] != '' && condition.buydate[1] == '') {
+            return ' DATE(CONSUMER_BOOK_TB.DATE_OF_BUY) >= \'' + condition.buydate[0] + '\'';
+        } else if (condition.buydate[0] == '' && condition.buydate[1] != '') {
+            return ' DATE(CONSUMER_BOOK_TB.DATE_OF_BUY) <= \'' + condition.buydate[1] + '\'';
         } else {
-            var date = [{year:'', month:'', date:''}, {year:'', month:'', date:''}];
-
-            if (condition['bookdate'][0] != '') {
-                var temp = condition['bookdate'][0].split('-');
-                date[0].year = temp[0];
-                date[0].month = temp[1];
-                date[0].date = temp[2];
-            }
-
-            if (condition['bookdate'][1] != '') {
-                var temp = condition['bookdate'][1].split('-');
-                date[1].year = temp[0];
-                date[1].month = temp[1];
-                date[1].date = temp[2];
-            }
-
-            return 'BOOK_PUBLISH_YEAR*10000+BOOK_PUBLISH_MONTH*100+BOOK_PUBLISH_DATE BETWEEN ' + date[0].year + date[0].month + date[0].date + ' AND ' + date[1].year + date[1].month + date[1].date + ' AND ';
+            return ' DATE(CONSUMER_BOOK_TB.DATE_OF_BUY) BETWEEN \'' + condition.buydate[0] + '\' AND \'' + condition.buydate[1] + '\'';
         }
-    };
-
+    }
     var sql = 'SELECT CONSUMER_INFO_TB.CONSUMER_ID, CONSUMER_INFO_TB.CONSUMER_FIRST_NAME, CONSUMER_INFO_TB.CONSUMER_LAST_NAME, CONSUMER_INFO_TB.CONSUMER_TYPE, CONSUMER_BOOK_TB.DATE_OF_BUY, BOOK_INFO_TB.BOOK_ID, BOOK_INFO_TB.BOOK_NAME, BOOK_INFO_TB.BOOK_TYPE, BOOK_INFO_TB.BOOK_ISBN, BOOK_INFO_TB.BOOK_PRICE, BOOK_INFO_TB.BOOK_QUANTITY FROM BOOK_INFO_TB INNER JOIN CONSUMER_BOOK_TB ON BOOK_INFO_TB.BOOK_ID = CONSUMER_BOOK_TB.BOOK_ID INNER JOIN CONSUMER_INFO_TB ON CONSUMER_BOOK_TB.CONSUMER_ID = CONSUMER_INFO_TB.CONSUMER_ID WHERE'
-            + ' BOOK_INFO_TB.BOOK_ID LIKE \'\%' + condition['bookid'] + '\%\' AND '
-            + ' BOOK_INFO_TB.BOOK_NAME LIKE \'\%' + condition['bookname'] + '\%\'';
-            + bookdate();
-            + ' BOOK_INFO_TB.BOOK_TYPE LIKE \'\%' + booktype() + '\%\''
+            + ' BOOK_INFO_TB.BOOK_ID LIKE \'\%' + condition.bookid + '\%\' AND'
+            + ' BOOK_INFO_TB.BOOK_NAME LIKE \'\%' + condition.bookname + '\%\' AND'
+            + ' BOOK_INFO_TB.BOOK_TYPE LIKE \'\%' + booktype() + '\%\' AND'
+            + buydate()
             + ' ORDER BY BOOK_INFO_TB.BOOK_ID ASC';
-
+    
     connection.query(sql, function(err, rows) {
         if (err) {
             console.log('Error: Fail to fetch result from database.', err);

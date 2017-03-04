@@ -102,6 +102,12 @@ function handleStaffEvents() {
     if (staffStoreDeleteButton) {
         staffStoreDeleteButton.addEventListener('click', todoDeleteMultipleStoreInfo);
     }
+
+    var staffVendDeleteButton = document.getElementById('vend-delete-rows-button');
+
+    if (staffVendDeleteButton) {
+        staffVendDeleteButton.addEventListener('click', todoDeleteMultipleVendInfo);
+    }
 }
 
 function handleModalEvents() {
@@ -183,10 +189,34 @@ function handleModalEvents() {
         openVendModalButton.addEventListener('click', todoOpenVendModal);
     }
 
+    var vendUploadRowsButton = document.getElementById('vend-upload-rows-button');
+
+    if (vendUploadRowsButton) {
+        vendUploadRowsButton.addEventListener('click', todoAddMultipleVendInfo);
+    }
+
     var closeVendModalButton = document.getElementById('vend-modal-close-button');
 
     if (closeVendModalButton) {
         closeVendModalButton.addEventListener('click', todoCloseVendModal);
+    }
+
+    var vendInsertModalButton = document.getElementById('vend-modal-button-insert');
+
+    if (vendInsertModalButton) {
+        vendInsertModalButton.addEventListener('click', todoAddSingleVendInfo);
+    }
+
+    var vendAddModalButton = document.getElementById('vend-modal-button-add');
+
+    if (vendAddModalButton) {
+        vendAddModalButton.addEventListener('click', todoAddTableVendInfo);
+    }
+
+    var vendUpdateModalButton = document.getElementById('vend-modal-button-update');
+
+    if (vendUpdateModalButton) {
+        vendUpdateModalButton.addEventListener('click', todoChangeSingleVendInfo);
     }
 }
 
@@ -331,6 +361,54 @@ function antiConvertPurpose(purpose) {
             return 4;
         case 'Art, Science':
             return 5;
+    }
+}
+
+function convertState(state) {
+    switch (state) {
+        case 'ca':
+            return 'California';
+        case 'ny':
+            return 'New York';
+        case 'or':
+            return 'Oregon';
+        case 'tx':
+            return 'Texas';
+        case 'wa':
+            return 'Washington';
+    }
+}
+
+function antiConvertState(state) {
+    switch (state) {
+        case 'California':
+            return 'ca';
+        case 'New York':
+            return 'ny';
+        case 'Oregon':
+            return 'or';
+        case 'Texas':
+            return 'tx';
+        case 'Washington':
+            return 'wa';
+    }
+}
+
+function convertCountry(country) {
+    switch (country) {
+        case 'chn':
+            return 'China';
+        case 'us':
+            return 'United States';
+    }
+}
+
+function antiConvertCountry(country) {
+    switch (country) {
+        case 'China':
+            return 'chn';
+        case 'United States':
+            return 'us';
     }
 }
 

@@ -44,7 +44,6 @@ function todoBookInformationSearch() {
     }));
 
     postRequest.addEventListener('load', function(event) {
-        console.log(event.target.response);
         for (var i = bookInfoTable.rows.length - 1; i > 0; i--) {
             bookInfoTable.deleteRow(i);
         }
@@ -92,7 +91,6 @@ function todoBookStorageSearch() {
     }));
 
     postRequest.addEventListener('load', function(event) {
-        console.log(event.target.response);
         for (var i = bookStoreTable.rows.length - 1; i > 0; i--) {
             bookStoreTable.deleteRow(i);
         }

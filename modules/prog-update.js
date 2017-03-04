@@ -19,7 +19,7 @@ exports.staffBookInfoChange = function(condition, connection, callback) {
             + ' BOOK_INFO_TB.BOOK_PRICE = \'' + condition.bookprice + '\', '
             + ' BOOK_INFO_TB.BOOK_QUANTITY = \'' + condition.bookquantity + '\' WHERE'
             + ' BOOK_INFO_TB.BOOK_ID = \'' + condition.bookid + '\'';
-    
+
     connection.query(sql, function(err) {
         if (err) {
             console.log('Error: Fail to update result to database.', err);
@@ -61,6 +61,32 @@ exports.staffStoreInfoChange = function(condition, connection, callback) {
                     callback('success');
                 }
             });
+        }
+    });
+}
+/**
+ * Function: staffVendInfoChange
+ * Parameter: condition, connection, and callback
+ * Description: To change a vendor information based on typed conditions
+ */
+exports.staffVendInfoChange = function(condition, connection, callback) {
+    var sql = 'UPDATE VENDOR_INFO_TB SET'
+            + ' VENDOR_INFO_TB.VENDOR_ID = \'' + condition.vendid + '\', '
+            + ' VENDOR_INFO_TB.VENDOR_NAME = \'' + condition.vendname + '\', '
+            + ' VENDOR_INFO_TB.VENDOR_ADDRESS_CITY = \'' + condition.vendcity + '\', '
+            + ' VENDOR_INFO_TB.VENDOR_ADDRESS_STATE = \'' + condition.vendstate + '\', '
+            + ' VENDOR_INFO_TB.VENDOR_ADDRESS_COUNTRY = \'' + condition.vendcountry + '\', '
+            + ' VENDOR_INFO_TB.VENDOR_PHONE = \'' + condition.vendphone + '\', '
+            + ' VENDOR_INFO_TB.VENDOR_EMAIL = \'' + condition.vendemail + '\', '
+            + ' VENDOR_INFO_TB.VENDOR_REPOSITORY_ID = \'' + condition.repoid + '\' WHERE'
+            + ' VENDOR_INFO_TB.VENDOR_ID = \'' + condition.vendid + '\'';
+
+    connection.query(sql, function(err) {
+        if (err) {
+            console.log('Error: Fail to update result to database.', err);
+            callback('error');
+        } else {
+            callback('success');
         }
     });
 }

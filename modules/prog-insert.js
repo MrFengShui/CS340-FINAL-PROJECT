@@ -4,10 +4,10 @@
  * Description: To add one or more purchasing information based on typed conditions
  */
 exports.buyBookInfoAdd = function(condition, connection, callback) {
-    var sql = 'INSERT INTO CONSUMER_BOOK_TB (CONSUMER_ID, BOOK_ID) VALUES ';
+    var sql = 'INSERT INTO CONSUMER_BOOK_TB (CONSUMER_ID, BOOK_ID, DATE_OF_BUY) VALUES ';
 
     for (var i = 0; i < condition.items.length; i++) {
-        sql += '(\'' + condition.items[i].personid + '\', \'' + condition.items[i].bookid + '\')' + ((i == condition.items.length - 1) ? '' : ', ');
+        sql += '(\'' + condition.items[i].personid + '\', \'' + condition.items[i].bookid + '\', \'' + condition.items[i].buydate + '\')' + ((i == condition.items.length - 1) ? '' : ', ');
     }
 
     connection.query(sql, function(err, rows) {
@@ -96,6 +96,37 @@ exports.staffStoreInfoAdd = function(condition, connection, callback) {
                     callback('success');
                 }
             });
+        }
+    });
+}
+/**
+ * Function: staffVendInfoAdd
+ * Parameter: condition, connection, and callback
+ * Description: To add one or more vendors information based on typed conditions
+ */
+exports.staffVendInfoAdd = function(condition, connection, callback) {
+    var sql = 'INSERT INTO VENDOR_INFO_TB (VENDOR_ID, VENDOR_NAME, VENDOR_ADDRESS_CITY, VENDOR_ADDRESS_STATE, VENDOR_ADDRESS_COUNTRY, VENDOR_PHONE, VENDOR_EMAIL, VENDOR_REPOSITORY_ID) VALUES ';
+
+    for (var i = 0; i < condition.length; i++) {
+        sql += '(\''
+            + condition[i].vendid + '\', \''
+            + condition[i].vendname + '\', \''
+            + condition[i].vendcity + '\', \''
+            + condition[i].vendstate + '\', \''
+            + condition[i].vendcountry + '\', \''
+            + condition[i].vendphone + '\', \''
+            + condition[i].vendemail + '\', \''
+            + condition[i].repoid
+            + '\')'
+            + ((i == condition.length - 1) ? '' : ', ');
+    }
+
+    connection.query(sql, function(err) {
+        if (err) {
+            console.log('Error: Fail to insert result to database.', err);
+            callback('error');
+        } else {
+            callback('success');
         }
     });
 }

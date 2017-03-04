@@ -1,6 +1,6 @@
 function validateInputValue() {
     for (var i = 0; i < arguments.length; i++) {
-        if (arguments[i] == null || arguments[i] == '' || arguments[i] == '0' || arguments[i] == 'anypress' || arguments[i] == 'undefined') {
+        if (arguments[i] == null || arguments[i] == '' || arguments[i] == '0' || arguments[i] == 'anypress' || arguments[i] == 'anycountry' || arguments[i] == 'anystate' || arguments[i] == 'undefined') {
             return false;
         }
     }
@@ -67,6 +67,17 @@ function todoCloseStoreModal() {
     todoClearStoreModal();
 }
 
+function todoClearVendModal() {
+    document.getElementById('vend-modal-input-vendid').value = '';
+    document.getElementById('vend-modal-input-vendname').value = '';
+    document.getElementById('vend-modal-input-vendcity').value = '';
+    document.getElementById('vend-modal-input-vendstate').selectedIndex = 0;
+    document.getElementById('vend-modal-input-vendcountry').selectedIndex = 0;
+    document.getElementById('vend-modal-input-vendphone').value = '';
+    document.getElementById('vend-modal-input-vendemail').value = '';
+    document.getElementById('vend-modal-input-repoid').value = '';
+}
+
 function todoOpenVendModal() {
     var backdrop = document.getElementById('vend-modal-backdrop');
     var dialog = document.getElementById('vend-modal-framework');
@@ -81,6 +92,8 @@ function todoCloseVendModal() {
 
     backdrop.style.display = 'none';
     dialog.style.display = 'none';
+
+    todoClearVendModal();
 }
 /**/
 function todoAddTableBookInfo() {
@@ -209,7 +222,6 @@ function todoChangeSingleBookInfo() {
         }));
 
         postRequest.addEventListener('load', function(event) {
-            console.log(event.target.response);
             todoCloseBookModal();
 
             if (event.target.response == 'success') {
@@ -285,7 +297,6 @@ function todoAddSingleStoreInfo() {
         }]));
 
         postRequest.addEventListener('load', function(event) {
-            console.log(event.target.response);
             todoCloseStoreModal();
 
             if (event.target.response == 'success') {
@@ -324,13 +335,128 @@ function todoChangeSingleStoreInfo() {
         }));
 
         postRequest.addEventListener('load', function(event) {
-            console.log(event.target.response);
             todoCloseStoreModal();
 
             if (event.target.response == 'success') {
                 alert('Echo: Change a store successfully.');
             } else {
                 alert('Error: Change a store unsuccessfully.');
+            }
+        });
+    }
+}
+/**/
+function todoAddTableVendInfo() {
+    var vendInfoTable = document.getElementById('vend-info-modify-table');
+    var vendid = document.getElementById('vend-modal-input-vendid').value;
+    var vendname = document.getElementById('vend-modal-input-vendname').value;
+    var vendcity = document.getElementById('vend-modal-input-vendcity').value;
+    var vendstate = document.getElementById('vend-modal-input-vendstate').value;
+    var vendcountry = document.getElementById('vend-modal-input-vendcountry').value;
+    var vendphone = document.getElementById('vend-modal-input-vendphone').value;
+    var vendemail = document.getElementById('vend-modal-input-vendemail').value;
+    var repoid = document.getElementById('vend-modal-input-repoid').value;
+    var flag = validateInputValue(vendid, vendname, vendcity, vendstate, vendcountry, vendphone, vendemail, repoid);
+
+    if (flag) {
+        for (var i = vendInfoTable.rows.length - 1; i > 0; i--) {
+            if (!vendInfoTable.rows[i].cells[0].children[0].checked) {
+                vendInfoTable.deleteRow(i);
+            }
+        }
+
+        var rowHTML = buildVendModHTML(
+            true,
+            vendid,
+            vendname,
+            vendcity,
+            convertState(vendstate),
+            convertCountry(vendcountry),
+            vendphone,
+            vendemail,
+            repoid
+        );
+
+        vendInfoTable.insertAdjacentHTML('beforeend', rowHTML);
+        todoCloseVendModal();
+    }
+}
+
+function todoAddSingleVendInfo() {
+    var vendid = document.getElementById('vend-modal-input-vendid').value;
+    var vendname = document.getElementById('vend-modal-input-vendname').value;
+    var vendcity = document.getElementById('vend-modal-input-vendcity').value;
+    var vendstate = document.getElementById('vend-modal-input-vendstate').value;
+    var vendcountry = document.getElementById('vend-modal-input-vendcountry').value;
+    var vendphone = document.getElementById('vend-modal-input-vendphone').value;
+    var vendemail = document.getElementById('vend-modal-input-vendemail').value;
+    var repoid = document.getElementById('vend-modal-input-repoid').value;
+    var flag = validateInputValue(vendid, vendname, vendcity, vendstate, vendcountry, vendphone, vendemail, repoid);
+
+    if (flag) {
+        var postURL = '/validate/vendInfoAdd';
+        var postRequest = new XMLHttpRequest();
+        postRequest.open('POST', postURL);
+        postRequest.setRequestHeader('Content-Type', 'application/json');
+
+        postRequest.send(JSON.stringify([{
+            vendid: vendid,
+            vendname: vendname,
+            vendcity: vendcity,
+            vendstate: convertState(vendstate),
+            vendcountry: convertCountry(vendcountry),
+            vendphone: vendphone,
+            vendemail: vendemail,
+            repoid: repoid
+        }]));
+
+        postRequest.addEventListener('load', function(event) {
+            todoCloseVendModal();
+
+            if (event.target.response == 'success') {
+                alert('Echo: Add a new vend successfully.');
+            } else {
+                alert('Error: Add a new vend unsuccessfully.');
+            }
+        });
+    }
+}
+
+function todoChangeSingleVendInfo() {
+    var vendid = document.getElementById('vend-modal-input-vendid').value;
+    var vendname = document.getElementById('vend-modal-input-vendname').value;
+    var vendcity = document.getElementById('vend-modal-input-vendcity').value;
+    var vendstate = document.getElementById('vend-modal-input-vendstate').value;
+    var vendcountry = document.getElementById('vend-modal-input-vendcountry').value;
+    var vendphone = document.getElementById('vend-modal-input-vendphone').value;
+    var vendemail = document.getElementById('vend-modal-input-vendemail').value;
+    var repoid = document.getElementById('vend-modal-input-repoid').value;
+    var flag = validateInputValue(vendid, vendname, vendcity, vendstate, vendcountry, vendphone, vendemail, repoid);
+
+    if (flag) {
+        var postURL = '/validate/vendInfoChange';
+        var postRequest = new XMLHttpRequest();
+        postRequest.open('POST', postURL);
+        postRequest.setRequestHeader('Content-Type', 'application/json');
+
+        postRequest.send(JSON.stringify({
+            vendid: vendid,
+            vendname: vendname,
+            vendcity: vendcity,
+            vendstate: convertState(vendstate),
+            vendcountry: convertCountry(vendcountry),
+            vendphone: vendphone,
+            vendemail: vendemail,
+            repoid: repoid
+        }));
+
+        postRequest.addEventListener('load', function(event) {
+            todoCloseVendModal();
+
+            if (event.target.response == 'success') {
+                alert('Echo: Change a vend successfully.');
+            } else {
+                alert('Error: Change a vend unsuccessfully.');
             }
         });
     }

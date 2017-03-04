@@ -63,15 +63,17 @@ function buildStoreModHTML(flag, id, name, type, quantity, repo, street, number,
     });
 }
 
-var createVendorMod = Handlebars.templates['vend-mod-row'];
+var createVendMod = Handlebars.templates['vend-mod-row'];
 
-function buildVendorModHTML(id, name, city, state, country, phone, email, type) {
-    return createVendorMod({
+function buildVendModHTML(flag, id, name, city, state, country, phone, email, repo, type) {
+    return createVendMod({
+        checked: flag,
         vendorid: id,
         vendorname: name,
-        vendoraddress: city + ' ' + state + ', ' + country,
+        vendoraddress: city + ', ' + state + ', ' + country,
         vendorphone: phone,
         vendoremail: email,
+        repoid: repo,
         booktype: convertType(type)
     });
 }

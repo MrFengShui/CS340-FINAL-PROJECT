@@ -19,7 +19,7 @@ function todoBuyInfoSearch() {
     var bookid = document.getElementById('buy-input-bookid').value;
     var bookname = document.getElementById('buy-input-bookname').value;
     var booktype = document.getElementById('buy-input-booktype').value;
-    var bookdate = [
+    var buydate = [
         document.getElementsByClassName('buy-input-bookdate')[0].value,
         document.getElementsByClassName('buy-input-bookdate')[1].value
     ];
@@ -33,7 +33,7 @@ function todoBuyInfoSearch() {
         bookid: bookid,
         bookname: bookname,
         booktype: booktype,
-        bookdate: bookdate
+        buydate: buydate
     }));
 
     postRequest.addEventListener('load', function(event) {
@@ -195,7 +195,8 @@ function todoVendorModifySearch() {
 
         vend = JSON.parse(event.target.response);
         vend.forEach(function(item) {
-            var rowHTML = buildVendorModHTML(
+            var rowHTML = buildVendModHTML(
+                false,
                 item['VENDOR_ID'],
                 item['VENDOR_NAME'],
                 item['VENDOR_ADDRESS_CITY'],
@@ -203,6 +204,7 @@ function todoVendorModifySearch() {
                 item['VENDOR_ADDRESS_COUNTRY'],
                 item['VENDOR_PHONE'],
                 item['VENDOR_EMAIL'],
+                item['VENDOR_REPOSITORY_ID'],
                 item['BOOK_TYPE']
             );
             bookVendTable.insertAdjacentHTML('beforeend', rowHTML);
@@ -268,7 +270,6 @@ function todoAddMultipleBookInfo() {
         postRequest.send(JSON.stringify(data));
 
         postRequest.addEventListener('load', function(event) {
-            console.log(event.target.response);
             todoCloseBookModal();
 
             if (event.target.response == 'success') {
@@ -362,7 +363,6 @@ function todoAddMultipleStoreInfo() {
         postRequest.send(JSON.stringify(data));
 
         postRequest.addEventListener('load', function(event) {
-            console.log(event.target.response);
             todoCloseStoreModal();
 
             if (event.target.response == 'success') {
@@ -427,9 +427,117 @@ function todoDeleteMultipleStoreInfo() {
 
     postRequest.addEventListener('load', function(event) {
         if (event.target.response == 'success') {
-            alert('Echo: Remove books successfully.');
+            alert('Echo: Remove store successfully.');
         } else {
-            alert('Error: Remove books unsuccessfully.');
+            alert('Error: Remove store unsuccessfully.');
+        }
+    });
+}
+/**/
+function todoAddMultipleVendInfo() {
+    var vendInfoTable = document.getElementById('vend-info-modify-table');
+    var data = [];
+
+    for (var i = vendInfoTable.rows.length - 1; i > 0; i--) {
+        if (vendInfoTable.rows[i].cells[0].children[0].checked) {
+            var vendid = vendInfoTable.rows[i].cells[1].innerHTML;
+            var vendname = vendInfoTable.rows[i].cells[2].innerHTML;
+            var vendcity = vendInfoTable.rows[i].cells[3].innerHTML.split(', ')[0];
+            var vendstate = vendInfoTable.rows[i].cells[3].innerHTML.split(', ')[1];
+            var vendcountry = vendInfoTable.rows[i].cells[3].innerHTML.split(', ')[2];
+            var vendphone = vendInfoTable.rows[i].cells[4].innerHTML;
+            var vendemail = vendInfoTable.rows[i].cells[5].innerHTML;
+            var repoid = vendInfoTable.rows[i].cells[6].innerHTML;
+            var row = {
+                vendid: vendid,
+                vendname: vendname,
+                vendcity: vendcity,
+                vendstate: vendstate,
+                vendcountry: vendcountry,
+                vendphone: vendphone,
+                vendemail: vendemail,
+                repoid: repoid
+            };
+            data.push(row);
+        }
+    }
+
+    if (data.length > 0) {
+        var postURL = '/validate/vendInfoAdd';
+        var postRequest = new XMLHttpRequest();
+        postRequest.open('POST', postURL);
+        postRequest.setRequestHeader('Content-Type', 'application/json');
+        postRequest.send(JSON.stringify(data));
+
+        postRequest.addEventListener('load', function(event) {
+            todoCloseVendModal();
+
+            if (event.target.response == 'success') {
+                alert('Echo: Add a new vend successfully.');
+            } else {
+                alert('Error: Add a new vend unsuccessfully.');
+            }
+        });
+    } else {
+        alert('Warning: Please add a new vend into table.');
+    }
+}
+
+function todoVendModifyEdit(event) {
+    todoOpenVendModal();
+    var row = event.parentNode.parentNode;
+    document.getElementById('vend-modal-input-vendid').value = row.cells[1].innerHTML;
+    document.getElementById('vend-modal-input-vendname').value = row.cells[2].innerHTML;
+    document.getElementById('vend-modal-input-vendcity').value = row.cells[3].innerHTML.split(', ')[0];
+    document.getElementById('vend-modal-input-vendstate').value = antiConvertState(row.cells[3].innerHTML.split(', ')[1]);
+    document.getElementById('vend-modal-input-vendcountry').value = antiConvertCountry(row.cells[3].innerHTML.split(', ')[2]);
+    document.getElementById('vend-modal-input-vendphone').value = row.cells[4].innerHTML;
+    document.getElementById('vend-modal-input-vendemail').value = row.cells[5].innerHTML;
+    document.getElementById('vend-modal-input-repoid').value = row.cells[6].innerHTML;
+}
+
+function todoDeleteSingleVendInfo(event) {
+    var row = event.parentNode.parentNode;
+    var vendid = row.cells[1].innerHTML;
+
+    var postURL = '/validate/vendInfoRemove';
+    var postRequest = new XMLHttpRequest();
+    postRequest.open('POST', postURL);
+    postRequest.setRequestHeader('Content-Type', 'application/json');
+    postRequest.send(JSON.stringify([{vendid: vendid}]));
+
+    postRequest.addEventListener('load', function(event) {
+        if (event.target.response == 'success') {
+            alert('Echo: Remove a vend successfully.');
+        } else {
+            alert('Error: Remove a vend unsuccessfully.');
+        }
+    });
+}
+
+function todoDeleteMultipleVendInfo() {
+    var vendInfoTable = document.getElementById('vend-info-modify-table');
+    var data = [];
+
+    for (var i = vendInfoTable.rows.length - 1; i > 0; i--) {
+        if (vendInfoTable.rows[i].cells[0].children[0].checked) {
+            var vendid = vendInfoTable.rows[i].cells[1].innerHTML;
+            var row = {vendid: vendid};
+            data.push(row);
+        }
+    }
+
+    var postURL = '/validate/vendInfoRemove';
+    var postRequest = new XMLHttpRequest();
+    postRequest.open('POST', postURL);
+    postRequest.setRequestHeader('Content-Type', 'application/json');
+    postRequest.send(JSON.stringify(data));
+
+    postRequest.addEventListener('load', function(event) {
+        if (event.target.response == 'success') {
+            alert('Echo: Remove vendor successfully.');
+        } else {
+            alert('Error: Remove vendor unsuccessfully.');
         }
     });
 }
