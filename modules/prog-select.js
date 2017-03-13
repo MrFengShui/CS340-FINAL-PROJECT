@@ -7,7 +7,7 @@ exports.loginQuery = function(condition, connection, callback) {
     var sql = 'SELECT CONSUMER_INFO_TB.CONSUMER_ID, CONSUMER_INFO_TB.CONSUMER_FIRST_NAME, CONSUMER_INFO_TB.CONSUMER_LAST_NAME, CONSUMER_INFO_TB.CONSUMER_TYPE FROM CONSUMER_INFO_TB WHERE'
             + ' CONSUMER_USERNAME=\'' + condition['username'] + '\' AND'
             + ' CONSUMER_PASSWORD=\'' + condition['password'] + '\'';
-
+    /*Execute select sql.*/
     connection.query(sql, function(err, rows) {
         if (err) {
             console.log('Error: Fail to fetch result from database.', err);
@@ -75,7 +75,6 @@ exports.consumerBookInfoQuery = function(condition, connection, callback) {
             return 'BOOK_PRICE BETWEEN ' + price[0] + ' AND ' + price[1];
         }
     };
-
     var sql = 'SELECT * FROM BOOK_INFO_TB WHERE '
             + 'BOOK_NAME LIKE \'\%' + condition['bookname'] + '\%\' AND '
             + 'BOOK_TYPE LIKE \'\%' + booktype() + '\%\' AND '
@@ -85,7 +84,7 @@ exports.consumerBookInfoQuery = function(condition, connection, callback) {
             + 'BOOK_PUBLISH_PRESS LIKE \'\%' + bookpress() + '\%\' AND '
             + bookprice()
             + ' ORDER BY BOOK_INFO_TB.BOOK_ID ASC';
-
+    /*Execute select sql.*/
     connection.query(sql, function(err, rows) {
         if (err) {
             console.log('Error: Fail to fetch result from database.', err);
@@ -107,7 +106,6 @@ exports.todoStoreInfoQuery = function(condition, connection, callback) {
     var repopurpose = function() {
         return (condition['repopurpose'] == '0') ? '' : condition['repopurpose'];
     }
-
     var sql = 'SELECT BOOK_INFO_TB.BOOK_ID, BOOK_INFO_TB.BOOK_NAME, BOOK_INFO_TB.BOOK_TYPE, BOOK_INFO_TB.BOOK_QUANTITY, REPOSITORY_INFO_TB.REPOSITORY_ID, REPOSITORY_INFO_TB.REPOSITORY_ADDRESS_STREET, REPOSITORY_INFO_TB.REPOSITORY_ADDRESS_NUMBER, REPOSITORY_INFO_TB.REPOSITORY_PURPOSE, REPOSITORY_INFO_TB.REPOSITORY_GUARD_ID, REPOSITORY_INFO_TB.REPOSITORY_VENDOR_ID FROM BOOK_INFO_TB INNER JOIN BOOK_REPOSITORY_TB ON BOOK_INFO_TB.BOOK_ID = BOOK_REPOSITORY_TB.BOOK_ID INNER JOIN REPOSITORY_INFO_TB ON BOOK_REPOSITORY_TB.REPOSITORY_ID = REPOSITORY_INFO_TB.REPOSITORY_ID WHERE'
             + ' BOOK_INFO_TB.BOOK_ID LIKE \'\%' + condition['bookid'] + '\%\' AND'
             + ' BOOK_INFO_TB.BOOK_NAME LIKE \'\%' + condition['bookname'] + '\%\' AND'
@@ -115,7 +113,7 @@ exports.todoStoreInfoQuery = function(condition, connection, callback) {
             + ' BOOK_INFO_TB.BOOK_ISBN LIKE \'\%' + condition['bookisbn'] + '\%\' AND'
             + ' REPOSITORY_INFO_TB.REPOSITORY_PURPOSE LIKE \'\%' + repopurpose() + '\%\''
             + ' ORDER BY BOOK_INFO_TB.BOOK_ID ASC';
-
+    /*Execute select sql.*/
     connection.query(sql, function(err, rows) {
         if (err) {
             console.log('Error: Fail to fetch result from database.', err);
@@ -134,7 +132,6 @@ exports.consumerVendInfoQuery = function(condition, connection, callback) {
     var booktype = function() {
         return (condition['booktype'] == '0') ? '' : condition['booktype'];
     }
-
     var sql = 'SELECT VENDOR_INFO_TB.VENDOR_ID, VENDOR_INFO_TB.VENDOR_NAME, VENDOR_INFO_TB.VENDOR_ADDRESS_CITY, VENDOR_INFO_TB.VENDOR_ADDRESS_STATE, VENDOR_INFO_TB.VENDOR_ADDRESS_COUNTRY, VENDOR_INFO_TB.VENDOR_PHONE, VENDOR_INFO_TB.VENDOR_EMAIL, VENDOR_REPOSITORY_ID, BOOK_INFO_TB.BOOK_TYPE FROM VENDOR_INFO_TB LEFT JOIN BOOK_REPOSITORY_TB ON VENDOR_INFO_TB.VENDOR_REPOSITORY_ID = BOOK_REPOSITORY_TB.REPOSITORY_ID LEFT JOIN BOOK_INFO_TB ON BOOK_REPOSITORY_TB.BOOK_ID = BOOK_INFO_TB.BOOK_ID WHERE'
         + ' BOOK_INFO_TB.BOOK_ID LIKE \'\%' + condition['bookid'] + '\%\' AND'
         + ' BOOK_INFO_TB.BOOK_TYPE LIKE \'\%' + booktype() + '\%\' AND'
@@ -142,7 +139,7 @@ exports.consumerVendInfoQuery = function(condition, connection, callback) {
         + ' VENDOR_INFO_TB.VENDOR_ID LIKE \'\%' + condition['vendid'] + '\%\' AND'
         + ' VENDOR_INFO_TB.VENDOR_NAME LIKE \'\%' + condition['vendname'] + '\%\''
         + ' ORDER BY VENDOR_INFO_TB.VENDOR_ID ASC';
-
+    /*Execute select sql.*/
     connection.query(sql, function(err, rows) {
         if (err) {
             console.log('Error: Fail to fetch result from database.', err);
@@ -160,7 +157,7 @@ exports.consumerVendInfoQuery = function(condition, connection, callback) {
 exports.consumerBuyBookQuery = function(condition, connection, callback) {
     var sql = 'SELECT BOOK_ID, BOOK_NAME, BOOK_PRICE FROM BOOK_INFO_TB WHERE'
             + ' BOOK_ISBN=\'' + condition['bookisbn'] + '\'';
-
+    /*Execute select sql.*/
     connection.query(sql, function(err, rows) {
         if (err) {
             console.log('Error: Fail to fetch result from database.', err);
@@ -196,7 +193,7 @@ exports.staffBuyInfoQuery = function(condition, connection, callback) {
             + ' BOOK_INFO_TB.BOOK_TYPE LIKE \'\%' + booktype() + '\%\' AND'
             + buydate()
             + ' ORDER BY BOOK_INFO_TB.BOOK_ID ASC';
-    
+    /*Execute select sql.*/
     connection.query(sql, function(err, rows) {
         if (err) {
             console.log('Error: Fail to fetch result from database.', err);

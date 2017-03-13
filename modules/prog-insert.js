@@ -5,11 +5,11 @@
  */
 exports.buyBookInfoAdd = function(condition, connection, callback) {
     var sql = 'INSERT INTO CONSUMER_BOOK_TB (CONSUMER_ID, BOOK_ID, DATE_OF_BUY) VALUES ';
-
+    /*Format multiple contents for sql.*/
     for (var i = 0; i < condition.items.length; i++) {
         sql += '(\'' + condition.items[i].personid + '\', \'' + condition.items[i].bookid + '\', \'' + condition.items[i].buydate + '\')' + ((i == condition.items.length - 1) ? '' : ', ');
     }
-
+    /*Execute insert sql.*/
     connection.query(sql, function(err, rows) {
         if (err) {
             console.log('Error: Fail to insert result to database.', err);
@@ -26,7 +26,7 @@ exports.buyBookInfoAdd = function(condition, connection, callback) {
  */
 exports.staffBookInfoAdd = function(condition, connection, callback) {
     var sql = 'INSERT INTO BOOK_INFO_TB (BOOK_ID, BOOK_NAME, BOOK_TYPE, BOOK_AUTHOR_FIRST_NAME, BOOK_AUTHOR_LAST_NAME, BOOK_EDITION, BOOK_PUBLISH_YEAR, BOOK_PUBLISH_MONTH, BOOK_PUBLISH_DATE, BOOK_PUBLISH_PRESS, BOOK_ISBN, BOOK_PRICE, BOOK_QUANTITY) VALUES ';
-
+    /*Format multiple contents for sql.*/
     for (var i = 0; i < condition.length; i++) {
         sql += '(\''
             + condition[i].bookid + '\', \''
@@ -45,7 +45,7 @@ exports.staffBookInfoAdd = function(condition, connection, callback) {
             + '\')'
             + ((i == condition.length - 1) ? '' : ', ');
     }
-
+    /*Execute insert sql.*/
     connection.query(sql, function(err) {
         if (err) {
             console.log('Error: Fail to insert result to database.', err);
@@ -62,9 +62,8 @@ exports.staffBookInfoAdd = function(condition, connection, callback) {
  */
 exports.staffStoreInfoAdd = function(condition, connection, callback) {
     var primarySQL = 'INSERT INTO REPOSITORY_INFO_TB (REPOSITORY_ID, REPOSITORY_ADDRESS_STREET, REPOSITORY_ADDRESS_NUMBER, REPOSITORY_PURPOSE, REPOSITORY_GUARD_ID, REPOSITORY_VENDOR_ID) VALUES ';
-
     var foreignSQL = 'INSERT INTO BOOK_REPOSITORY_TB (BOOK_ID, REPOSITORY_ID) VALUES ';
-
+    /*Format multiple contents for sql.*/
     for (var i = 0; i < condition.length; i++) {
         primarySQL += '(\''
             + condition[i].repoid + '\', \''
@@ -82,7 +81,7 @@ exports.staffStoreInfoAdd = function(condition, connection, callback) {
             + '\')'
             + ((i == condition.length - 1) ? '' : ', ');
     }
-
+    /*Execute insert sql.*/
     connection.query(primarySQL, function(outerError) {
         if (outerError) {
             console.log('Error: Fail to insert result to database.', outerError);
@@ -106,7 +105,7 @@ exports.staffStoreInfoAdd = function(condition, connection, callback) {
  */
 exports.staffVendInfoAdd = function(condition, connection, callback) {
     var sql = 'INSERT INTO VENDOR_INFO_TB (VENDOR_ID, VENDOR_NAME, VENDOR_ADDRESS_CITY, VENDOR_ADDRESS_STATE, VENDOR_ADDRESS_COUNTRY, VENDOR_PHONE, VENDOR_EMAIL, VENDOR_REPOSITORY_ID) VALUES ';
-
+    /*Format multiple contents for sql.*/
     for (var i = 0; i < condition.length; i++) {
         sql += '(\''
             + condition[i].vendid + '\', \''
@@ -120,7 +119,7 @@ exports.staffVendInfoAdd = function(condition, connection, callback) {
             + '\')'
             + ((i == condition.length - 1) ? '' : ', ');
     }
-
+    /*Execute insert sql.*/
     connection.query(sql, function(err) {
         if (err) {
             console.log('Error: Fail to insert result to database.', err);

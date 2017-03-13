@@ -19,7 +19,7 @@ exports.staffBookInfoChange = function(condition, connection, callback) {
             + ' BOOK_INFO_TB.BOOK_PRICE = \'' + condition.bookprice + '\', '
             + ' BOOK_INFO_TB.BOOK_QUANTITY = \'' + condition.bookquantity + '\' WHERE'
             + ' BOOK_INFO_TB.BOOK_ID = \'' + condition.bookid + '\'';
-
+    /*Execute update sql.*/
     connection.query(sql, function(err) {
         if (err) {
             console.log('Error: Fail to update result to database.', err);
@@ -47,7 +47,7 @@ exports.staffStoreInfoChange = function(condition, connection, callback) {
             + ' BOOK_REPOSITORY_TB.BOOK_ID = \'' + condition.bookid + '\', '
             + ' BOOK_REPOSITORY_TB.REPOSITORY_ID = \'' + condition.repoid + '\' WHERE'
             + ' BOOK_REPOSITORY_TB.REPOSITORY_ID = \'' + condition.repoid + '\'';
-
+    /*Execute update sql.*/
     connection.query(primarySQL, function(outerError) {
         if (outerError) {
             console.log('Error: Fail to update result to database.', outerError);
@@ -80,7 +80,7 @@ exports.staffVendInfoChange = function(condition, connection, callback) {
             + ' VENDOR_INFO_TB.VENDOR_EMAIL = \'' + condition.vendemail + '\', '
             + ' VENDOR_INFO_TB.VENDOR_REPOSITORY_ID = \'' + condition.repoid + '\' WHERE'
             + ' VENDOR_INFO_TB.VENDOR_ID = \'' + condition.vendid + '\'';
-
+    /*Execute update sql.*/
     connection.query(sql, function(err) {
         if (err) {
             console.log('Error: Fail to update result to database.', err);
