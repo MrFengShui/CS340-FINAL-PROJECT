@@ -1,31 +1,3 @@
-function defineVisitorType(type) {
-    switch (type) {
-        case 1:
-            return 'Iron';
-        case 2:
-            return 'Bronze';
-        case 3:
-            return 'Silver';
-        case 4:
-            return 'Gold';
-        case 5:
-            return 'Platinum';
-        default:
-            return 'None';
-    }
-}
-
-function defineAdminType(type) {
-    switch (type) {
-        case 1:
-            return 'Manager';
-        case 2:
-            return 'Supervisor';
-        default:
-            return 'Staff';
-    }
-}
-
 function todoSignIn() {
     var username = document.getElementById('initial-input-username').value;
     var password = document.getElementById('initial-input-password').value;

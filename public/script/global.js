@@ -1,3 +1,8 @@
+/**
+ * Function: matchGlobalHeight
+ * Parameter:
+ * Description: Adjust individual height to fit for browser.
+ */
 function matchGlobalHeight() {
     var initialMainPage = document.getElementsByClassName('initial-page-main');
 
@@ -20,7 +25,11 @@ function matchGlobalHeight() {
     matchConsumerHeight(indexPageContent);
     matchStaffHeight(indexPageContent);
 }
-
+/**
+ * Function: matchGlobalHeight
+ * Parameter:
+ * Description: Adjust consumer pages height to fit for browser.
+ */
 function matchConsumerHeight(indexPageContent) {
     var consumerBuyListContent = document.getElementById('buy-list-content');
     var consumerBookInfoContent = document.getElementById('book-query-content');
@@ -61,7 +70,11 @@ function matchConsumerHeight(indexPageContent) {
         consumerStoreInfoTable.style.width = (indexPageContent[0].clientWidth <= 1620) ? '1620px' : '100%';
     }
 }
-
+/**
+ * Function: matchGlobalHeight
+ * Parameter:
+ * Description: Adjust staff page height to fit for browser.
+ */
 function matchStaffHeight(indexPageContent) {
     var staffBuyInfoContent = document.getElementById('buy-query-content');
     var staffBookModContent = document.getElementById('book-modify-content');

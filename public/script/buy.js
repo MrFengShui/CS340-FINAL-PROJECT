@@ -1,7 +1,16 @@
+/**
+ * Function: todoClearBuyModalInput
+ * Parameter:
+ * Description: Clear all input records in buy modal dialog.
+ */
 function todoClearBuyModalInput() {
     document.getElementById('input-book-isbn').value = '';
 }
-
+/**
+ * Function: todoOpenBuyModal
+ * Parameter:
+ * Description: Open buy modal dialog.
+ */
 function todoOpenBuyModal() {
     var bookBuyTable = document.getElementById('consumer-buy-book-table');
 
@@ -15,7 +24,11 @@ function todoOpenBuyModal() {
         modal.style.display = 'inline-flex';
     }
 }
-
+/**
+ * Function: todoCloseBuyModal
+ * Parameter:
+ * Description: Close buy modal dialog.
+ */
 function todoCloseBuyModal() {
     var backdrop = document.getElementById('buy-modal-backdrop');
     var modal = document.getElementById('buy-modal-framework');
@@ -25,20 +38,21 @@ function todoCloseBuyModal() {
 
     todoClearBuyModalInput();
 }
-
+/**
+ * Function: totdoAddBuyList
+ * Parameter:
+ * Description: Execute add new table rows of book.
+ */
 function totdoAddBuyList() {
     var bookBuyTable = document.getElementById('consumer-buy-book-table');
     var bookisbn = document.getElementById('input-book-isbn').value;
-
+    /*Rredirect to '/validate/consumerBuyBook' and then send post request to server*/
     var postURL = '/validate/consumerBuyBook';
     var postRequest = new XMLHttpRequest();
     postRequest.open('POST', postURL);
     postRequest.setRequestHeader('Content-Type', 'application/json');
-
-    postRequest.send(JSON.stringify({
-        bookisbn: bookisbn
-    }));
-
+    postRequest.send(JSON.stringify({bookisbn: bookisbn}));
+    /*Get response from server and then show by each row*/
     postRequest.addEventListener('load', function(event) {
         book = JSON.parse(event.target.response);
         var rowHTML = buildBuyBookHTML(
@@ -50,7 +64,11 @@ function totdoAddBuyList() {
         todoCloseBuyModal();
     });
 }
-
+/**
+ * Function: todoCalculatePrice
+ * Parameter:
+ * Description: Sum all items price.
+ */
 function todoCalculatePrice() {
     var bookBuyTable = document.getElementById('consumer-buy-book-table');
 
@@ -69,7 +87,11 @@ function todoCalculatePrice() {
         bookBuyTable.insertAdjacentHTML('beforeend', rowHTML);
     }
 }
-
+/**
+ * Function: todoPayBook
+ * Parameter:
+ * Description: Submit a purchasing information and then redirect to success page.
+ */
 function todoPayBook() {
     var bookBuyTable = document.getElementById('consumer-buy-book-table');
     var personID = document.getElementById('person-info-id').innerHTML;
@@ -93,7 +115,7 @@ function todoPayBook() {
             }
         }
     }
-
+    /*Rredirect to '/validate/buyInfoInsert' and then send post request to server*/
     var postURL = '/validate/buyInfoInsert';
     var postRequest = new XMLHttpRequest();
     postRequest.open('POST', postURL);

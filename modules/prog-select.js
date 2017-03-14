@@ -39,26 +39,38 @@ exports.consumerBookInfoQuery = function(condition, connection, callback) {
         return author;
     };
     var bookdate = function() {
-        if (condition['bookdate'][0] == '' && condition['bookdate'][1] == '') {
-            return 'BOOK_PUBLISH_YEAR LIKE \'\%\%\' AND ';
-        } else {
-            var date = [{year:'', month:'', date:''}, {year:'', month:'', date:''}];
+        var date = [{year:'', month:'', date:''}, {year:'', month:'', date:''}];
 
-            if (condition['bookdate'][0] != '') {
-                var temp = condition['bookdate'][0].split('-');
+        if (condition.bookdate[0] == '' && condition.bookdate[1] == '') {
+            return 'BOOK_PUBLISH_YEAR LIKE \'\%\%\' AND BOOK_PUBLISH_MONTH LIKE \'\%\%\' AND BOOK_PUBLISH_DATE LIKE \'\%\%\' AND ';
+        } else if (condition.bookdate[0] != '' && condition.bookdate[1] == '') {
+            var temp = condition.bookdate[0].split('-');
+            date[0].year = temp[0];
+            date[0].month = temp[1];
+            date[0].date = temp[2];
+            return 'BOOK_PUBLISH_YEAR * 10000 + BOOK_PUBLISH_MONTH * 100 + BOOK_PUBLISH_DATE >= ' + date[0].year + date[0].month + date[0].date + ' AND ';
+        } else if (condition.bookdate[0] == '' && condition.bookdate[1] != '') {
+            var temp = condition.bookdate[1].split('-');
+            date[1].year = temp[0];
+            date[1].month = temp[1];
+            date[1].date = temp[2];
+            return 'BOOK_PUBLISH_YEAR * 10000 + BOOK_PUBLISH_MONTH * 100 + BOOK_PUBLISH_DATE <= ' + date[1].year + date[1].month + date[1].date + ' AND ';
+        } else {
+            if (condition.bookdate[0] != '') {
+                var temp = condition.bookdate[0].split('-');
                 date[0].year = temp[0];
                 date[0].month = temp[1];
                 date[0].date = temp[2];
             }
 
-            if (condition['bookdate'][1] != '') {
-                var temp = condition['bookdate'][1].split('-');
+            if (condition.bookdate[1] != '') {
+                var temp = condition.bookdate[1].split('-');
                 date[1].year = temp[0];
                 date[1].month = temp[1];
                 date[1].date = temp[2];
             }
 
-            return 'BOOK_PUBLISH_YEAR*10000+BOOK_PUBLISH_MONTH*100+BOOK_PUBLISH_DATE BETWEEN ' + date[0].year + date[0].month + date[0].date + ' AND ' + date[1].year + date[1].month + date[1].date + ' AND ';
+            return 'BOOK_PUBLISH_YEAR * 10000 + BOOK_PUBLISH_MONTH * 100 + BOOK_PUBLISH_DATE BETWEEN ' + date[0].year + date[0].month + date[0].date + ' AND ' + date[1].year + date[1].month + date[1].date + ' AND ';
         }
     };
     var bookpress = function() {
@@ -66,13 +78,14 @@ exports.consumerBookInfoQuery = function(condition, connection, callback) {
         return press[condition['bookpress']];
     };
     var bookprice = function() {
-        if (condition['bookprice'][0] == '-1' && condition['bookprice'][1] == '-1') {
+        if (condition.bookprice[0] == '' && condition.bookprice[1] == '') {
             return 'BOOK_PRICE LIKE \'\%\%\'';
+        } else if (condition.bookprice[0] != '' && condition.bookprice[1] == '') {
+            return 'BOOK_PRICE >= ' + condition.bookprice[0];
+        } else if (condition.bookprice[0] == '' && condition.bookprice[1] != '') {
+            return 'BOOK_PRICE <= ' + condition.bookprice[1];
         } else {
-            var price = [];
-            price[0] = (condition['bookprice'][0] == '-1') ? '' : condition['bookprice'][0];
-            price[1] = (condition['bookprice'][1] == '-1') ? '' : condition['bookprice'][1];
-            return 'BOOK_PRICE BETWEEN ' + price[0] + ' AND ' + price[1];
+            return 'BOOK_PRICE BETWEEN ' + condition.bookprice[0] + ' AND ' + condition.bookprice[1];
         }
     };
     var sql = 'SELECT * FROM BOOK_INFO_TB WHERE '
