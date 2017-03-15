@@ -1,3 +1,8 @@
+/**
+ * Function: handleLoginEvents
+ * Parameter:
+ * Description: To handle all login events.
+ */
 function handleLoginEvents() {
     var signinButton = document.getElementById('initial-signin-button');
 
@@ -5,7 +10,11 @@ function handleLoginEvents() {
         signinButton.addEventListener('click', todoSignIn);
     }
 }
-
+/**
+ * Function: handleConsumerEvents
+ * Parameter:
+ * Description: To handle all consumer events.
+ */
 function handleConsumerEvents() {
     var consumerOpenBuyModalButton = document.getElementById('buy-modal-open-button');
 
@@ -57,7 +66,11 @@ function handleConsumerEvents() {
         }
     }
 }
-
+/**
+ * Function: handleStaffEvents
+ * Parameter:
+ * Description: To handle all staff events.
+ */
 function handleStaffEvents() {
     var staffBookSearchButton = document.getElementById('staff-search-button');
 
@@ -109,7 +122,11 @@ function handleStaffEvents() {
         staffVendDeleteButton.addEventListener('click', todoDeleteMultipleVendInfo);
     }
 }
-
+/**
+ * Function: handleModalEvents
+ * Parameter:
+ * Description: To handle all modal dialog events.
+ */
 function handleModalEvents() {
     var openBookModalButton = document.getElementById('book-modal-open-button');
 
@@ -146,7 +163,7 @@ function handleModalEvents() {
     if (bookUpdateModalButton) {
         bookUpdateModalButton.addEventListener('click', todoChangeSingleBookInfo);
     }
-    /**/
+
     var openStoreModalButton = document.getElementById('store-modal-open-button');
 
     if (openStoreModalButton) {
@@ -182,7 +199,7 @@ function handleModalEvents() {
     if (storeUpdateModalButton) {
         storeUpdateModalButton.addEventListener('click', todoChangeSingleStoreInfo);
     }
-    /**/
+
     var openVendModalButton = document.getElementById('vend-modal-open-button');
 
     if (openVendModalButton) {
@@ -219,14 +236,22 @@ function handleModalEvents() {
         vendUpdateModalButton.addEventListener('click', todoChangeSingleVendInfo);
     }
 }
-
+/**
+ * Function:
+ * Parameter:
+ * Description: To listen and handle all events.
+ */
 window.addEventListener('DOMContentLoaded', function(event) {
     handleLoginEvents();
     handleConsumerEvents();
     handleStaffEvents();
     handleModalEvents();
 });
-
+/**
+ * Function: defineVisitorType
+ * Parameter: type
+ * Description: To convert vistor's type to string type.
+ */
 function defineVisitorType(type) {
     switch (type) {
         case 1:
@@ -243,7 +268,11 @@ function defineVisitorType(type) {
             return 'None';
     }
 }
-
+/**
+ * Function: defineAdminType
+ * Parameter: type
+ * Description: To convert administrator's type to string type.
+ */
 function defineAdminType(type) {
     switch (type) {
         case 1:
@@ -254,7 +283,11 @@ function defineAdminType(type) {
             return 'Staff';
     }
 }
-
+/**
+ * Function: convertType
+ * Parameter: type
+ * Description: To convert book's type to string type.
+ */
 function convertType(type) {
     switch (type) {
         case 1:
@@ -269,7 +302,11 @@ function convertType(type) {
             return 'Science';
     }
 }
-
+/**
+ * Function: antiConvertType
+ * Parameter: type
+ * Description: To convert book's string type to type.
+ */
 function antiConvertType(type) {
     switch (type) {
         case 'Art':
@@ -287,23 +324,11 @@ function antiConvertType(type) {
     }
 }
 
-function defineType(type) {
-    switch (type) {
-        case 1:
-            return'Iron';
-        case 2:
-            return 'Bronze';
-        case 3:
-            return 'Silver';
-        case 4:
-            return 'Gold';
-        case 5:
-            return 'Platinum';
-        default:
-            return 'None';
-    }
-}
-
+/**
+ * Function: convertPress
+ * Parameter: press
+ * Description: To convert press type to string type.
+ */
 function convertPress(press) {
     switch (press) {
         case 'apress':
@@ -332,7 +357,11 @@ function convertPress(press) {
             return 'Brooks Cole';
     }
 }
-
+/**
+ * Function: antiConvertPress
+ * Parameter: press
+ * Description: To convert string press type to type.
+ */
 function antiConvertPress(press) {
     switch (press) {
         case 'Apress':
@@ -361,7 +390,11 @@ function antiConvertPress(press) {
             return 'brooks';
     }
 }
-
+/**
+ * Function: convertPurpose
+ * Parameter: purpose
+ * Description: To convert repositoty purpose type to string type.
+ */
 function convertPurpose(purpose) {
     switch (purpose) {
         case 1:
@@ -376,7 +409,11 @@ function convertPurpose(purpose) {
             return 'Art, Science';
     }
 }
-
+/**
+ * Function: antiConvertPurpose
+ * Parameter: purpose
+ * Description: To convert repositoty purpose string type to type.
+ */
 function antiConvertPurpose(purpose) {
     switch (purpose) {
         case 'Art, History, Literature':
@@ -391,7 +428,11 @@ function antiConvertPurpose(purpose) {
             return 5;
     }
 }
-
+/**
+ * Function: convertState
+ * Parameter: state
+ * Description: To convert state to string state.
+ */
 function convertState(state) {
     switch (state) {
         case 'ca':
@@ -406,7 +447,11 @@ function convertState(state) {
             return 'Washington';
     }
 }
-
+/**
+ * Function: antiConvertState
+ * Parameter: state
+ * Description: To convert string state to state.
+ */
 function antiConvertState(state) {
     switch (state) {
         case 'California':
@@ -421,7 +466,11 @@ function antiConvertState(state) {
             return 'wa';
     }
 }
-
+/**
+ * Function: convertCountry
+ * Parameter: country
+ * Description: To convert country to string state.
+ */
 function convertCountry(country) {
     switch (country) {
         case 'chn':
@@ -430,7 +479,11 @@ function convertCountry(country) {
             return 'United States';
     }
 }
-
+/**
+ * Function: antiConvertCountry
+ * Parameter: country
+ * Description: To convert string country to country.
+ */
 function antiConvertCountry(country) {
     switch (country) {
         case 'China':
@@ -439,7 +492,11 @@ function antiConvertCountry(country) {
             return 'us';
     }
 }
-
+/**
+ * Function: formateDate
+ * Parameter: date
+ * Description: To format book publishing date.
+ */
 function formateDate(date) {
     var year = date.getFullYear();
     var month = date.getMonth() + 1;

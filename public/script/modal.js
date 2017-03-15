@@ -1,3 +1,8 @@
+/**
+ * Function: validateInputValue
+ * Parameter:
+ * Description: To check all inputing value if valid or not
+ */
 function validateInputValue() {
     for (var i = 0; i < arguments.length; i++) {
         if (arguments[i] == null || arguments[i] == '' || arguments[i] == '0' || arguments[i] == 'anypress' || arguments[i] == 'anycountry' || arguments[i] == 'anystate' || arguments[i] == 'undefined') {
@@ -7,7 +12,11 @@ function validateInputValue() {
 
     return true;
 }
-/**/
+/**
+ * Function: todoClearBookModal
+ * Parameter:
+ * Description: To clear all inputing records in book modal dialog
+ */
 function todoClearBookModal() {
     document.getElementById('book-modal-input-bookid').value = '';
     document.getElementById('book-modal-input-bookname').value = '';
@@ -20,7 +29,11 @@ function todoClearBookModal() {
     document.getElementById('book-modal-input-bookprice').value = 0;
     document.getElementById('book-modal-input-bookquantity').value = 0;
 }
-
+/**
+ * Function: todoOpenBookModal
+ * Parameter:
+ * Description: To open book modal dialog
+ */
 function todoOpenBookModal() {
     var backdrop = document.getElementById('book-modal-backdrop');
     var dialog = document.getElementById('book-modal-framework');
@@ -28,7 +41,11 @@ function todoOpenBookModal() {
     backdrop.style.display = 'inline-flex';
     dialog.style.display = 'inline-flex';
 }
-
+/**
+ * Function: todoCloseBookModal
+ * Parameter:
+ * Description: To close book modal dialog
+ */
 function todoCloseBookModal() {
     var backdrop = document.getElementById('book-modal-backdrop');
     var dialog = document.getElementById('book-modal-framework');
@@ -38,7 +55,11 @@ function todoCloseBookModal() {
 
     todoClearBookModal();
 }
-
+/**
+ * Function: todoClearStoreModal
+ * Parameter:
+ * Description: To clear all inputing records in storage modal dialog
+ */
 function todoClearStoreModal() {
     document.getElementById('store-modal-input-repoid').value = '';
     document.getElementById('store-modal-input-repostreet').value = '';
@@ -48,7 +69,11 @@ function todoClearStoreModal() {
     document.getElementById('store-modal-input-bookid').value = '';
     document.getElementById('store-modal-input-vendid').value = '';
 }
-
+/**
+ * Function: todoOpenStoreModal
+ * Parameter:
+ * Description: To open storage modal dialog
+ */
 function todoOpenStoreModal() {
     var backdrop = document.getElementById('store-modal-backdrop');
     var dialog = document.getElementById('store-modal-framework');
@@ -56,7 +81,11 @@ function todoOpenStoreModal() {
     backdrop.style.display = 'inline-flex';
     dialog.style.display = 'inline-flex';
 }
-
+/**
+ * Function: todoCloseStoreModal
+ * Parameter:
+ * Description: To close storage modal dialog
+ */
 function todoCloseStoreModal() {
     var backdrop = document.getElementById('store-modal-backdrop');
     var dialog = document.getElementById('store-modal-framework');
@@ -66,7 +95,11 @@ function todoCloseStoreModal() {
 
     todoClearStoreModal();
 }
-
+/**
+ * Function: todoClearVendModal
+ * Parameter:
+ * Description: To clear all inputing records in vendor modal dialog
+ */
 function todoClearVendModal() {
     document.getElementById('vend-modal-input-vendid').value = '';
     document.getElementById('vend-modal-input-vendname').value = '';
@@ -77,7 +110,11 @@ function todoClearVendModal() {
     document.getElementById('vend-modal-input-vendemail').value = '';
     document.getElementById('vend-modal-input-repoid').value = '';
 }
-
+/**
+ * Function: todoOpenVendModal
+ * Parameter:
+ * Description: To open vendor modal dialog
+ */
 function todoOpenVendModal() {
     var backdrop = document.getElementById('vend-modal-backdrop');
     var dialog = document.getElementById('vend-modal-framework');
@@ -85,7 +122,11 @@ function todoOpenVendModal() {
     backdrop.style.display = 'inline-flex';
     dialog.style.display = 'inline-flex';
 }
-
+/**
+ * Function: todoCloseVendModal
+ * Parameter:
+ * Description: To close vendor modal dialog
+ */
 function todoCloseVendModal() {
     var backdrop = document.getElementById('vend-modal-backdrop');
     var dialog = document.getElementById('vend-modal-framework');
@@ -95,7 +136,11 @@ function todoCloseVendModal() {
 
     todoClearVendModal();
 }
-/**/
+/**
+ * Function: todoAddTableBookInfo
+ * Parameter:
+ * Description: To add a new row to book information table.
+ */
 function todoAddTableBookInfo() {
     var bookInfoTable = document.getElementById('book-info-modify-table');
     var bookid = document.getElementById('book-modal-input-bookid').value;
@@ -111,6 +156,7 @@ function todoAddTableBookInfo() {
     var flag = validateInputValue(bookid, bookname, booktype, bookauthor, bookedition, bookdate, bookpress, bookisbn, bookquantity);
 
     if (flag) {
+        /*Clear all unchecked rows before add a new row*/
         for (var i = bookInfoTable.rows.length - 1; i > 0; i--) {
             if (!bookInfoTable.rows[i].cells[0].children[0].checked) {
                 bookInfoTable.deleteRow(i);
@@ -138,7 +184,11 @@ function todoAddTableBookInfo() {
         todoCloseBookModal();
     }
 }
-
+/**
+ * Function: todoAddSingleBookInfo
+ * Parameter:
+ * Description: To add a new book information to database.
+ */
 function todoAddSingleBookInfo() {
     var bookid = document.getElementById('book-modal-input-bookid').value;
     var bookname = document.getElementById('book-modal-input-bookname').value;
@@ -185,7 +235,11 @@ function todoAddSingleBookInfo() {
         });
     }
 }
-
+/**
+ * Function: todoChangeSingleBookInfo
+ * Parameter:
+ * Description: To change a checked book information to database.
+ */
 function todoChangeSingleBookInfo() {
     var bookid = document.getElementById('book-modal-input-bookid').value;
     var bookname = document.getElementById('book-modal-input-bookname').value;
@@ -232,7 +286,11 @@ function todoChangeSingleBookInfo() {
         });
     }
 }
-/**/
+/**
+ * Function: todoAddTableStoreInfo
+ * Parameter:
+ * Description: To add a new row to storage information table.
+ */
 function todoAddTableStoreInfo() {
     var storeInfoTable = document.getElementById('store-info-modify-table');
     var repoid = document.getElementById('store-modal-input-repoid').value;
@@ -245,6 +303,7 @@ function todoAddTableStoreInfo() {
     var flag = validateInputValue(repoid, repostreet, reponumber, repopurpose, repoguard, bookid, vendid);
 
     if (flag) {
+        /*Clear all unchecked rows before add a new row*/
         for (var i = storeInfoTable.rows.length - 1; i > 0; i--) {
             if (!storeInfoTable.rows[i].cells[0].children[0].checked) {
                 storeInfoTable.deleteRow(i);
@@ -269,7 +328,11 @@ function todoAddTableStoreInfo() {
         todoCloseStoreModal();
     }
 }
-
+/**
+ * Function: todoAddSingleStoreInfo
+ * Parameter:
+ * Description: To add a new storage information to database.
+ */
 function todoAddSingleStoreInfo() {
     var repoid = document.getElementById('store-modal-input-repoid').value;
     var repostreet = document.getElementById('store-modal-input-repostreet').value;
@@ -307,7 +370,11 @@ function todoAddSingleStoreInfo() {
         });
     }
 }
-
+/**
+ * Function: todoChangeSingleStoreInfo
+ * Parameter:
+ * Description: To chanage a checked storage information to database.
+ */
 function todoChangeSingleStoreInfo() {
     var repoid = document.getElementById('store-modal-input-repoid').value;
     var repostreet = document.getElementById('store-modal-input-repostreet').value;
@@ -345,7 +412,11 @@ function todoChangeSingleStoreInfo() {
         });
     }
 }
-/**/
+/**
+ * Function: todoAddTableVendInfo
+ * Parameter:
+ * Description: To add a new row to vendor information table.
+ */
 function todoAddTableVendInfo() {
     var vendInfoTable = document.getElementById('vend-info-modify-table');
     var vendid = document.getElementById('vend-modal-input-vendid').value;
@@ -359,6 +430,7 @@ function todoAddTableVendInfo() {
     var flag = validateInputValue(vendid, vendname, vendcity, vendstate, vendcountry, vendphone, vendemail, repoid);
 
     if (flag) {
+        /*Clear all unchecked rows before add a new row*/
         for (var i = vendInfoTable.rows.length - 1; i > 0; i--) {
             if (!vendInfoTable.rows[i].cells[0].children[0].checked) {
                 vendInfoTable.deleteRow(i);
@@ -381,7 +453,11 @@ function todoAddTableVendInfo() {
         todoCloseVendModal();
     }
 }
-
+/**
+ * Function: todoAddSingleVendInfo
+ * Parameter:
+ * Description: To add a new vendor information to database.
+ */
 function todoAddSingleVendInfo() {
     var vendid = document.getElementById('vend-modal-input-vendid').value;
     var vendname = document.getElementById('vend-modal-input-vendname').value;
@@ -421,7 +497,11 @@ function todoAddSingleVendInfo() {
         });
     }
 }
-
+/**
+ * Function: todoChangeSingleVendInfo
+ * Parameter:
+ * Description: To change a checked vendor information to database.
+ */
 function todoChangeSingleVendInfo() {
     var vendid = document.getElementById('vend-modal-input-vendid').value;
     var vendname = document.getElementById('vend-modal-input-vendname').value;

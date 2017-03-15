@@ -1,8 +1,13 @@
+/**
+ * Function: todoSignIn
+ * Parameter:
+ * Description: To do login.
+ */
 function todoSignIn() {
     var username = document.getElementById('initial-input-username').value;
     var password = document.getElementById('initial-input-password').value;
     var role = document.getElementById('initial-select-role').value;
-    /**/
+    /*Rredirect to '/validate/signin' and then send post request to server*/
     var postURL = '/validate/signin';
     var postRequest = new XMLHttpRequest();
     postRequest.open('POST', postURL);
@@ -14,7 +19,7 @@ function todoSignIn() {
             password: password,
             role: role
         }));
-
+        /*Get response from server and then login if it is validated*/
         postRequest.addEventListener('load', function(event) {
             console.log(event.target.response);
             person = JSON.parse(event.target.response);

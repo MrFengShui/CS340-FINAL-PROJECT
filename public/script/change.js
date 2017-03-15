@@ -1,3 +1,8 @@
+/**
+ * Function: todoModifyTabbedPane
+ * Parameter: event
+ * Description: To handle all tabbed pane selected events
+ */
 function todoModifyTabbedPane(event) {
     var tabbedTitles = document.getElementsByClassName('modify-tabbed-title');
     var tabbedContents = document.getElementsByClassName('modify-tabbed-content');
@@ -13,7 +18,11 @@ function todoModifyTabbedPane(event) {
     content.style.display = 'block';
     event.target.style.backgroundColor = 'darkred';
 }
-
+/**
+ * Function: todoBuyInfoSearch
+ * Parameter:
+ * Description: To search buy information from database and show results
+ */
 function todoBuyInfoSearch() {
     var buyInfoTable = document.getElementById('buy-info-query-table');
     var bookid = document.getElementById('buy-input-bookid').value;
@@ -23,7 +32,7 @@ function todoBuyInfoSearch() {
         document.getElementsByClassName('buy-input-bookdate')[0].value,
         document.getElementsByClassName('buy-input-bookdate')[1].value
     ];
-
+    /*Rredirect to '/validate/buyInfoSearch' and then send post request to server*/
     var postURL = '/validate/buyInfoSearch';
     var postRequest = new XMLHttpRequest();
     postRequest.open('POST', postURL);
@@ -35,7 +44,7 @@ function todoBuyInfoSearch() {
         booktype: booktype,
         buydate: buydate
     }));
-
+    /*Get response from server and then show by each row*/
     postRequest.addEventListener('load', function(event) {
         for (var i = buyInfoTable.rows.length - 1; i > 0; i--) {
             buyInfoTable.deleteRow(i);
@@ -59,7 +68,11 @@ function todoBuyInfoSearch() {
         });
     });
 }
-
+/**
+ * Function: todoBookInformationSearch
+ * Parameter:
+ * Description: To search book information from database and show results
+ */
 function todoBookModifySearch() {
     var bookInfoTable = document.getElementById('book-info-modify-table');
     var bookname = document.getElementById('staff-input-bookname').value;
@@ -74,7 +87,7 @@ function todoBookModifySearch() {
         document.getElementsByClassName('staff-input-bookprice')[0].value,
         document.getElementsByClassName('staff-input-bookprice')[1].value
     ];
-
+    /*Rredirect to '/validate/bookInfoSearch' and then send post request to server*/
     var postURL = '/validate/bookInfoSearch';
     var postRequest = new XMLHttpRequest();
     postRequest.open('POST', postURL);
@@ -88,7 +101,7 @@ function todoBookModifySearch() {
         bookpress: bookpress,
         bookprice: bookprice
     }));
-
+    /*Get response from server and then show by each row*/
     postRequest.addEventListener('load', function(event) {
         for (var i = bookInfoTable.rows.length - 1; i > 0; i--) {
             bookInfoTable.deleteRow(i);
@@ -116,7 +129,11 @@ function todoBookModifySearch() {
         });
     });
 }
-
+/**
+ * Function: todoStorageModifySearch
+ * Parameter:
+ * Description: To search storage information from database and show results
+ */
 function todoStorageModifySearch() {
     var bookStoreTable = document.getElementById('store-info-modify-table');
     var bookid = document.getElementById('staff-store-input-bookid').value;
@@ -126,7 +143,7 @@ function todoStorageModifySearch() {
     var repoid = document.getElementById('staff-store-input-repoid').value;
     var repoaddress = document.getElementById('staff-store-input-address').value;
     var repopurpose = document.getElementById('staff-store-select-purpose').value;
-
+    /*Rredirect to '/validate/storeInfoSearch' and then send post request to server*/
     var postURL = '/validate/storeInfoSearch';
     var postRequest = new XMLHttpRequest();
     postRequest.open('POST', postURL);
@@ -141,7 +158,7 @@ function todoStorageModifySearch() {
         repoaddress: repoaddress,
         repopurpose: repopurpose
     }));
-
+    /*Get response from server and then show by each row*/
     postRequest.addEventListener('load', function(event) {
         for (var i = bookStoreTable.rows.length - 1; i > 0; i--) {
             bookStoreTable.deleteRow(i);
@@ -166,7 +183,11 @@ function todoStorageModifySearch() {
         });
     });
 }
-
+/**
+ * Function: todoVendorModifySearch
+ * Parameter:
+ * Description: To search vendor information from database and show results
+ */
 function todoVendorModifySearch() {
     var bookVendTable = document.getElementById('vend-info-modify-table');
     var bookid = document.getElementById('staff-vend-input-bookid').value;
@@ -174,7 +195,7 @@ function todoVendorModifySearch() {
     var repoid = document.getElementById('staff-vend-input-repoid').value;
     var vendid = document.getElementById('staff-vend-input-vendid').value;
     var vendname = document.getElementById('staff-vend-input-vendname').value;
-
+    /*Rredirect to '/validate/vendInfoSearch' and then send post request to server*/
     var postURL = '/validate/vendInfoSearch';
     var postRequest = new XMLHttpRequest();
     postRequest.open('POST', postURL);
@@ -187,7 +208,7 @@ function todoVendorModifySearch() {
         vendid: vendid,
         vendname: vendname
     }));
-
+    /*Get response from server and then show by each row*/
     postRequest.addEventListener('load', function(event) {
         for (var i = bookVendTable.rows.length - 1; i > 0; i--) {
             bookVendTable.deleteRow(i);
@@ -211,7 +232,11 @@ function todoVendorModifySearch() {
         });
     });
 }
-
+/**
+ * Function: todoBookModifyEdit
+ * Parameter:
+ * Description: To transfer and show table row information to book modal dialog
+ */
 function todoBookModifyEdit(event) {
     todoOpenBookModal();
     var row = event.parentNode.parentNode;
@@ -226,11 +251,15 @@ function todoBookModifyEdit(event) {
     document.getElementById('book-modal-input-bookprice').value = row.cells[9].innerHTML.substr(1);
     document.getElementById('book-modal-input-bookquantity').value = row.cells[10].innerHTML;
 }
-
+/**
+ * Function: todoAddMultipleBookInfo
+ * Parameter:
+ * Description: To add multiple book information rows to database
+ */
 function todoAddMultipleBookInfo() {
     var bookInfoTable = document.getElementById('book-info-modify-table');
     var data = [];
-
+    /*Collect add rows and tranfer to an array*/
     for (var i = bookInfoTable.rows.length - 1; i > 0; i--) {
         if (bookInfoTable.rows[i].cells[0].children[0].checked) {
             var bookid = bookInfoTable.rows[i].cells[1].innerHTML;
@@ -282,17 +311,21 @@ function todoAddMultipleBookInfo() {
         alert('Warning: Please add a new book into table.');
     }
 }
-
+/**
+ * Function: todoDeleteSingleBookInfo
+ * Parameter:
+ * Description: To remove a book information row from database
+ */
 function todoDeleteSingleBookInfo(event) {
     var row = event.parentNode.parentNode;
     var bookid = row.cells[1].innerHTML;
-
+    /*Rredirect to '/validate/bookInfoRemove' and then send post request to server*/
     var postURL = '/validate/bookInfoRemove';
     var postRequest = new XMLHttpRequest();
     postRequest.open('POST', postURL);
     postRequest.setRequestHeader('Content-Type', 'application/json');
     postRequest.send(JSON.stringify([{bookid: bookid}]));
-
+    /*Get response from server and then show result*/
     postRequest.addEventListener('load', function(event) {
         if (event.target.response == 'success') {
             alert('Echo: Remove a book successfully.');
@@ -301,11 +334,15 @@ function todoDeleteSingleBookInfo(event) {
         }
     });
 }
-
+/**
+ * Function: todoDeleteMultipleBookInfo
+ * Parameter:
+ * Description: To remove all checked book information row from database
+ */
 function todoDeleteMultipleBookInfo() {
     var bookInfoTable = document.getElementById('book-info-modify-table');
     var data = [];
-
+    /*Collect add rows and tranfer to an array*/
     for (var i = bookInfoTable.rows.length - 1; i > 0; i--) {
         if (bookInfoTable.rows[i].cells[0].children[0].checked) {
             var bookid = bookInfoTable.rows[i].cells[1].innerHTML;
@@ -313,13 +350,13 @@ function todoDeleteMultipleBookInfo() {
             data.push(row);
         }
     }
-
+    /*Rredirect to '/validate/bookInfoRemove' and then send post request to server*/
     var postURL = '/validate/bookInfoRemove';
     var postRequest = new XMLHttpRequest();
     postRequest.open('POST', postURL);
     postRequest.setRequestHeader('Content-Type', 'application/json');
     postRequest.send(JSON.stringify(data));
-
+    /*Get response from server and then show result*/
     postRequest.addEventListener('load', function(event) {
         if (event.target.response == 'success') {
             alert('Echo: Remove books successfully.');
@@ -328,11 +365,15 @@ function todoDeleteMultipleBookInfo() {
         }
     });
 }
-/**/
+/**
+ * Function: todoAddMultipleStoreInfo
+ * Parameter:
+ * Description: To add multiple storage information rows to database
+ */
 function todoAddMultipleStoreInfo() {
     var storeInfoTable = document.getElementById('store-info-modify-table');
     var data = [];
-
+    /*Collect add rows and tranfer to an array*/
     for (var i = storeInfoTable.rows.length - 1; i > 0; i--) {
         if (storeInfoTable.rows[i].cells[0].children[0].checked) {
             var bookid = storeInfoTable.rows[i].cells[1].innerHTML;
@@ -375,7 +416,11 @@ function todoAddMultipleStoreInfo() {
         alert('Warning: Please add a new store into table.');
     }
 }
-
+/**
+ * Function: todoStoreModifyEdit
+ * Parameter:
+ * Description: To transfer and show table row information to storage modal dialog
+ */
 function todoStoreModifyEdit(event) {
     todoOpenStoreModal();
     var row = event.parentNode.parentNode;
@@ -387,17 +432,21 @@ function todoStoreModifyEdit(event) {
     document.getElementById('store-modal-input-repoguard').value = row.cells[8].innerHTML;
     document.getElementById('store-modal-input-vendid').value = row.cells[9].innerHTML;
 }
-
+/**
+ * Function: todoDeleteSingleStoreInfo
+ * Parameter:
+ * Description: To remove a storage information row from database
+ */
 function todoDeleteSingleStoreInfo(event) {
     var row = event.parentNode.parentNode;
     var repoid = row.cells[5].innerHTML;
-
+    /*Rredirect to '/validate/storeInfoRemove' and then send post request to server*/
     var postURL = '/validate/storeInfoRemove';
     var postRequest = new XMLHttpRequest();
     postRequest.open('POST', postURL);
     postRequest.setRequestHeader('Content-Type', 'application/json');
     postRequest.send(JSON.stringify([{repoid: repoid}]));
-
+    /*Get response from server and then show result*/
     postRequest.addEventListener('load', function(event) {
         if (event.target.response == 'success') {
             alert('Echo: Remove a store successfully.');
@@ -406,11 +455,15 @@ function todoDeleteSingleStoreInfo(event) {
         }
     });
 }
-
+/**
+ * Function: todoDeleteMultipleStoreInfo
+ * Parameter:
+ * Description: To remove all checked book information row from database
+ */
 function todoDeleteMultipleStoreInfo() {
     var storeInfoTable = document.getElementById('store-info-modify-table');
     var data = [];
-
+    /*Collect add rows and tranfer to an array*/
     for (var i = storeInfoTable.rows.length - 1; i > 0; i--) {
         if (storeInfoTable.rows[i].cells[0].children[0].checked) {
             var repoid = storeInfoTable.rows[i].cells[5].innerHTML;
@@ -418,13 +471,13 @@ function todoDeleteMultipleStoreInfo() {
             data.push(row);
         }
     }
-
+    /*Rredirect to '/validate/storeInfoRemove' and then send post request to server*/
     var postURL = '/validate/storeInfoRemove';
     var postRequest = new XMLHttpRequest();
     postRequest.open('POST', postURL);
     postRequest.setRequestHeader('Content-Type', 'application/json');
     postRequest.send(JSON.stringify(data));
-
+    /*Get response from server and then show result*/
     postRequest.addEventListener('load', function(event) {
         if (event.target.response == 'success') {
             alert('Echo: Remove store successfully.');
@@ -433,11 +486,15 @@ function todoDeleteMultipleStoreInfo() {
         }
     });
 }
-/**/
+/**
+ * Function: todoAddMultipleVendInfo
+ * Parameter:
+ * Description: To add multiple vendor information rows to database
+ */
 function todoAddMultipleVendInfo() {
     var vendInfoTable = document.getElementById('vend-info-modify-table');
     var data = [];
-
+    /*Collect add rows and tranfer to an array*/
     for (var i = vendInfoTable.rows.length - 1; i > 0; i--) {
         if (vendInfoTable.rows[i].cells[0].children[0].checked) {
             var vendid = vendInfoTable.rows[i].cells[1].innerHTML;
@@ -482,7 +539,11 @@ function todoAddMultipleVendInfo() {
         alert('Warning: Please add a new vend into table.');
     }
 }
-
+/**
+ * Function: todoVendModifyEdit
+ * Parameter:
+ * Description: To transfer and show table row information to vendor modal dialog
+ */
 function todoVendModifyEdit(event) {
     todoOpenVendModal();
     var row = event.parentNode.parentNode;
@@ -495,17 +556,21 @@ function todoVendModifyEdit(event) {
     document.getElementById('vend-modal-input-vendemail').value = row.cells[5].innerHTML;
     document.getElementById('vend-modal-input-repoid').value = row.cells[6].innerHTML;
 }
-
+/**
+ * Function: todoDeleteSingleVendInfo
+ * Parameter:
+ * Description: To remove a vendor information row from database
+ */
 function todoDeleteSingleVendInfo(event) {
     var row = event.parentNode.parentNode;
     var vendid = row.cells[1].innerHTML;
-
+    /*Rredirect to '/validate/vendInfoRemove' and then send post request to server*/
     var postURL = '/validate/vendInfoRemove';
     var postRequest = new XMLHttpRequest();
     postRequest.open('POST', postURL);
     postRequest.setRequestHeader('Content-Type', 'application/json');
     postRequest.send(JSON.stringify([{vendid: vendid}]));
-
+    /*Get response from server and then show result*/
     postRequest.addEventListener('load', function(event) {
         if (event.target.response == 'success') {
             alert('Echo: Remove a vend successfully.');
@@ -514,11 +579,15 @@ function todoDeleteSingleVendInfo(event) {
         }
     });
 }
-
+/**
+ * Function: todoDeleteMultipleVendInfo
+ * Parameter:
+ * Description: To remove all checked vendor information row from database
+ */
 function todoDeleteMultipleVendInfo() {
     var vendInfoTable = document.getElementById('vend-info-modify-table');
     var data = [];
-
+    /*Collect add rows and tranfer to an array*/
     for (var i = vendInfoTable.rows.length - 1; i > 0; i--) {
         if (vendInfoTable.rows[i].cells[0].children[0].checked) {
             var vendid = vendInfoTable.rows[i].cells[1].innerHTML;
@@ -526,13 +595,13 @@ function todoDeleteMultipleVendInfo() {
             data.push(row);
         }
     }
-
+    /*Rredirect to '/validate/vendInfoRemove' and then send post request to server*/
     var postURL = '/validate/vendInfoRemove';
     var postRequest = new XMLHttpRequest();
     postRequest.open('POST', postURL);
     postRequest.setRequestHeader('Content-Type', 'application/json');
     postRequest.send(JSON.stringify(data));
-
+    /*Get response from server and then show result*/
     postRequest.addEventListener('load', function(event) {
         if (event.target.response == 'success') {
             alert('Echo: Remove vendor successfully.');

@@ -261,42 +261,6 @@ app.get('/staff-page%id=:id%%name=:name%%type=:type%', function(req, res) {
         type: req.params.type
     });
 });
-
-// app.get('/book-query', function(req, res) {
-//     res.render('book-query-page', {
-//         title: 'Book Query Page'
-//     });
-// });
-
-// app.get('/book-modify', function(req, res) {
-//     res.render('book-modify-page', {
-//         title: 'Book Modify Page'
-//     });
-// });
-
-// app.get('/storage-query', function(req, res) {
-//     res.render('store-query-page', {
-//         title: 'Storage Query Page'
-//     });
-// });
-
-// app.get('/storage-modify', function(req, res) {
-//     res.render('store-modify-page', {
-//         title: 'Storage Modify Page'
-//     });
-// });
-
-// app.get('/vendor-query', function(req, res) {
-//     res.render('vend-query-page', {
-//         title: 'Vendor Query Page'
-//     });
-// });
-
-// app.get('/vendor-modify', function(req, res) {
-//     res.render('vend-modify-page', {
-//         title: 'Vendor Modify Page'
-//     });
-// });
 /*Build connection to MySQL and then listen local port*/
 connection.connect(function(err) {
     if (err) {

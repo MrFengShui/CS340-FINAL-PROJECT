@@ -1,3 +1,8 @@
+/**
+ * Function: todoQueryTabbedPane
+ * Parameter: event
+ * Description: To handle all tabbed pane selected events
+ */
 function todoQueryTabbedPane(event) {
     var tabbedTitles = document.getElementsByClassName('query-tabbed-title');
     var tabbedContents = document.getElementsByClassName('query-tabbed-content');
@@ -13,7 +18,11 @@ function todoQueryTabbedPane(event) {
     content.style.display = 'block';
     event.target.style.backgroundColor = 'darkred';
 }
-
+/**
+ * Function: todoBookInformationSearch
+ * Parameter:
+ * Description: To search book information from database and show results
+ */
 function todoBookInformationSearch() {
     var bookInfoTable = document.getElementById('book-info-query-table');
     var bookname = document.getElementById('consumer-input-bookname').value;
@@ -28,7 +37,7 @@ function todoBookInformationSearch() {
         document.getElementsByClassName('consumer-input-bookprice')[0].value,
         document.getElementsByClassName('consumer-input-bookprice')[1].value
     ];
-
+    /*Rredirect to '/validate/bookInfoSearch' and then send post request to server*/
     var postURL = '/validate/bookInfoSearch';
     var postRequest = new XMLHttpRequest();
     postRequest.open('POST', postURL);
@@ -42,7 +51,7 @@ function todoBookInformationSearch() {
         bookpress: bookpress,
         bookprice: bookprice
     }));
-
+    /*Get response from server and then show by each row*/
     postRequest.addEventListener('load', function(event) {
         for (var i = bookInfoTable.rows.length - 1; i > 0; i--) {
             bookInfoTable.deleteRow(i);
@@ -68,7 +77,11 @@ function todoBookInformationSearch() {
         });
     });
 }
-
+/**
+ * Function: todoBookStorageSearch
+ * Parameter:
+ * Description: To search storage information from database and show results
+ */
 function todoBookStorageSearch() {
     var bookStoreTable = document.getElementById('store-info-query-table');
     var bookid = document.getElementById('consumer-repo-input-bookid').value;
@@ -76,7 +89,7 @@ function todoBookStorageSearch() {
     var booktype = document.getElementById('consumer-repo-select-booktype').value;
     var bookisbn = document.getElementById('consumer-repo-input-bookisbn').value;
     var repopurpose = document.getElementById('consumer-repo-select-purpose').value;
-
+    /*Rredirect to '/validate/storeInfoSearch' and then send post request to server*/
     var postURL = '/validate/storeInfoSearch';
     var postRequest = new XMLHttpRequest();
     postRequest.open('POST', postURL);
@@ -89,7 +102,7 @@ function todoBookStorageSearch() {
         bookisbn: bookisbn,
         repopurpose: repopurpose
     }));
-
+    /*Get response from server and then show by each row*/
     postRequest.addEventListener('load', function(event) {
         for (var i = bookStoreTable.rows.length - 1; i > 0; i--) {
             bookStoreTable.deleteRow(i);

@@ -114,7 +114,7 @@ function buildBuyInfoHTML(buyid, buyfname, buylname, buytype, buydate, bookid, b
     return createBuyInfo({
         buyid: buyid,
         buyname: buyfname + ' ' + buylname,
-        buytype: defineType(buytype),
+        buytype: defineVisitorType(buytype),
         buydate: formateDate(new Date(buydate)),
         bookid: bookid,
         bookname: bookname,
