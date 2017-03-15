@@ -2,7 +2,7 @@
 
 Group Member: Luan Songjian
 Update Date: 2017-03-15
-[GitHub Repo]: (https://github.com/MrFengShui/CS340-FINAL-PROJECT)
+GitHub Repo: (https://github.com/MrFengShui/CS340-FINAL-PROJECT)
 
 ## Description
 
